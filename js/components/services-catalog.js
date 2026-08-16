@@ -74,34 +74,6 @@ class ServicesCatalog extends HTMLElement {
                 <div class="image-placeholder service-placeholder">
                   <span class="placeholder-icon">📷</span>
                   <span class="placeholder-tag">Insertar Imagen</span>
-                  <span class="placeholder-desc">Escáner & Diagnóstico Electrónico OBD</span>
-                  <span class="placeholder-spec">600 x 400 px</span>
-                </div>
-                <span class="service-badge">Alta Tecnología</span>
-              </div>
-              <div class="service-body">
-                <h3 class="service-title">Escáner & Diagnóstico Electrónico</h3>
-                <p class="service-desc">Lectura avanzada de centralitas ECU en motocicletas modernas de inyección. Diagnóstico certero sin prueba y error.</p>
-                <ul class="service-features-list">
-                  <li>Lectura y reseteo de códigos de falla DTC</li>
-                  <li>Reseteo de indicador de intervalo de servicio</li>
-                  <li>Monitoreo de sensores (TPS, O2, temperatura, MAP)</li>
-                  <li>Calibración de cuerpos de aceleración electrónicos</li>
-                </ul>
-                <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="escaner" style="width: 100%;">
-                    Cotizar este Servicio
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Servicio 3 -->
-            <div class="service-card">
-              <div class="service-img-wrap">
-                <div class="image-placeholder service-placeholder">
-                  <span class="placeholder-icon">📷</span>
-                  <span class="placeholder-tag">Insertar Imagen</span>
                   <span class="placeholder-desc">Ajuste y Reparación de Motores</span>
                   <span class="placeholder-spec">600 x 400 px</span>
                 </div>
@@ -124,7 +96,7 @@ class ServicesCatalog extends HTMLElement {
               </div>
             </div>
 
-            <!-- Servicio 4 -->
+            <!-- Servicio 3 -->
             <div class="service-card">
               <div class="service-img-wrap">
                 <div class="image-placeholder service-placeholder">
@@ -152,35 +124,7 @@ class ServicesCatalog extends HTMLElement {
               </div>
             </div>
 
-            <!-- Servicio 5 -->
-            <div class="service-card">
-              <div class="service-img-wrap">
-                <div class="image-placeholder service-placeholder">
-                  <span class="placeholder-icon">📷</span>
-                  <span class="placeholder-tag">Insertar Imagen</span>
-                  <span class="placeholder-desc">Inyección Electrónica (EFI) & Ultrasonido</span>
-                  <span class="placeholder-spec">600 x 400 px</span>
-                </div>
-                <span class="service-badge">Rendimiento Óptimo</span>
-              </div>
-              <div class="service-body">
-                <h3 class="service-title">Inyección (EFI) & Ultrasonido</h3>
-                <p class="service-desc">Limpieza y calibración de sistemas de alimentación para recuperar potencia y optimizar el consumo de combustible.</p>
-                <ul class="service-features-list">
-                  <li>Limpieza y prueba en banco ultrasónico de inyectores</li>
-                  <li>Sincronización por vacío de cuerpos de aceleración</li>
-                  <li>Diagnóstico de bombas y reguladores de presión</li>
-                  <li>Servicio integral a carburadores clásicos</li>
-                </ul>
-                <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="inyeccion" style="width: 100%;">
-                    Cotizar este Servicio
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Servicio 6 -->
+            <!-- Servicio 4 -->
             <div class="service-card">
               <div class="service-img-wrap">
                 <div class="image-placeholder service-placeholder">
@@ -195,7 +139,7 @@ class ServicesCatalog extends HTMLElement {
                 <h3 class="service-title">Inspección Pre-Compra (30 Puntos)</h3>
                 <p class="service-desc">¿Vas a comprar una moto usada? Traela antes a Coyote's House y recibe un informe técnico completo de su estado real.</p>
                 <ul class="service-features-list">
-                  <li>Escáner de fallas ocultas en centralita ECU</li>
+                  <li>Revisión exhaustiva mecánica, eléctrica y funcional</li>
                   <li>Revisión de chasis, compresión y fugas de fluidos</li>
                   <li>Estado de neumáticos, rodamientos y transmisión</li>
                   <li>Estimación de costos de mantención futura</li>

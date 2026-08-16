@@ -36,12 +36,12 @@ class WorkshopGallery extends HTMLElement {
               <div class="image-placeholder gallery-placeholder">
                 <span class="placeholder-icon">📷</span>
                 <span class="placeholder-tag">Insertar Imagen</span>
-                <span class="placeholder-desc">Diagnóstico y Escáner Electrónico OBD</span>
+                <span class="placeholder-desc">Mantenimiento Preventivo y Pauta por KM</span>
                 <span class="placeholder-spec">800 x 600 px</span>
               </div>
               <div class="gallery-overlay">
-                <div class="gallery-caption-title">Diagnóstico Computarizado</div>
-                <div class="gallery-caption-sub">Detección de sensores y calibración electrónica</div>
+                <div class="gallery-caption-title">Puesta a Punto & Fluidos</div>
+                <div class="gallery-caption-sub">Cambio de aceites sintéticos, filtros y bujías</div>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ class WorkshopGallery extends HTMLElement {
               </div>
               <div class="gallery-overlay">
                 <div class="gallery-caption-title">Ajuste de Válvulas y Distribución</div>
-                <div class="gallery-caption-sub">Torquímetros digitales según manual de taller</div>
+                <div class="gallery-caption-sub">Torquímetros de precisión según manual de taller</div>
               </div>
             </div>
 
@@ -67,7 +67,7 @@ class WorkshopGallery extends HTMLElement {
               </div>
               <div class="gallery-overlay">
                 <div class="gallery-caption-title">Suspensión & Frenos</div>
-                <div class="gallery-caption-sub">Horquillas invertidas, retenes y purgado de ABS</div>
+                <div class="gallery-caption-sub">Horquillas invertidas, retenes y purgado hidráulico</div>
               </div>
             </div>
 
@@ -75,12 +75,12 @@ class WorkshopGallery extends HTMLElement {
               <div class="image-placeholder gallery-placeholder">
                 <span class="placeholder-icon">📷</span>
                 <span class="placeholder-tag">Insertar Imagen</span>
-                <span class="placeholder-desc">Banco Ultrasónico de Inyección EFI</span>
+                <span class="placeholder-desc">Transmisión, Cadena y Kit de Arrastre</span>
                 <span class="placeholder-spec">800 x 600 px</span>
               </div>
               <div class="gallery-overlay">
-                <div class="gallery-caption-title">Banco Ultrasónico de Inyección</div>
-                <div class="gallery-caption-sub">Limpieza y ecualización de inyectores EFI</div>
+                <div class="gallery-caption-title">Transmisión & Rodamientos</div>
+                <div class="gallery-caption-sub">Alineación, tensión y lubricación técnica</div>
               </div>
             </div>
 

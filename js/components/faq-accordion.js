@@ -81,7 +81,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Es un chequeo integral de 30 puntos que incluye escaneo de fallas en centralita, estado de chasis y suspensión, compresión del motor, frenos, transmisión, neumáticos y verificación de fugas. Te entregamos un informe técnico para que compres sobre seguro.
+                Es un chequeo integral de 30 puntos que incluye revisión funcional de sistemas, estado de chasis y suspensión, compresión del motor, frenos, transmisión, neumáticos y verificación de fugas. Te entregamos un informe técnico para que compres sobre seguro.
               </div>
             </div>
 

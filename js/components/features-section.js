@@ -1,6 +1,6 @@
 /**
  * Componente: FeaturesSection (<features-section>)
- * Pilares de excelencia y propuesta de valor del taller (4 tarjetas).
+ * Pilares de excelencia y propuesta de valor del taller.
  */
 
 class FeaturesSection extends HTMLElement {
@@ -20,12 +20,6 @@ class FeaturesSection extends HTMLElement {
             </div>
 
             <div class="feature-card">
-              <div class="feature-icon-box">💻</div>
-              <h3 class="feature-title">Escáner & Diagnóstico OBD</h3>
-              <p class="feature-desc">Equipamiento electrónico avanzado para motos de inyección (EFI), reseteo de fallas DTC, pautas de servicio y telemetría.</p>
-            </div>
-
-            <div class="feature-card">
               <div class="feature-icon-box">🤝</div>
               <h3 class="feature-title">Transparencia Total</h3>
               <p class="feature-desc">Explicación clara de cada intervención, repuestos de primera línea y presupuesto previo sin cobros sorpresas.</p>
@@ -34,7 +28,7 @@ class FeaturesSection extends HTMLElement {
             <div class="feature-card">
               <div class="feature-icon-box">🏍️</div>
               <h3 class="feature-title">Todas las Cilindradas</h3>
-              <p class="feature-desc">Especialistas en deportivas, naked, touring, trail, custom, scooters urbanos y motos de alta cilindrada multimarca.</p>
+              <p class="feature-desc">Especialistas en deportivas, naked, touring, trail, custom, scooters urbanos y motos de baja a alta cilindrada multimarca.</p>
             </div>
           </div>
         </div>

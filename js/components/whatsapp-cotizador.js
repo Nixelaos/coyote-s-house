@@ -140,7 +140,7 @@ class WhatsappCotizador extends HTMLElement {
     if (btnSendQuote) btnSendQuote.addEventListener('click', (e) => this.sendToWhatsApp(e));
     if (btnSendQuotePreview) btnSendQuotePreview.addEventListener('click', (e) => this.sendToWhatsApp(e));
 
-    // Leer parámetro URL si viene desde servicios.html (ej: cotizador.html?servicio=escaner)
+    // Leer parámetro URL si viene desde servicios.html (ej: cotizador.html?servicio=motor)
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const serviceParam = urlParams.get('servicio');
@@ -207,10 +207,8 @@ class WhatsappCotizador extends HTMLElement {
                     <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
                     <select id="serviceType" class="form-control">
                       <option value="mantenimiento" selected>Mantenimiento Preventivo / Pauta por KM</option>
-                      <option value="escaner">Diagnóstico Electrónico & Escáner OBD</option>
-                      <option value="frenos">Frenos y Suspensión (Pastillas, Discos, Retenes)</option>
                       <option value="motor">Ajuste, Sincronización o Reparación de Motor</option>
-                      <option value="inyeccion">Inyección Electrónica (EFI) & Ultrasonido</option>
+                      <option value="frenos">Frenos y Suspensión (Pastillas, Discos, Retenes)</option>
                       <option value="precompra">Inspección Pre-Compra (Revisión 30 Puntos)</option>
                       <option value="otro">Otro / Consulta General</option>
                     </select>

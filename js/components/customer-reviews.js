@@ -1,6 +1,6 @@
 /**
  * Componente: CustomerReviews (<customer-reviews>)
- * Testimonios y opiniones de clientes con banner de calificación Google Maps.
+ * Sección de opiniones de clientes en estado 'Próximamente'.
  */
 
 class CustomerReviews extends HTMLElement {
@@ -13,64 +13,18 @@ class CustomerReviews extends HTMLElement {
       <section class="reviews-section" id="testimonios">
         <div class="container">
           <div class="text-center">
-            <span class="section-tag">Prueba Social</span>
-            <h2 class="section-title">La Opinión de <span class="highlight-red">Nuestros Clientes</span></h2>
-            
-            <div class="google-rating-banner center-block">
-              <span style="font-weight: 800; font-size: 1.2rem; color: #fff;">5.0</span>
-              <span class="stars">★★★★★</span>
-              <span style="font-size: 0.9rem; color: var(--color-text-muted);">Calificación excelente en Google Maps</span>
-            </div>
+            <span class="section-tag">Testimonios</span>
+            <h2 class="section-title">Opiniones de <span class="highlight-red">Nuestros Clientes</span></h2>
+            <p class="section-subtitle center-block">La experiencia de quienes confían el cuidado de sus motocicletas en Coyote's House.</p>
           </div>
 
-          <div class="reviews-grid">
-            <div class="review-card">
-              <div>
-                <div class="stars" style="margin-bottom: 0.75rem;">★★★★★</div>
-                <p class="review-text">"Excelente servicio. Se nota de inmediato la experiencia pedagógica de Alberto: te explica con detalle qué tenía la moto, cómo se solucionó y qué pautas seguir. 100% recomendado en Santiago."</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar">MR</div>
-                <div class="reviewer-info">
-                  <h4>Mauricio Rojas</h4>
-                  <span>Yamaha MT-09 • Cliente frecuente</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="review-card">
-              <div>
-                <div class="stars" style="margin-bottom: 0.75rem;">★★★★★</div>
-                <p class="review-text">"Llevé mi moto con una falla eléctrica intermitente que ningún taller lograba diagnosticar. Con el escáner y la experiencia de Alberto detectó el sensor fallido en menos de una hora. Impecable trabajo."</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar">CP</div>
-                <div class="reviewer-info">
-                  <h4>Cristián Parra</h4>
-                  <span>BMW F800GS • Mantención y Diagnóstico</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="review-card">
-              <div>
-                <div class="stars" style="margin-bottom: 0.75rem;">★★★★★</div>
-                <p class="review-text">"Puntualidad, honestidad en los repuestos y precios totalmente justos para la calidad de atención. Coyote's House es el taller definitivo para dejar la moto con total tranquilidad."</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar">DA</div>
-                <div class="reviewer-info">
-                  <h4>Diego Álvarez</h4>
-                  <span>Kawasaki Ninja 400 • Pauta por Kilometraje</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-center" style="margin-top: 2.5rem;">
-            <a href="https://maps.app.goo.gl/e7bNXcAvnVxL1CTN9" target="_blank" rel="noopener" class="btn btn-outline">
-              <span>⭐</span> Ver o Dejar Reseña en Google Maps
-            </a>
+          <div style="max-width: 720px; margin: 3rem auto 0; background: var(--color-bg-card); border: 1px dashed rgba(245, 158, 11, 0.45); border-radius: var(--radius-xl); padding: 3.5rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; box-shadow: var(--shadow-md);">
+            <span style="font-size: 2.8rem; line-height: 1;">💬</span>
+            <span class="placeholder-tag" style="font-size: 0.9rem; padding: 0.35rem 1rem;">Próximamente</span>
+            <h3 style="font-size: 1.35rem; color: var(--color-text-title); margin-top: 0.25rem;">Sección de Opiniones en Construcción</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.98rem; max-width: 520px; line-height: 1.6;">
+              Muy pronto compartiremos las valoraciones y testimonios verificados de nuestra comunidad de motociclistas.
+            </p>
           </div>
         </div>
       </section>

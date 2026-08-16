@@ -16,7 +16,7 @@ class HeroSection extends HTMLElement {
             <div class="hero-content">
               <div class="hero-badge-wrap">
                 <span class="hero-badge">
-                  ⚡ Taller Especializado en Motos Modernas
+                  ⚡ Taller Especializado en Motocicletas
                 </span>
               </div>
               
@@ -25,7 +25,7 @@ class HeroSection extends HTMLElement {
               </h1>
 
               <p class="hero-desc">
-                En <strong>Coyote's House</strong> combinamos más de <strong>20 años de trayectoria</strong> con diagnósticos computarizados y altos estándares de precisión. Cuidado experto para todo tipo de marcas y cilindradas en Macul, Santiago.
+                En <strong>Coyote's House</strong> combinamos más de <strong>20 años de trayectoria</strong> con dedicación, método riguroso y altos estándares de precisión. Cuidado experto para todo tipo de marcas y cilindradas en Macul, Santiago.
               </p>
 
               <div class="hero-cta-group">
@@ -47,11 +47,11 @@ class HeroSection extends HTMLElement {
                 </div>
                 <div class="stat-item">
                   <span class="stat-number">100%</span>
-                  <span class="stat-label">Docente técnico certificado</span>
+                  <span class="stat-label">Atención directa por su dueño</span>
                 </div>
                 <div class="stat-item">
-                  <span class="stat-number">5.0 ★</span>
-                  <span class="stat-label">Calificación en Google Maps</span>
+                  <span class="stat-number">Multimarca</span>
+                  <span class="stat-label">Baja, media y alta cilindrada</span>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@ class HeroSection extends HTMLElement {
                   <div class="floating-icon">🐺</div>
                   <div>
                     <div class="floating-text-title">Alberto Pizarro — Taller Titular</div>
-                    <div class="floating-text-sub">Atención personalizada y diagnóstico certero</div>
+                    <div class="floating-text-sub">Atención personalizada y trabajo garantizado</div>
                   </div>
                 </div>
               </div>
