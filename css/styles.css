@@ -73,7 +73,6 @@
 
 /* Custom Web Component Elements */
 workshop-topbar,
-site-header,
 hero-section,
 features-section,
 whatsapp-cotizador,
@@ -87,6 +86,14 @@ site-footer,
 floating-whatsapp {
   display: block;
   width: 100%;
+}
+
+site-header {
+  display: block;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 html {
@@ -363,11 +370,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Main Navigation Header --- */
 .site-header {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  z-index: 100;
   background: rgba(8, 12, 20, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
