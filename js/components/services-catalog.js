@@ -15,13 +15,14 @@ class ServicesCatalog extends HTMLElement {
       btn.addEventListener('click', (e) => {
         const selectedService = btn.getAttribute('data-service');
         if (selectedService) {
-          window.dispatchEvent(new CustomEvent('select-service', {
-            detail: { service: selectedService }
-          }));
-
           const quoteElement = document.querySelector('#cotizador') || document.querySelector('whatsapp-cotizador');
           if (quoteElement) {
+            window.dispatchEvent(new CustomEvent('select-service', {
+              detail: { service: selectedService }
+            }));
             quoteElement.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.location.href = `cotizador.html?servicio=${encodeURIComponent(selectedService)}`;
           }
         }
       });

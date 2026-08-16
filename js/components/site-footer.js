@@ -1,6 +1,6 @@
 /**
  * Componente: SiteFooter (<site-footer>)
- * Pie de página oficial con logo restaurado, enlaces rápidos y derechos reservados.
+ * Pie de página oficial con enlaces a las páginas del sitio, logo y copyright.
  */
 
 class SiteFooter extends HTMLElement {
@@ -26,11 +26,12 @@ class SiteFooter extends HTMLElement {
             <div class="footer-links">
               <h4>Navegación Rápida</h4>
               <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios y Especialidades</a></li>
-                <li><a href="#sobre-alberto">Sobre Alberto Pizarro</a></li>
-                <li><a href="#cotizador">Cotizador WhatsApp</a></li>
-                <li><a href="#contacto">Ubicación y Horarios</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios y Especialidades</a></li>
+                <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
+                <li><a href="cotizador.html">Cotizador WhatsApp</a></li>
+                <li><a href="galeria.html">Galería del Taller</a></li>
+                <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>
             </div>
 

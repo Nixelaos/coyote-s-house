@@ -1,6 +1,6 @@
 /**
  * Componente: HeroSection (<hero-section>)
- * Sección principal de impacto con propuesta de valor, CTAs y placeholder de imagen principal.
+ * Sección principal de impacto con propuesta de valor, CTAs y enlaces a páginas.
  */
 
 class HeroSection extends HTMLElement {
@@ -29,13 +29,13 @@ class HeroSection extends HTMLElement {
               </p>
 
               <div class="hero-cta-group">
-                <a href="#cotizador" class="btn btn-primary btn-lg">
+                <a href="cotizador.html" class="btn btn-primary btn-lg">
                   <span>🔧</span> Cotizar Servicio
                 </a>
                 <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20consultar%20por%20un%20servicio%20para%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
                   <span>💬</span> WhatsApp Directo
                 </a>
-                <a href="#contacto" class="btn btn-outline">
+                <a href="contacto.html" class="btn btn-outline">
                   <span>📍</span> Cómo Llegar
                 </a>
               </div>

@@ -68,9 +68,9 @@
   <workshop-topbar></workshop-topbar>
 
   <!-- 2. Navegación Principal & Logo Oficial -->
-  <site-header></site-header>
+  <site-header active="inicio"></site-header>
 
-  <!-- 3. Contenido Principal -->
+  <!-- 3. Portada Principal de Inicio -->
   <main>
     <!-- Hero / Portada Principal -->
     <hero-section></hero-section>
@@ -78,26 +78,27 @@
     <!-- Pilares de Excelencia -->
     <features-section></features-section>
 
-    <!-- Cotizador y Agendador WhatsApp -->
-    <whatsapp-cotizador></whatsapp-cotizador>
-
-    <!-- Catálogo de Servicios Especializados -->
-    <services-catalog></services-catalog>
-
-    <!-- Sobre Alberto Pizarro (Docente y Mecánico) -->
-    <about-alberto></about-alberto>
-
-    <!-- Galería del Taller -->
-    <workshop-gallery></workshop-gallery>
+    <!-- Banner de Acceso Rápido al Cotizador y Servicios -->
+    <section style="padding: 3rem 0; background: rgba(13, 27, 62, 0.4); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="container text-center">
+        <span class="section-tag">Atención Rápida</span>
+        <h2 class="section-title" style="margin-bottom: 1rem;">¿Listo para agendar o cotizar tu mantención?</h2>
+        <p class="section-subtitle center-block" style="margin-bottom: 2rem;">
+          Utiliza nuestro cotizador inteligente para generar tu presupuesto estimado o revisa todas nuestras especialidades técnicas.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="cotizador.html" class="btn btn-whatsapp btn-lg">
+            <span>💬</span> Abrir Cotizador WhatsApp
+          </a>
+          <a href="servicios.html" class="btn btn-outline btn-lg">
+            <span>🔧</span> Ver Todos los Servicios
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- Opiniones y Reseñas de Clientes -->
     <customer-reviews></customer-reviews>
-
-    <!-- Preguntas Frecuentes (FAQ) -->
-    <faq-accordion></faq-accordion>
-
-    <!-- Ubicación, Contacto y Mapa -->
-    <contact-location></contact-location>
   </main>
 
   <!-- 4. Pie de Página -->
@@ -111,13 +112,7 @@
   <script defer src="js/components/site-header.js"></script>
   <script defer src="js/components/hero-section.js"></script>
   <script defer src="js/components/features-section.js"></script>
-  <script defer src="js/components/whatsapp-cotizador.js"></script>
-  <script defer src="js/components/services-catalog.js"></script>
-  <script defer src="js/components/about-alberto.js"></script>
-  <script defer src="js/components/workshop-gallery.js"></script>
   <script defer src="js/components/customer-reviews.js"></script>
-  <script defer src="js/components/faq-accordion.js"></script>
-  <script defer src="js/components/contact-location.js"></script>
   <script defer src="js/components/site-footer.js"></script>
   <script defer src="js/components/floating-whatsapp.js"></script>
   <script defer src="js/main.js"></script>

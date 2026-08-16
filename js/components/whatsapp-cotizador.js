@@ -140,6 +140,15 @@ class WhatsappCotizador extends HTMLElement {
     if (btnSendQuote) btnSendQuote.addEventListener('click', (e) => this.sendToWhatsApp(e));
     if (btnSendQuotePreview) btnSendQuotePreview.addEventListener('click', (e) => this.sendToWhatsApp(e));
 
+    // Leer parámetro URL si viene desde servicios.html (ej: cotizador.html?servicio=escaner)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceParam = urlParams.get('servicio');
+      if (serviceParam && serviceType) {
+        serviceType.value = serviceParam;
+      }
+    } catch (err) {}
+
     this.updatePreview();
   }
 

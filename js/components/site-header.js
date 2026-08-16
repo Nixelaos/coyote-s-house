@@ -1,18 +1,43 @@
 /**
  * Componente: SiteHeader (<site-header>)
- * Navegación principal, logo oficial restaurado, menú responsive y scroll highlight.
+ * Navegación principal multipágina, logo oficial, menú responsive y detección de página activa.
  */
 
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initHeaderEvents();
+    this.highlightActivePage();
   }
 
   disconnectedCallback() {
     if (this.scrollHandler) {
       window.removeEventListener('scroll', this.scrollHandler);
     }
+  }
+
+  highlightActivePage() {
+    const navLinks = this.querySelectorAll('.nav-link');
+    const activeAttr = this.getAttribute('active');
+
+    // Obtener el nombre del archivo actual (ej: servicios.html)
+    let currentPath = window.location.pathname.split('/').pop();
+    if (!currentPath || currentPath === '' || currentPath === '/') {
+      currentPath = 'index.html';
+    }
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href');
+      const linkPage = href ? href.split('#')[0] : '';
+      const pageKey = link.getAttribute('data-page');
+
+      if (activeAttr && (activeAttr === pageKey || activeAttr === linkPage)) {
+        link.classList.add('active');
+      } else if (!activeAttr && (currentPath === linkPage || (currentPath === 'index.html' && linkPage === 'index.html'))) {
+        link.classList.add('active');
+      }
+    });
   }
 
   initHeaderEvents() {
@@ -27,23 +52,6 @@ class SiteHeader extends HTMLElement {
       } else {
         header?.classList.remove('scrolled');
       }
-
-      // Highlight current section
-      let currentSection = '';
-      const sections = document.querySelectorAll('section[id]');
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) {
-          currentSection = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-          link.classList.add('active');
-        }
-      });
     };
 
     window.addEventListener('scroll', this.scrollHandler);
@@ -69,7 +77,7 @@ class SiteHeader extends HTMLElement {
     this.innerHTML = `
       <header class="site-header">
         <div class="container nav-container">
-          <a href="#inicio" class="brand-logo" title="Coyote's House - Taller de Motos">
+          <a href="index.html" class="brand-logo" title="Coyote's House - Taller de Motos">
             <div class="logo-circle-wrapper">
               <img src="assets/logo.jpg" alt="Logo Coyote's House" width="52" height="52">
             </div>
@@ -80,13 +88,12 @@ class SiteHeader extends HTMLElement {
           </a>
 
           <nav class="nav-menu" id="navMenu">
-            <a href="#inicio" class="nav-link active">Inicio</a>
-            <a href="#servicios" class="nav-link">Servicios</a>
-            <a href="#sobre-alberto" class="nav-link">Alberto Pizarro</a>
-            <a href="#cotizador" class="nav-link">Cotizador WhatsApp</a>
-            <a href="#galeria" class="nav-link">Taller</a>
-            <a href="#testimonios" class="nav-link">Opiniones</a>
-            <a href="#contacto" class="nav-link">Ubicación</a>
+            <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
+            <a href="servicios.html" class="nav-link" data-page="servicios">Servicios</a>
+            <a href="sobre-alberto.html" class="nav-link" data-page="sobre-alberto">Alberto Pizarro</a>
+            <a href="cotizador.html" class="nav-link" data-page="cotizador">Cotizador WhatsApp</a>
+            <a href="galeria.html" class="nav-link" data-page="galeria">Taller</a>
+            <a href="contacto.html" class="nav-link" data-page="contacto">Ubicación</a>
           </nav>
 
           <div class="nav-actions">
