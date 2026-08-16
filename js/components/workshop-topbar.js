@@ -1,6 +1,7 @@
 /**
  * Componente: WorkshopTopbar (<workshop-topbar>)
  * Barra superior con horario dinámico en tiempo real y datos de contacto rápido.
+ * Utiliza zona horaria oficial 'America/Santiago' (Chile UTC-4 / UTC-3 automático).
  */
 
 class WorkshopTopbar extends HTMLElement {
@@ -15,20 +16,49 @@ class WorkshopTopbar extends HTMLElement {
     }
   }
 
+  getChileTime() {
+    const now = new Date();
+    try {
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Santiago',
+        weekday: 'short',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+
+      const parts = formatter.formatToParts(now);
+      const partMap = {};
+      for (const p of parts) {
+        partMap[p.type] = p.value;
+      }
+
+      const daysMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+      const day = daysMap[partMap.weekday] ?? now.getDay();
+      let hour = parseInt(partMap.hour, 10);
+      if (hour === 24) hour = 0;
+      const minutes = parseInt(partMap.minute, 10) || 0;
+
+      return { day, hour, minutes, currentTime: hour + minutes / 60 };
+    } catch (e) {
+      // Fallback a horario local si Intl no estuviera disponible
+      const day = now.getDay();
+      const hour = now.getHours();
+      const minutes = now.getMinutes();
+      return { day, hour, minutes, currentTime: hour + minutes / 60 };
+    }
+  }
+
   updateWorkshopStatus() {
     const badge = this.querySelector('.status-badge');
     if (!badge) return;
 
-    const now = new Date();
-    const day = now.getDay(); // 0: Domingo, 1: Lunes, ... 6: Sábado
-    const hour = now.getHours();
-    const minutes = now.getMinutes();
-    const currentTime = hour + minutes / 60;
+    const { day, currentTime } = this.getChileTime();
 
     let isOpen = false;
     let statusText = '';
 
-    // Lunes (1) a Viernes (5) de 09:00 a 17:00
+    // Lunes (1) a Viernes (5) de 09:00 a 17:00 (Hora de Santiago de Chile)
     if (day >= 1 && day <= 5) {
       if (currentTime >= 9.0 && currentTime < 17.0) {
         isOpen = true;
