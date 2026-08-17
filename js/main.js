@@ -67,7 +67,7 @@ function initBackgroundPrefetch() {
 }
 
 /**
- * 2. SCROLL REVEAL (Aparición escalonada con IntersectionObserver)
+ * 2. SCROLL REVEAL DIRECCIONAL INTELIGENTE (Izquierda en Celular / Izquierda o Derecha según cercanía en PC)
  */
 function initScrollReveal() {
   if (!('IntersectionObserver' in window)) return;
@@ -81,12 +81,15 @@ function initScrollReveal() {
     });
   }, {
     root: null,
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
   });
 
-  // Observar componentes y tarjetas
+  // Observar componentes y tarjetas asignando dirección inteligente
   function observeElements() {
+    const isMobile = window.innerWidth <= 768;
+    const windowCenterX = window.innerWidth / 2;
+
     const targetSelectors = [
       '.feature-card',
       '.service-card',
@@ -96,14 +99,36 @@ function initScrollReveal() {
       '.review-card',
       '.gallery-item',
       '.about-feature',
-      '.contact-card'
+      '.about-card',
+      '.about-image-card',
+      '.contact-card',
+      '.contact-map-wrapper',
+      '.quote-box',
+      '.whatsapp-mockup-card',
+      '.contact-info-list'
     ];
 
     targetSelectors.forEach(selector => {
       document.querySelectorAll(selector).forEach((el, idx) => {
         if (!el.classList.contains('reveal-on-scroll')) {
           el.classList.add('reveal-on-scroll');
-          // Staggering escalonado para elementos hermanos
+
+          if (isMobile) {
+            // En celular: siempre entra desde la izquierda
+            el.classList.add('reveal-from-left');
+          } else {
+            // En PC: calcula si el centro del elemento está más cerca del lado izquierdo o derecho
+            const rect = el.getBoundingClientRect();
+            const elemCenterX = rect.left + (rect.width / 2);
+
+            if (elemCenterX < windowCenterX) {
+              el.classList.add('reveal-from-left');
+            } else {
+              el.classList.add('reveal-from-right');
+            }
+          }
+
+          // Staggering escalonado para elementos continuos
           const delayClass = `delay-${(idx % 4) + 1}`;
           el.classList.add(delayClass);
           observer.observe(el);
@@ -114,8 +139,8 @@ function initScrollReveal() {
 
   // Ejecutar al cargar y tras renderizado de Web Components
   observeElements();
-  setTimeout(observeElements, 400);
-  setTimeout(observeElements, 1200);
+  setTimeout(observeElements, 350);
+  setTimeout(observeElements, 1000);
 }
 
 /**
