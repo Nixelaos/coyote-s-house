@@ -21,7 +21,7 @@ class HeroSection extends HTMLElement {
               </div>
               
               <h1 class="hero-title">
-                TU MOTO EN MANOS DE UN TÉCNICO CALIFICADO Y PROFESOR DE MECÁNICA
+                TU MOTO EN MANOS DE UN PROFESIONAL CALIFICADO Y PROFESOR DE MECÁNICA
               </h1>
 
               <p class="hero-desc">
@@ -42,6 +42,10 @@ class HeroSection extends HTMLElement {
 
               <div class="hero-stats-row">
                 <div class="stat-item">
+                  <span class="stat-number">Docencia</span>
+                  <span class="stat-label">Profesional en mecánica de motos</span>
+                </div>
+                <div class="stat-item">
                   <span class="stat-number">20+</span>
                   <span class="stat-label">Años de experiencia profesional</span>
                 </div>
@@ -50,8 +54,8 @@ class HeroSection extends HTMLElement {
                   <span class="stat-label">Atención directa por su dueño</span>
                 </div>
                 <div class="stat-item">
-                  <span class="stat-number">Multimarca</span>
-                  <span class="stat-label">Baja, media y alta cilindrada</span>
+                  <span class="stat-number">Gama Total</span>
+                  <span class="stat-label">Todo tipo de motocicletas</span>
                 </div>
               </div>
             </div>

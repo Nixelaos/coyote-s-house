@@ -27,7 +27,7 @@ class FeaturesSection extends HTMLElement {
 
             <div class="feature-card">
               <div class="feature-icon-box">🏍️</div>
-              <h3 class="feature-title">Todas las Cilindradas</h3>
+              <h3 class="feature-title">Todo Tipo de Motocicletas</h3>
               <p class="feature-desc">Especialistas en deportivas, naked, touring, trail, custom, scooters urbanos y motos de baja a alta cilindrada multimarca.</p>
             </div>
           </div>

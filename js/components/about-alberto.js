@@ -33,7 +33,7 @@ class AboutAlberto extends HTMLElement {
               <h2 class="section-title">Alberto Pizarro: <span class="highlight-accent">Pasión, Precisión y Docencia</span></h2>
 
               <div class="about-quote">
-                "Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido por técnico calificado y profesor de mecánica."
+                "Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido por profesional calificado y profesor de mecánica."
               </div>
 
               <p style="color: var(--color-text-body); font-size: 1.05rem;">

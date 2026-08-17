@@ -25,34 +25,40 @@ class WhatsappCotizador extends HTMLElement {
   getQuoteData() {
     const motoBrand = this.querySelector('#motoBrand');
     const motoModel = this.querySelector('#motoModel');
-    const motoCapacity = this.querySelector('#motoCapacity');
+    const motoMileage = this.querySelector('#motoMileage');
     const serviceType = this.querySelector('#serviceType');
     const clientNotes = this.querySelector('#clientNotes');
 
-    const brand = (motoBrand && motoBrand.value.trim()) ? motoBrand.value.trim() : 'Yamaha';
-    const model = (motoModel && motoModel.value.trim()) ? motoModel.value.trim() : 'MT-07 (2022)';
-    const capacity = (motoCapacity && motoCapacity.options[motoCapacity.selectedIndex]) 
-      ? motoCapacity.options[motoCapacity.selectedIndex].text 
-      : '600cc a 900cc (Alta Cilindrada)';
+    const rawBrand = (motoBrand && motoBrand.value) ? motoBrand.value.trim() : '';
+    const rawModel = (motoModel && motoModel.value) ? motoModel.value.trim() : '';
+    const rawMileage = (motoMileage && motoMileage.value) ? motoMileage.value.trim() : '';
     const service = (serviceType && serviceType.options[serviceType.selectedIndex]) 
       ? serviceType.options[serviceType.selectedIndex].text 
       : 'Mantenimiento Preventivo / Pauta por KM';
-    const notes = (clientNotes && clientNotes.value.trim()) 
-      ? clientNotes.value.trim() 
-      : 'Revisión y mantención periódica';
+    const rawNotes = (clientNotes && clientNotes.value) ? clientNotes.value.trim() : '';
 
-    return { brand, model, capacity, service, notes };
+    return {
+      brand: rawBrand,
+      model: rawModel,
+      mileage: rawMileage,
+      service: service,
+      notes: rawNotes
+    };
   }
 
   generateWhatsAppMessage() {
     const data = this.getQuoteData();
+    const brandText = data.brand || 'Por confirmar';
+    const modelText = data.model || 'Por confirmar';
+    const mileageText = data.mileage || 'Por confirmar';
+    const notesText = data.notes ? `\n💬 *Detalle / Síntoma:* ${data.notes}` : '';
 
     const message = `¡Hola Alberto! 👋 Quisiera cotizar y agendar un servicio en *Coyote's House*:\n\n` +
-      `🏍️ *Marca:* ${data.brand}\n` +
-      `📌 *Modelo / Año:* ${data.model}\n` +
-      `⚡ *Cilindrada:* ${data.capacity}\n` +
-      `🔧 *Servicio:* ${data.service}\n` +
-      `💬 *Detalle / Síntoma:* ${data.notes}\n\n` +
+      `🏍️ *Marca:* ${brandText}\n` +
+      `📌 *Modelo / Año:* ${modelText}\n` +
+      `🛣️ *Kilometraje:* ${mileageText}\n` +
+      `🔧 *Servicio:* ${data.service}` +
+      `${notesText}\n\n` +
       `¿Podrías indicarme disponibilidad de hora y presupuesto estimado? ¡Muchas gracias!`;
 
     return message;
@@ -76,6 +82,22 @@ class WhatsappCotizador extends HTMLElement {
       timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     }
 
+    const brandDisplay = data.brand 
+      ? `<span class="wsp-item-val">${this.escapeHtml(data.brand)}</span>`
+      : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: Yamaha</span>`;
+
+    const modelDisplay = data.model 
+      ? `<span class="wsp-item-val">${this.escapeHtml(data.model)}</span>`
+      : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: MT-07 2022</span>`;
+
+    const mileageDisplay = data.mileage 
+      ? `<span class="wsp-item-val">${this.escapeHtml(data.mileage)}</span>`
+      : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: 15.000 km</span>`;
+
+    const notesDisplay = data.notes 
+      ? `<span class="wsp-item-val">${this.escapeHtml(data.notes)}</span>`
+      : `<span class="wsp-item-val" style="opacity: 0.55; font-style: italic;">(Opcional) Ej: Mantención periódica...</span>`;
+
     whatsappPreview.innerHTML = `
       <div class="wsp-bubble-header">
         ¡Hola Alberto! 👋 Quisiera cotizar y agendar un servicio en <strong>Coyote's House</strong>:
@@ -83,15 +105,15 @@ class WhatsappCotizador extends HTMLElement {
       <div class="wsp-bubble-list">
         <div class="wsp-item">
           <span class="wsp-item-label">🏍️ Marca:</span>
-          <span class="wsp-item-val">${this.escapeHtml(data.brand)}</span>
+          ${brandDisplay}
         </div>
         <div class="wsp-item">
           <span class="wsp-item-label">📌 Modelo / Año:</span>
-          <span class="wsp-item-val">${this.escapeHtml(data.model)}</span>
+          ${modelDisplay}
         </div>
         <div class="wsp-item">
-          <span class="wsp-item-label">⚡ Cilindrada:</span>
-          <span class="wsp-item-val">${this.escapeHtml(data.capacity)}</span>
+          <span class="wsp-item-label">🛣️ Kilometraje:</span>
+          ${mileageDisplay}
         </div>
         <div class="wsp-item">
           <span class="wsp-item-label">🔧 Servicio:</span>
@@ -99,7 +121,7 @@ class WhatsappCotizador extends HTMLElement {
         </div>
         <div class="wsp-item">
           <span class="wsp-item-label">💬 Detalle:</span>
-          <span class="wsp-item-val">${this.escapeHtml(data.notes)}</span>
+          ${notesDisplay}
         </div>
       </div>
       <div class="wsp-bubble-footer-text">
@@ -123,7 +145,7 @@ class WhatsappCotizador extends HTMLElement {
   initCotizador() {
     const motoBrand = this.querySelector('#motoBrand');
     const motoModel = this.querySelector('#motoModel');
-    const motoCapacity = this.querySelector('#motoCapacity');
+    const motoMileage = this.querySelector('#motoMileage');
     const serviceType = this.querySelector('#serviceType');
     const clientNotes = this.querySelector('#clientNotes');
     const btnSendQuote = this.querySelector('#btnSendQuote');
@@ -133,7 +155,7 @@ class WhatsappCotizador extends HTMLElement {
 
     if (motoBrand) motoBrand.addEventListener('input', updateHandler);
     if (motoModel) motoModel.addEventListener('input', updateHandler);
-    if (motoCapacity) motoCapacity.addEventListener('change', updateHandler);
+    if (motoMileage) motoMileage.addEventListener('input', updateHandler);
     if (serviceType) serviceType.addEventListener('change', updateHandler);
     if (clientNotes) clientNotes.addEventListener('input', updateHandler);
 
@@ -183,24 +205,18 @@ class WhatsappCotizador extends HTMLElement {
                 <div class="form-row-2">
                   <div class="form-group">
                     <label class="form-label" for="motoBrand">🏍️ Marca de tu Moto</label>
-                    <input type="text" id="motoBrand" class="form-control" placeholder="Ej: Honda, Yamaha, BMW, Kawasaki..." value="Yamaha">
+                    <input type="text" id="motoBrand" class="form-control" placeholder="Ej: Honda, Yamaha, BMW, Kawasaki...">
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="motoModel">📌 Modelo y Año</label>
-                    <input type="text" id="motoModel" class="form-control" placeholder="Ej: MT-07 2022 / Duke 390 2021" value="MT-07 2022">
+                    <input type="text" id="motoModel" class="form-control" placeholder="Ej: MT-07 2022 / Duke 390 2021">
                   </div>
                 </div>
 
                 <div class="form-row-2">
                   <div class="form-group">
-                    <label class="form-label" for="motoCapacity">⚡ Cilindrada</label>
-                    <select id="motoCapacity" class="form-control">
-                      <option value="125cc a 250cc">125cc a 250cc (Baja Cilindrada / Ciudad)</option>
-                      <option value="300cc a 500cc">300cc a 500cc (Media Cilindrada)</option>
-                      <option value="600cc a 900cc" selected>600cc a 900cc (Alta Cilindrada)</option>
-                      <option value="1000cc o más">1000cc o más (Superbike / Maxi-Trail)</option>
-                      <option value="Scooter">Scooter / Maxiscooter</option>
-                    </select>
+                    <label class="form-label" for="motoMileage">🛣️ Kilometraje</label>
+                    <input type="text" id="motoMileage" class="form-control" placeholder="Ej: 15.000 km / 25.000 km">
                   </div>
 
                   <div class="form-group">
