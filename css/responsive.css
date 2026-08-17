@@ -26,10 +26,6 @@
     height: auto;
   }
 
-  .hero-image-frame::before {
-    background: linear-gradient(180deg, transparent 50%, rgba(8, 12, 20, 0.6) 100%);
-  }
-
   .hero-image-frame img {
     min-height: 480px;
     height: 480px;
