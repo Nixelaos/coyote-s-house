@@ -3,6 +3,8 @@
    ========================================================================== */
 
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -25,11 +27,31 @@
   text-align: center;
 }
 
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn:hover::before {
+  left: 140%;
+}
+
 .btn > * {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   transform: skewX(12deg);
+  position: relative;
+  z-index: 2;
 }
 
 .btn:active {
