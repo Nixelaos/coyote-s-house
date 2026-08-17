@@ -58,19 +58,7 @@ class HeroSection extends HTMLElement {
 
             <div class="hero-media">
               <div class="hero-image-frame">
-                <div class="image-placeholder hero-placeholder">
-                  <span class="placeholder-icon">📷</span>
-                  <span class="placeholder-tag">Insertar Imagen</span>
-                  <span class="placeholder-desc">Taller Principal / Moto en elevador hidráulico</span>
-                  <span class="placeholder-spec">Recomendado: 1200 x 800 px</span>
-                </div>
-                <div class="hero-floating-badge">
-                  <div class="floating-icon">🐺</div>
-                  <div>
-                    <div class="floating-text-title">Alberto Pizarro — Taller Titular</div>
-                    <div class="floating-text-sub">Atención personalizada y trabajo garantizado</div>
-                  </div>
-                </div>
+                <img src="assets/workshop-hero.jpg" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="900" height="900">
               </div>
             </div>
           </div>
