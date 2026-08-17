@@ -24,7 +24,6 @@
 
 .hero-badge-wrap {
   margin-bottom: 1.25rem;
-  animation: slideInFromLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
 .hero-badge {
@@ -55,7 +54,6 @@
   line-height: 1.18;
   margin-bottom: 1.35rem;
   color: #ffffff;
-  animation: slideInFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 
 .hero-title .accent-gradient,
@@ -73,7 +71,6 @@
   line-height: 1.7;
   margin-bottom: 2rem;
   max-width: 580px;
-  animation: slideInFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
 }
 
 .hero-desc strong {
@@ -87,7 +84,6 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
-  animation: slideInFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
 }
 
 .hero-stats-row {
@@ -96,18 +92,6 @@
   gap: 1.25rem;
   padding-top: 2rem;
   border-top: 1px solid var(--color-border);
-  animation: slideInFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-35px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .stat-item {
@@ -142,7 +126,6 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  animation: slideInFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 .hero-image-frame {
@@ -181,25 +164,6 @@
   border: none;
   outline: none;
   transition: transform var(--transition-slow);
-  animation: mechanicalFocus 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes mechanicalFocus {
-  0% {
-    filter: blur(10px) brightness(0.85);
-    transform: scale(0.96);
-    opacity: 0.3;
-  }
-  60% {
-    filter: blur(2px) brightness(1.04);
-    transform: scale(1.01);
-    opacity: 0.95;
-  }
-  100% {
-    filter: blur(0px) brightness(1);
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .hero-image-frame:hover img {

@@ -1,17 +1,15 @@
 /**
  * COYOTE'S HOUSE - TALLER MECÁNICO DE MOTOCICLETAS
- * Main Engine: Pre-carga en segundo plano, Scroll Reveal & Micro-animaciones
+ * Main Engine: Pre-carga silenciosa en segundo plano para navegación instantánea
  * Teléfono Taller: +56 9 5475 0993 (Alberto Pizarro)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollReveal();
-  initDynamicCounters();
   initBackgroundPrefetch();
 });
 
 /**
- * 1. PRE-CARGA EN SEGUNDO PLANO (Prefetching silencioso en reposo + Hover)
+ * PRE-CARGA EN SEGUNDO PLANO (Prefetching silencioso en reposo + Hover)
  * Asegura transiciones instantáneas a 0ms sin ralentizar la carga inicial.
  */
 function initBackgroundPrefetch() {
@@ -30,7 +28,6 @@ function initBackgroundPrefetch() {
     if (!url || prefetchedUrls.has(url) || window.location.pathname.endsWith(url)) return;
     prefetchedUrls.add(url);
 
-    // Intentar prefetch nativo con link rel="prefetch"
     const link = document.createElement('link');
     link.rel = 'prefetch';
     link.href = url;
@@ -64,134 +61,4 @@ function initBackgroundPrefetch() {
       prefetchUrl(link.getAttribute('href'));
     }
   }, { passive: true });
-}
-
-/**
- * 2. SCROLL REVEAL DIRECCIONAL INTELIGENTE (Izquierda en Celular / Izquierda o Derecha según cercanía en PC)
- */
-function initScrollReveal() {
-  if (!('IntersectionObserver' in window)) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    root: null,
-    threshold: 0.08,
-    rootMargin: '0px 0px -30px 0px'
-  });
-
-  // Observar componentes y tarjetas asignando dirección inteligente
-  function observeElements() {
-    const isMobile = window.innerWidth <= 768;
-    const windowCenterX = window.innerWidth / 2;
-
-    const targetSelectors = [
-      '.feature-card',
-      '.service-card',
-      '.pauta-detail-box',
-      '.brand-chip',
-      '.faq-item',
-      '.review-card',
-      '.gallery-item',
-      '.about-feature',
-      '.about-card',
-      '.about-image-card',
-      '.contact-card',
-      '.contact-map-wrapper',
-      '.quote-box',
-      '.whatsapp-mockup-card',
-      '.contact-info-list'
-    ];
-
-    targetSelectors.forEach(selector => {
-      document.querySelectorAll(selector).forEach((el, idx) => {
-        if (!el.classList.contains('reveal-on-scroll')) {
-          el.classList.add('reveal-on-scroll');
-
-          if (isMobile) {
-            // En celular: siempre entra desde la izquierda
-            el.classList.add('reveal-from-left');
-          } else {
-            // En PC: calcula si el centro del elemento está más cerca del lado izquierdo o derecho
-            const rect = el.getBoundingClientRect();
-            const elemCenterX = rect.left + (rect.width / 2);
-
-            if (elemCenterX < windowCenterX) {
-              el.classList.add('reveal-from-left');
-            } else {
-              el.classList.add('reveal-from-right');
-            }
-          }
-
-          // Staggering escalonado para elementos continuos
-          const delayClass = `delay-${(idx % 4) + 1}`;
-          el.classList.add(delayClass);
-          observer.observe(el);
-        }
-      });
-    });
-  }
-
-  // Ejecutar al cargar y tras renderizado de Web Components
-  observeElements();
-  setTimeout(observeElements, 350);
-  setTimeout(observeElements, 1000);
-}
-
-/**
- * 3. CONTADOR DINÁMICO PARA MÉTRICAS (20+, 100%)
- */
-function initDynamicCounters() {
-  if (!('IntersectionObserver' in window)) return;
-
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const targetText = el.textContent.trim();
-
-        if (targetText.includes('20+')) {
-          animateCount(el, 0, 20, 1000, '+');
-        } else if (targetText.includes('100%')) {
-          animateCount(el, 0, 100, 1100, '%');
-        }
-
-        counterObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  function animateCount(element, start, end, duration, suffix = '') {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease-out cubic
-      const currentVal = Math.floor(easeProgress * (end - start) + start);
-      element.textContent = currentVal + suffix;
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        element.textContent = end + suffix;
-      }
-    };
-    window.requestAnimationFrame(step);
-  }
-
-  function observeCounters() {
-    document.querySelectorAll('.stat-number').forEach(stat => {
-      const txt = stat.textContent;
-      if (txt.includes('20+') || txt.includes('100%')) {
-        counterObserver.observe(stat);
-      }
-    });
-  }
-
-  observeCounters();
-  setTimeout(observeCounters, 500);
 }
