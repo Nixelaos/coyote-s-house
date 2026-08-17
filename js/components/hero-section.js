@@ -21,7 +21,7 @@ class HeroSection extends HTMLElement {
               </div>
               
               <h1 class="hero-title">
-                TU MOTO EN MANOS DE UN PROFESIONAL CALIFICADO Y PROFESOR DE MECÁNICA
+                TU MOTO EN MANOS DE UN PROFESIONAL CALIFICADO
               </h1>
 
               <p class="hero-desc">
@@ -32,19 +32,12 @@ class HeroSection extends HTMLElement {
                 <a href="cotizador.html" class="btn btn-primary btn-lg">
                   <span>🔧</span> Cotizar Servicio
                 </a>
-                <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20consultar%20por%20un%20servicio%20para%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-                  <span>💬</span> WhatsApp Directo
-                </a>
-                <a href="contacto.html" class="btn btn-outline">
+                <a href="contacto.html" class="btn btn-outline btn-lg">
                   <span>📍</span> Cómo Llegar
                 </a>
               </div>
 
               <div class="hero-stats-row">
-                <div class="stat-item">
-                  <span class="stat-number">Docencia</span>
-                  <span class="stat-label">Profesional en mecánica de motos</span>
-                </div>
                 <div class="stat-item">
                   <span class="stat-number">20+</span>
                   <span class="stat-label">Años de experiencia profesional</span>
@@ -54,8 +47,8 @@ class HeroSection extends HTMLElement {
                   <span class="stat-label">Atención directa por su dueño</span>
                 </div>
                 <div class="stat-item">
-                  <span class="stat-number">Gama Total</span>
-                  <span class="stat-label">Todo tipo de motocicletas</span>
+                  <span class="stat-number">Garantizado</span>
+                  <span class="stat-label">Trabajo transparente y sin cobros sorpresa</span>
                 </div>
               </div>
             </div>

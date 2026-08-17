@@ -14,9 +14,9 @@ class FeaturesSection extends HTMLElement {
         <div class="container">
           <div class="features-grid">
             <div class="feature-card">
-              <div class="feature-icon-box">🎓</div>
-              <h3 class="feature-title">Docente de Mecánica</h3>
-              <p class="feature-desc">Atendido directamente por Alberto Pizarro, profesor formador de mecánicos en Chile. Conocimiento técnico al más alto nivel.</p>
+              <div class="feature-icon-box">⚡</div>
+              <h3 class="feature-title">Profesional Calificado</h3>
+              <p class="feature-desc">Atendido directamente por su dueño Alberto Pizarro. Más de 20 años de experiencia, método riguroso y altos estándares técnicos.</p>
             </div>
 
             <div class="feature-card">

@@ -37,11 +37,12 @@ class FaqAccordion extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <section class="faq-section">
+      <section class="faq-section" id="faq">
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Dudas Comunes</span>
             <h2 class="section-title">Preguntas <span class="highlight-accent">Frecuentes</span></h2>
+            <p class="section-subtitle center-block">Respuestas directas sobre la atención, tiempos de entrega, pauta técnica y marcas atendidas en Coyote's House.</p>
           </div>
 
           <div class="faq-container">
@@ -51,17 +52,37 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body" style="max-height: 200px;">
-                Sí, te recomendamos agendar con anticipación por WhatsApp (+56 9 5475 0993) para asegurar tu cupo en el elevador y brindarte un servicio dedicado sin esperas innecesarias.
+                Sí, recomendamos agendar con anticipación por WhatsApp (+56 9 5475 0993) para reservar tu cupo en el elevador hidráulico y coordinar la entrega de tu moto en el mismo día.
               </div>
             </div>
 
             <div class="faq-item">
               <button class="faq-header" type="button">
-                <span>¿Qué marcas y modelos de motocicletas atienden?</span>
+                <span>¿Cuáles son los tiempos de entrega habituales?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos todas las marcas del mercado: japonesas (Honda, Yamaha, Kawasaki, Suzuki), europeas (BMW, KTM, Ducati, Triumph), marcas en auge (Royal Enfield, Bajaj, Benelli, CF Moto) y scooters urbanos multimarca.
+                Las mantenciones preventivas y por kilometraje se entregan en su gran mayoría durante el mismo día (siempre que no surjan imprevistos mecánicos). Las reparaciones de motores pequeños salen de 24 a 48 hrs, mientras que cilindradas mayores dependen de la disponibilidad de repuestos específicos.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-header" type="button">
+                <span>¿Qué marcas y tipos de motocicletas atienden?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-body">
+                Atendemos motocicletas de calle homologadas para circular de las principales marcas: Honda, Yamaha, Suzuki, Kawasaki, KTM, BMW, Bajaj, CFMOTO, Zontes, Haojue, Aprilia, Benelli, Husqvarna, etc. Otras marcas y modelos quedan sujetos a consulta técnica previa.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-header" type="button">
+                <span>¿Qué incluye la pauta de mantención completa?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-body">
+                Es una inspección integral de más de 25 puntos desde el interior hacia el exterior: ajuste/luz de válvulas, torque de culata, aseo de inyector/carburador, prueba de chispa de bujías en probador específico en banco, carga de batería al 100%, scanner con lectura de parámetros, y relubricación de rodamientos y pistas de caliper.
               </div>
             </div>
 
@@ -71,27 +92,17 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Absolutamente. Realizamos una inspección inicial, te explicamos el diagnóstico y los repuestos requeridos, y solo procedemos con tu aprobación expresa.
+                Absolutamente. Se realiza una revisión técnica transparente y te informamos el diagnóstico y presupuesto antes de intervenir tu moto. Sin cobros sorpresa.
               </div>
             </div>
 
             <div class="faq-item">
               <button class="faq-header" type="button">
-                <span>¿En qué consiste la revisión pre-compra para motos usadas?</span>
+                <span>¿Cuáles son los horarios de atención y ubicación?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Es un chequeo integral de 30 puntos que incluye revisión funcional de sistemas, estado de chasis y suspensión, compresión del motor, frenos, transmisión, neumáticos y verificación de fugas. Te entregamos un informe técnico para que compres sobre seguro.
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <button class="faq-header" type="button">
-                <span>¿Cuáles son los horarios de atención y formas de pago?</span>
-                <span class="faq-icon">+</span>
-              </button>
-              <div class="faq-body">
-                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs. Aceptamos transferencias electrónicas bancarias y efectivo.
+                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5847, Macul, Santiago. Aceptamos transferencias bancarias y efectivo.
               </div>
             </div>
           </div>

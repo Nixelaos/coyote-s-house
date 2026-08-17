@@ -222,11 +222,12 @@ class WhatsappCotizador extends HTMLElement {
                   <div class="form-group">
                     <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
                     <select id="serviceType" class="form-control">
-                      <option value="mantenimiento" selected>Mantenimiento Preventivo / Pauta por KM</option>
-                      <option value="motor">Ajuste, Sincronización o Reparación de Motor</option>
-                      <option value="frenos">Frenos y Suspensión (Pastillas, Discos, Retenes)</option>
-                      <option value="precompra">Inspección Pre-Compra (Revisión 30 Puntos)</option>
-                      <option value="otro">Otro / Consulta General</option>
+                      <option value="mantencion" selected>Mantención por Kilometraje / Pauta Preventiva</option>
+                      <option value="motor">Reparación o Ajuste de Motor (Menor / Pesada)</option>
+                      <option value="suspension">Servicio de Suspensión (Horquillas y Amortiguación)</option>
+                      <option value="scanner">Scanner y Diagnóstico Electrónico OBD</option>
+                      <option value="frenos">Mantenimiento Integral de Frenos</option>
+                      <option value="otro">Otro Servicio / Consulta General</option>
                     </select>
                   </div>
                 </div>

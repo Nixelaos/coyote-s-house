@@ -20,7 +20,7 @@ class SiteFooter extends HTMLElement {
                 </div>
                 <span class="brand-name" style="font-size: 1.2rem;">Coyote's <span>House</span></span>
               </div>
-              <p>Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido por profesional calificado y profesor de mecánica Alberto Pizarro.</p>
+              <p>Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido directamente por Alberto Pizarro.</p>
             </div>
 
             <div class="footer-links">
@@ -31,6 +31,7 @@ class SiteFooter extends HTMLElement {
                 <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
                 <li><a href="cotizador.html">Cotizador</a></li>
                 <li><a href="galeria.html">Galería del Taller</a></li>
+                <li><a href="faq.html">Preguntas Frecuentes</a></li>
                 <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>
             </div>
