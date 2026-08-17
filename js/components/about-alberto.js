@@ -30,7 +30,7 @@ class AboutAlberto extends HTMLElement {
 
             <div class="about-content">
               <span class="section-tag">Liderazgo Técnico</span>
-              <h2 class="section-title">Alberto Pizarro: <span class="highlight-gold">Pasión, Precisión y Docencia</span></h2>
+              <h2 class="section-title">Alberto Pizarro: <span class="highlight-accent">Pasión, Precisión y Docencia</span></h2>
 
               <div class="about-quote">
                 "Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido por técnico calificado y profesor de mecánica."

@@ -41,7 +41,7 @@ class FaqAccordion extends HTMLElement {
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Dudas Comunes</span>
-            <h2 class="section-title">Preguntas <span class="highlight-gold">Frecuentes</span></h2>
+            <h2 class="section-title">Preguntas <span class="highlight-accent">Frecuentes</span></h2>
           </div>
 
           <div class="faq-container">

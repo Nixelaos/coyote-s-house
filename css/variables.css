@@ -1,0 +1,106 @@
+/* ==========================================================================
+   COYOTE'S HOUSE - DESIGN TOKENS & CSS VARIABLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700;1,800;1,900&family=Saira:ital,wght@0,600;0,800;0,900;1,600;1,800;1,900&family=Oxanium:wght@400;600;700;800;900&family=Kanit:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Exo+2:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap');
+
+/* Native Racing Font: Automove Italic */
+@font-face {
+  font-family: 'Automove';
+  src: url('../fonts/Automove Personal Use Only.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Automove';
+  src: url('../fonts/Automove Personal Use Only.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Automove Italic';
+  src: url('../fonts/Automove Personal Use Only.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Brand Colors - Deep Obsidian, Electric Cyan & Sapphire Blue */
+  --color-navy-dark: #070e1e;
+  --color-navy: #0d1b3e;
+  --color-navy-light: #162b60;
+  --color-navy-accent: #1e3a8a;
+  
+  /* Primary & Accent Tones */
+  --color-primary: #0284c7;
+  --color-primary-hover: #0ea5e9;
+  --color-primary-dark: #0369a1;
+  --color-primary-glow: rgba(14, 165, 233, 0.25);
+  
+  --color-accent: #38bdf8;
+  --color-accent-bright: #7dd3fc;
+  --color-accent-glow: rgba(56, 189, 248, 0.25);
+
+  /* Aliases to eliminate all legacy red and gold */
+  --color-red: #38bdf8;
+  --color-red-dark: #0284c7;
+  --color-red-glow: rgba(56, 189, 248, 0.25);
+  
+  --color-gold: #38bdf8;
+  --color-gold-bright: #7dd3fc;
+  --color-gold-glow: rgba(56, 189, 248, 0.25);
+  
+  /* Surfaces & Backgrounds */
+  --color-bg-main: #080c14;
+  --color-bg-surface: #0f1523;
+  --color-bg-card: #131b2e;
+  --color-bg-card-hover: #18233c;
+  --color-border: #1e293b;
+  --color-border-light: #334155;
+  
+  /* Typography Colors */
+  --color-text-title: #f8fafc;
+  --color-text-body: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
+  --color-white: #ffffff;
+  
+  /* WhatsApp Identity */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c7e;
+  
+  /* Typography - Motorsport / High-Octane Speed Italic Style */
+  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', 'Kanit', 'Exo 2', sans-serif;
+  --font-body: 'Chakra Petch', 'Oxanium', 'Saira', 'Kanit', 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
+  
+  /* Shadows & Elevations */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 8px 24px rgba(56, 189, 248, 0.2);
+  --shadow-red: 0 8px 24px rgba(14, 165, 233, 0.25);
+  --shadow-accent: 0 8px 24px rgba(56, 189, 248, 0.25);
+  --shadow-navy: 0 8px 30px rgba(13, 27, 62, 0.6);
+  
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Header & Topbar Heights */
+  --topbar-height: 38px;
+  --header-height: 78px;
+}

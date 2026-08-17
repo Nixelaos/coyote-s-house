@@ -14,7 +14,7 @@ class ContactLocation extends HTMLElement {
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Encuéntranos</span>
-            <h2 class="section-title">Ubicación y <span class="highlight-red">Contacto Directo</span></h2>
+            <h2 class="section-title">Ubicación y <span class="highlight-accent">Contacto Directo</span></h2>
             <p class="section-subtitle center-block">Ubicados estratégicamente en Macul con fácil acceso desde las principales avenidas de Santiago.</p>
           </div>
 

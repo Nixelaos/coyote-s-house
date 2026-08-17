@@ -14,7 +14,7 @@ class CustomerReviews extends HTMLElement {
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Testimonios</span>
-            <h2 class="section-title">Opiniones de <span class="highlight-red">Nuestros Clientes</span></h2>
+            <h2 class="section-title">Opiniones de <span class="highlight-accent">Nuestros Clientes</span></h2>
             <p class="section-subtitle center-block">La experiencia de quienes confían el cuidado de sus motocicletas en Coyote's House.</p>
           </div>
 

@@ -173,7 +173,7 @@ class WhatsappCotizador extends HTMLElement {
         <div class="container">
           <div class="text-center" style="margin-bottom: 2.5rem;">
             <span class="section-tag">Cotización Inmediata</span>
-            <h2 class="section-title">Genera tu consulta para <span class="highlight-gold">WhatsApp</span></h2>
+            <h2 class="section-title">Genera tu consulta para <span class="highlight-accent">WhatsApp</span></h2>
             <p class="section-subtitle center-block">Completa los datos de tu moto a continuación. Se generará un mensaje claro y ordenado para que Alberto te responda con disponibilidad y presupuesto.</p>
           </div>
 

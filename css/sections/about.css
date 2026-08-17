@@ -1,0 +1,117 @@
+/* ==========================================================================
+   COYOTE'S HOUSE - ABOUT ALBERTO PIZARRO SECTION
+   ========================================================================== */
+
+.about-section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-card {
+  position: relative;
+}
+
+.about-photo-wrapper {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 2px solid rgba(56, 189, 248, 0.35);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(56, 189, 248, 0.15);
+  background: var(--color-bg-surface);
+}
+
+.about-photo-wrapper img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+.experience-sticker {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.experience-years {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  display: block;
+}
+
+.experience-tag {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.about-quote {
+  background: rgba(13, 27, 62, 0.5);
+  border-left: 4px solid var(--color-accent);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-white);
+  line-height: 1.6;
+}
+
+.credentials-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.credential-box {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 1.15rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.credential-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.credential-info h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
+.credential-info p {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}

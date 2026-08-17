@@ -14,7 +14,7 @@ class WorkshopGallery extends HTMLElement {
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Galería del Taller</span>
-            <h2 class="section-title">Trabajos y <span class="highlight-gold">Procedimientos en Taller</span></h2>
+            <h2 class="section-title">Trabajos y <span class="highlight-accent">Procedimientos en Taller</span></h2>
             <p class="section-subtitle center-block">Un vistazo a nuestras instalaciones, instrumental de precisión y el cuidado que brindamos a cada moto.</p>
           </div>
 

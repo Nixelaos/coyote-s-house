@@ -21,7 +21,7 @@ class HeroSection extends HTMLElement {
               </div>
               
               <h1 class="hero-title">
-                Tu moto en manos de un <span class="accent-gradient">técnico calificado</span> y <span class="text-red">profesor de mecánica</span>
+                TU MOTO EN MANOS DE UN TÉCNICO CALIFICADO Y PROFESOR DE MECÁNICA
               </h1>
 
               <p class="hero-desc">

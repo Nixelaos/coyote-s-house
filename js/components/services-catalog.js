@@ -35,7 +35,7 @@ class ServicesCatalog extends HTMLElement {
         <div class="container">
           <div class="text-center">
             <span class="section-tag">Especialidades del Taller</span>
-            <h2 class="section-title">Servicios con <span class="highlight-red">Estándares de Calidad</span></h2>
+            <h2 class="section-title">Servicios con <span class="highlight-accent">Estándares de Calidad</span></h2>
             <p class="section-subtitle center-block">Cada procedimiento se realiza siguiendo especificaciones técnicas de manual de taller de cada fabricante.</p>
           </div>
 
