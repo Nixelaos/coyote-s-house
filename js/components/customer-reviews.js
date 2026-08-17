@@ -18,7 +18,7 @@ class CustomerReviews extends HTMLElement {
             <p class="section-subtitle center-block">La experiencia de quienes confían el cuidado de sus motocicletas en Coyote's House.</p>
           </div>
 
-          <div style="max-width: 720px; margin: 3rem auto 0; background: var(--color-bg-card); border: 1px dashed rgba(245, 158, 11, 0.45); border-radius: var(--radius-xl); padding: 3.5rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; box-shadow: var(--shadow-md);">
+          <div class="reviews-coming-soon">
             <span style="font-size: 2.8rem; line-height: 1;">💬</span>
             <span class="placeholder-tag" style="font-size: 0.9rem; padding: 0.35rem 1rem;">Próximamente</span>
             <h3 style="font-size: 1.35rem; color: var(--color-text-title); margin-top: 0.25rem;">Sección de Opiniones en Construcción</h3>
