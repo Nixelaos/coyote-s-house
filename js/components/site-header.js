@@ -14,6 +14,9 @@ class SiteHeader extends HTMLElement {
     if (this.scrollHandler) {
       window.removeEventListener('scroll', this.scrollHandler);
     }
+    if (this.outsideClickHandler) {
+      document.removeEventListener('click', this.outsideClickHandler);
+    }
   }
 
   highlightActivePage() {
@@ -57,19 +60,31 @@ class SiteHeader extends HTMLElement {
     window.addEventListener('scroll', this.scrollHandler);
 
     if (mobileToggle && navMenu) {
-      mobileToggle.addEventListener('click', () => {
-        mobileToggle.classList.toggle('active');
-        navMenu.classList.toggle('open');
-        document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
-      });
+      this.toggleHandler = (e) => {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle('open');
+        mobileToggle.classList.toggle('active', isOpen);
+      };
+
+      mobileToggle.addEventListener('click', this.toggleHandler);
+
+      this.linkClickHandler = () => {
+        mobileToggle.classList.remove('active');
+        navMenu.classList.remove('open');
+      };
 
       navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', this.linkClickHandler);
+      });
+
+      this.outsideClickHandler = (e) => {
+        if (navMenu.classList.contains('open') && !this.contains(e.target)) {
           mobileToggle.classList.remove('active');
           navMenu.classList.remove('open');
-          document.body.style.overflow = '';
-        });
-      });
+        }
+      };
+
+      document.addEventListener('click', this.outsideClickHandler);
     }
   }
 

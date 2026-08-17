@@ -8,12 +8,27 @@ class WorkshopTopbar extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initScheduleTimer();
+    this.updateCssHeight();
+    this.boundResize = () => this.updateCssHeight();
+    window.addEventListener('resize', this.boundResize);
   }
 
   disconnectedCallback() {
     if (this.timer) {
       clearInterval(this.timer);
     }
+    if (this.boundResize) {
+      window.removeEventListener('resize', this.boundResize);
+    }
+  }
+
+  updateCssHeight() {
+    requestAnimationFrame(() => {
+      const height = this.offsetHeight;
+      if (height > 0) {
+        document.documentElement.style.setProperty('--topbar-height', `${height}px`);
+      }
+    });
   }
 
   getChileTime() {
@@ -62,22 +77,23 @@ class WorkshopTopbar extends HTMLElement {
     if (day >= 1 && day <= 5) {
       if (currentTime >= 9.0 && currentTime < 17.0) {
         isOpen = true;
-        statusText = '🟢 Abierto hoy hasta las 17:00 hrs';
+        statusText = 'Abierto hoy hasta 17:00';
       } else if (currentTime < 9.0) {
-        statusText = '🔴 Cerrado ahora (Abrimos a las 09:00 hrs)';
+        statusText = 'Cerrado (Abre 09:00 hrs)';
       } else {
         if (day === 5) {
-          statusText = '🔴 Cerrado (Abrimos el lunes a las 09:00 hrs)';
+          statusText = 'Cerrado (Abre lunes 09:00)';
         } else {
-          statusText = '🔴 Cerrado (Abrimos mañana a las 09:00 hrs)';
+          statusText = 'Cerrado (Abre mañana 09:00)';
         }
       }
     } else {
-      statusText = '🔴 Cerrado fin de semana (Abrimos el lunes a las 09:00 hrs)';
+      statusText = 'Cerrado (Abre lunes 09:00)';
     }
 
     badge.className = `status-badge ${isOpen ? 'open' : 'closed'}`;
-    badge.innerHTML = `<span class="status-dot"></span> ${statusText}`;
+    badge.innerHTML = `<span class="status-dot"></span> <span class="status-text">${statusText}</span>`;
+    this.updateCssHeight();
   }
 
   initScheduleTimer() {
@@ -88,21 +104,21 @@ class WorkshopTopbar extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="top-bar">
-        <div class="container">
+        <div class="container top-bar-container">
           <div class="top-info-left">
             <div class="status-badge open">
-              <span class="status-dot"></span> Abierto hoy hasta las 17:00 hrs
+              <span class="status-dot"></span> <span class="status-text">Abierto hoy hasta 17:00</span>
             </div>
-            <span class="top-link">
+            <span class="top-link top-address">
               📍 Av. Macul 5847, Macul, Santiago
             </span>
           </div>
           <div class="top-info-right">
-            <span class="top-link">
+            <span class="top-link top-schedule">
               🕒 Lun a Vie: 09:00 a 17:00 hrs
             </span>
-            <a href="https://wa.me/56954750993" target="_blank" rel="noopener" class="top-link" style="color: var(--color-whatsapp); font-weight: 700;">
-              💬 WhatsApp: +56 9 5475 0993
+            <a href="https://wa.me/56954750993" target="_blank" rel="noopener" class="top-link top-whatsapp" style="color: var(--color-whatsapp); font-weight: 700;">
+              💬 <span class="whatsapp-label">WhatsApp:</span> +56 9 5475 0993
             </a>
           </div>
         </div>
