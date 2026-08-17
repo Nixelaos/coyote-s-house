@@ -55,17 +55,19 @@
 
 .gallery-caption-title {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
   font-style: italic;
   color: var(--color-white);
   margin-bottom: 0.25rem;
+  line-height: 1.25;
 }
 
 .gallery-caption-sub {
   font-family: var(--font-heading);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 700;
   font-style: italic;
   color: var(--color-accent);
+  letter-spacing: 0.04em;
 }

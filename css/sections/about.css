@@ -21,8 +21,8 @@
 .about-photo-wrapper {
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 2px solid rgba(56, 189, 248, 0.35);
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(56, 189, 248, 0.15);
+  border: 2px solid rgba(225, 29, 72, 0.35);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(225, 29, 72, 0.15);
   background: var(--color-bg-surface);
 }
 
@@ -36,9 +36,9 @@
   position: absolute;
   bottom: -20px;
   right: -20px;
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
   color: #fff;
-  padding: 1.25rem 1.5rem;
+  padding: 1.15rem 1.4rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -47,7 +47,7 @@
 
 .experience-years {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.95rem;
   font-weight: 900;
   font-style: italic;
   letter-spacing: 0.02em;
@@ -57,7 +57,7 @@
 
 .experience-tag {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
@@ -105,10 +105,11 @@
 
 .credential-info h4 {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 800;
   font-style: italic;
   margin-bottom: 0.2rem;
+  line-height: 1.25;
 }
 
 .credential-info p {

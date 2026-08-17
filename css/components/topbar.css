@@ -3,28 +3,30 @@
    ========================================================================== */
 
 .top-bar {
-  font-family: var(--font-heading);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 500;
   background: linear-gradient(90deg, #070d1e 0%, #0d1b3e 50%, #070d1e 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   padding: 0.45rem 0;
   color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .top-bar .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-wrap: nowrap;
+  gap: 1rem;
 }
 
 .top-info-left, .top-info-right {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .status-badge {
@@ -32,13 +34,15 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.65rem;
   border-radius: var(--radius-full);
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  font-size: 0.74rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .status-badge.open {

@@ -30,30 +30,30 @@
 }
 
 :root {
-  /* Brand Colors - Deep Obsidian, Electric Cyan & Sapphire Blue */
+  /* Brand Colors - Deep Obsidian & Racing Red */
   --color-navy-dark: #070e1e;
   --color-navy: #0d1b3e;
   --color-navy-light: #162b60;
   --color-navy-accent: #1e3a8a;
   
-  /* Primary & Accent Tones */
-  --color-primary: #0284c7;
-  --color-primary-hover: #0ea5e9;
-  --color-primary-dark: #0369a1;
-  --color-primary-glow: rgba(14, 165, 233, 0.25);
+  /* Primary & Accent Tones (Exact #B5292A) */
+  --color-primary: #b5292a;
+  --color-primary-hover: #cf3335;
+  --color-primary-dark: #8c1e1f;
+  --color-primary-glow: rgba(181, 41, 42, 0.28);
   
-  --color-accent: #38bdf8;
-  --color-accent-bright: #7dd3fc;
-  --color-accent-glow: rgba(56, 189, 248, 0.25);
+  --color-accent: #b5292a;
+  --color-accent-bright: #d94849;
+  --color-accent-dark: #8c1e1f;
+  --color-accent-glow: rgba(181, 41, 42, 0.25);
 
-  /* Aliases to eliminate all legacy red and gold */
-  --color-red: #38bdf8;
-  --color-red-dark: #0284c7;
-  --color-red-glow: rgba(56, 189, 248, 0.25);
+  --color-red: #b5292a;
+  --color-red-dark: #8c1e1f;
+  --color-red-glow: rgba(181, 41, 42, 0.25);
   
-  --color-gold: #38bdf8;
-  --color-gold-bright: #7dd3fc;
-  --color-gold-glow: rgba(56, 189, 248, 0.25);
+  --color-gold: #b5292a;
+  --color-gold-bright: #d94849;
+  --color-gold-glow: rgba(181, 41, 42, 0.25);
   
   /* Surfaces & Backgrounds */
   --color-bg-main: #080c14;
@@ -74,18 +74,18 @@
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #128c7e;
   
-  /* Typography - Motorsport / High-Octane Speed Italic Style */
-  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', 'Kanit', 'Exo 2', sans-serif;
-  --font-body: 'Chakra Petch', 'Oxanium', 'Saira', 'Kanit', 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Typography - Motorsport Display & Clean Body Text */
+  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', 'Kanit', sans-serif;
+  --font-body: 'Kanit', 'Exo 2', 'Chakra Petch', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
   
   /* Shadows & Elevations */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 8px 24px rgba(56, 189, 248, 0.2);
-  --shadow-red: 0 8px 24px rgba(14, 165, 233, 0.25);
-  --shadow-accent: 0 8px 24px rgba(56, 189, 248, 0.25);
+  --shadow-gold: 0 8px 24px rgba(181, 41, 42, 0.25);
+  --shadow-red: 0 8px 24px rgba(181, 41, 42, 0.28);
+  --shadow-accent: 0 8px 24px rgba(181, 41, 42, 0.25);
   --shadow-navy: 0 8px 30px rgba(13, 27, 62, 0.6);
   
   /* Radii */

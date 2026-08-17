@@ -15,7 +15,7 @@
 .site-header.scrolled {
   background: rgba(7, 10, 18, 0.96);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  border-bottom-color: rgba(56, 189, 248, 0.2);
+  border-bottom-color: rgba(181, 41, 42, 0.25);
 }
 
 .nav-container {
@@ -64,7 +64,7 @@
 
 .brand-name {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.22rem;
   font-weight: 900;
   font-style: italic;
   color: var(--color-text-title);
@@ -79,11 +79,11 @@
 
 .brand-sub {
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   font-style: italic;
   color: var(--color-accent-bright);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -96,7 +96,7 @@
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   font-style: italic;
   text-transform: uppercase;
@@ -111,6 +111,11 @@
   color: var(--color-accent);
 }
 
+.nav-link[data-page="inicio"].active,
+.nav-link[data-page="inicio"]:hover {
+  color: #b5292a;
+}
+
 .nav-link::after {
   content: '';
   position: absolute;
@@ -118,7 +123,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #38bdf8, #0284c7);
+  background: linear-gradient(90deg, #cf3335, #b5292a);
   transition: width var(--transition-normal);
   border-radius: 2px;
 }

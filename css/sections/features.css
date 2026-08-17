@@ -28,7 +28,7 @@
 .feature-card:hover {
   transform: translateY(-5px);
   background: var(--color-bg-card-hover);
-  border-color: rgba(56, 189, 248, 0.4);
+  border-color: rgba(225, 29, 72, 0.45);
   box-shadow: var(--shadow-md);
 }
 
@@ -37,7 +37,7 @@
   height: 56px;
   border-radius: var(--radius-md);
   background: rgba(13, 27, 62, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  border: 1px solid rgba(225, 29, 72, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,11 +54,12 @@
 
 .feature-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.12rem;
   font-weight: 800;
   font-style: italic;
   margin-bottom: 0.65rem;
   color: var(--color-text-title);
+  line-height: 1.25;
 }
 
 .feature-desc {

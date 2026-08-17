@@ -145,7 +145,7 @@
   }
   
   .nav-link {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
   
   .mobile-toggle {
@@ -161,7 +161,8 @@
   }
 
   .hero-title {
-    font-size: clamp(2rem, 7vw, 2.75rem);
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+    line-height: 1.18;
     word-break: break-word;
   }
 
@@ -182,6 +183,14 @@
   .hero-stats-row {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.75rem;
+  }
+
+  .stat-number {
+    font-size: 1.55rem;
+  }
+
+  .stat-label {
+    font-size: 0.74rem;
   }
 
   .hero-placeholder,
@@ -349,13 +358,14 @@
   }
 
   .btn {
-    font-size: 0.95rem;
-    padding: 0.85rem 1.15rem;
+    font-size: 0.88rem;
+    padding: 0.78rem 1.15rem;
     width: 100%;
   }
 
   .section-title {
-    font-size: 1.65rem;
+    font-size: 1.45rem;
+    line-height: 1.22;
   }
 
   .section-subtitle {
@@ -395,11 +405,11 @@
   }
 
   .brand-name {
-    font-size: 1.12rem;
+    font-size: 1.05rem;
   }
 
   .brand-sub {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
   }
 
   .mobile-toggle {
@@ -422,7 +432,7 @@
   }
 
   .floating-text-title {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
   .floating-text-sub {
