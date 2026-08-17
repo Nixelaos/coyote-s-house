@@ -98,7 +98,6 @@ class SiteHeader extends HTMLElement {
             </div>
             <div class="brand-text">
               <span class="brand-name">Coyote's <span>House</span></span>
-              <span class="brand-sub">Taller Mecánico de Motos</span>
             </div>
           </a>
 
@@ -106,15 +105,12 @@ class SiteHeader extends HTMLElement {
             <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
             <a href="servicios.html" class="nav-link" data-page="servicios">Servicios</a>
             <a href="sobre-alberto.html" class="nav-link" data-page="sobre-alberto">Alberto Pizarro</a>
-            <a href="cotizador.html" class="nav-link" data-page="cotizador">Cotizador WhatsApp</a>
+            <a href="cotizador.html" class="nav-link" data-page="cotizador">COTIZADOR</a>
             <a href="galeria.html" class="nav-link" data-page="galeria">Taller</a>
             <a href="contacto.html" class="nav-link" data-page="contacto">Ubicación</a>
           </nav>
 
           <div class="nav-actions">
-            <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20pedir%20una%20hora%20para%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
-              <span>💬</span> Pedir Hora
-            </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menú de Navegación">
               <span></span>
               <span></span>

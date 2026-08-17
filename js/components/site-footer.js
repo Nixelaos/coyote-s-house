@@ -29,7 +29,7 @@ class SiteFooter extends HTMLElement {
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="servicios.html">Servicios y Especialidades</a></li>
                 <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
-                <li><a href="cotizador.html">Cotizador WhatsApp</a></li>
+                <li><a href="cotizador.html">Cotizador</a></li>
                 <li><a href="galeria.html">Galería del Taller</a></li>
                 <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>
