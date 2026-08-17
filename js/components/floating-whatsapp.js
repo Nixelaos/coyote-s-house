@@ -68,8 +68,8 @@ class FloatingWhatsapp extends HTMLElement {
             <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Necesito cotizar una revisión de frenos o motor para mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
               🛠️ Revisión de frenos o motor
             </button>
-            <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera consultar por una revisión pre-compra de una moto usada." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
-              🔍 Revisión pre-compra
+            <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera hacer una consulta para mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
+              💬 Otros
             </button>
           </div>
           <a href="https://wa.me/56954750993" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="width: 100%; margin-top: 0.25rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
