@@ -1,5 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - TYPOGRAPHY & HEADINGS
+   Anti-Glare Chalk Headings, Medium Weights & Airy Line-Heights
    ========================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
@@ -7,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 800;
   font-style: italic;
-  line-height: 1.2;
+  line-height: 1.24;
   letter-spacing: 0.02em;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -18,14 +19,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.45rem;
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-accent);
-  background: rgba(225, 29, 72, 0.12);
-  border: 1px solid rgba(225, 29, 72, 0.35);
+  background: rgba(181, 41, 42, 0.12);
+  border: 1px solid rgba(181, 41, 42, 0.35);
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-full);
   margin-bottom: 1rem;
@@ -39,12 +40,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  font-size: clamp(1.55rem, 3.2vw, 2.3rem);
   font-style: italic;
   font-weight: 900;
   line-height: 1.22;
   letter-spacing: 0.02em;
   margin-bottom: 1rem;
+  color: var(--color-text-title);
   word-break: break-word;
   overflow-wrap: break-word;
 }
@@ -56,10 +58,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
+  font-weight: 500;
   color: var(--color-text-muted);
-  max-width: 680px;
-  line-height: 1.7;
+  max-width: 720px;
+  line-height: 1.78;
   word-break: break-word;
   overflow-wrap: break-word;
 }

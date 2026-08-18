@@ -1,5 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - FEATURES / VALUE PROPOSITION SECTION
+   Ergonomic Dark Mode: Charcoal Cards & Pearl Gray Text
    ========================================================================== */
 
 .features-section {
@@ -17,7 +18,7 @@
 .feature-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  padding: 2rem 1.75rem;
+  padding: 2.15rem 1.85rem;
   border-radius: var(--radius-lg);
   transition: all var(--transition-normal);
   position: relative;
@@ -28,7 +29,7 @@
 .feature-card:hover {
   transform: translateY(-5px);
   background: var(--color-bg-card-hover);
-  border-color: rgba(225, 29, 72, 0.45);
+  border-color: rgba(181, 41, 42, 0.45);
   box-shadow: var(--shadow-md);
 }
 
@@ -36,8 +37,8 @@
   width: 56px;
   height: 56px;
   border-radius: var(--radius-md);
-  background: rgba(13, 27, 62, 0.8);
-  border: 1px solid rgba(225, 29, 72, 0.35);
+  background: rgba(38, 38, 46, 0.85);
+  border: 1px solid rgba(181, 41, 42, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,12 +50,12 @@
 
 .feature-card:hover .feature-icon-box {
   transform: scale(1.1);
-  background: var(--color-navy);
+  background: var(--color-navy-light);
 }
 
 .feature-title {
   font-family: var(--font-heading);
-  font-size: 1.12rem;
+  font-size: 1.18rem;
   font-weight: 800;
   font-style: italic;
   margin-bottom: 0.65rem;
@@ -63,7 +64,8 @@
 }
 
 .feature-desc {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  font-weight: 500;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.72;
 }

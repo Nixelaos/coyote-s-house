@@ -1,5 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - BASE & RESET STYLES
+   Ergonomic Base (17px, Weight 500, Line-Height 1.76, Charcoal Background)
    ========================================================================== */
 
 *, *::before, *::after {
@@ -48,7 +49,7 @@ site-header {
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  font-size: 17px;
   color-scheme: dark;
   overflow-x: clip;
   width: 100%;
@@ -60,7 +61,9 @@ body {
   background-color: var(--color-bg-main);
   color: var(--color-text-body);
   font-family: var(--font-body);
-  line-height: 1.65;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.76;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
@@ -70,7 +73,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Background Subtle Gradient & Mesh */
+/* Background Subtle Gradient & Mesh (Charcoal Soft Blend) */
 body::before {
   content: '';
   position: fixed;
@@ -81,9 +84,9 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 15% 15%, rgba(13, 27, 62, 0.55) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(225, 29, 72, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 15% 15%, rgba(38, 38, 46, 0.5) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(181, 41, 42, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(44, 44, 54, 0.06) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
@@ -132,5 +135,3 @@ main.is-transitioning {
   opacity: 0;
   transform: translateY(6px);
 }
-
-

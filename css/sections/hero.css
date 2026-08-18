@@ -1,5 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - HERO SECTION
+   Ergonomic Dark Mode: Charcoal Blend & Anti-Glare Typography
    ========================================================================== */
 
 .hero-section {
@@ -31,17 +32,17 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-heading);
-  background: rgba(13, 27, 62, 0.7);
-  border: 1px solid rgba(225, 29, 72, 0.35);
+  background: rgba(38, 38, 46, 0.75);
+  border: 1px solid rgba(181, 41, 42, 0.35);
   padding: 0.35rem 0.9rem;
   border-radius: var(--radius-full);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-accent-bright);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .hero-title {
@@ -53,29 +54,30 @@
   letter-spacing: 0.03em;
   line-height: 1.18;
   margin-bottom: 1.35rem;
-  color: #ffffff;
+  color: var(--color-text-title);
 }
 
 .hero-title .accent-gradient,
 .hero-title .text-red,
 .hero-title .text-accent {
-  color: #ffffff;
+  color: var(--color-text-title);
   background: none;
   -webkit-background-clip: unset;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-text-fill-color: var(--color-text-title);
 }
 
 .hero-desc {
-  font-size: 1.12rem;
+  font-size: 1.15rem;
+  font-weight: 500;
   color: var(--color-text-body);
-  line-height: 1.7;
+  line-height: 1.78;
   margin-bottom: 2rem;
   max-width: 580px;
 }
 
 .hero-desc strong {
-  color: var(--color-white);
-  font-weight: 600;
+  color: var(--color-text-title);
+  font-weight: 700;
 }
 
 .hero-cta-group {
@@ -112,10 +114,10 @@
 
 .stat-label {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--color-text-muted);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 /* Hero Media Card */
@@ -134,7 +136,7 @@
   overflow: hidden;
   border: none;
   outline: none;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
   background: transparent;
   width: 100%;
   max-width: 510px;
@@ -147,7 +149,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #080c14 0%, rgba(8, 12, 20, 0.75) 12%, rgba(8, 12, 20, 0.2) 32%, transparent 55%);
+  background: linear-gradient(90deg, #18181b 0%, rgba(24, 24, 27, 0.75) 12%, rgba(24, 24, 27, 0.2) 32%, transparent 55%);
   z-index: 2;
   pointer-events: none;
   border-radius: 28px;
@@ -173,7 +175,7 @@
 .floating-icon {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, #e11d48, #be123c);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary-dark));
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -184,14 +186,14 @@
 
 .floating-text-title {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 800;
   font-style: italic;
-  color: var(--color-white);
+  color: var(--color-text-title);
   line-height: 1.2;
 }
 
 .floating-text-sub {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
 }

@@ -1,20 +1,21 @@
 /* ==========================================================================
    COYOTE'S HOUSE - MAIN NAVIGATION HEADER
+   Ergonomic Soft Asphalt Tone
    ========================================================================== */
 
 .site-header {
   position: relative;
   width: 100%;
-  background: rgba(8, 12, 20, 0.88);
+  background: rgba(24, 24, 27, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--color-border);
   transition: all var(--transition-normal);
 }
 
 .site-header.scrolled {
-  background: rgba(7, 10, 18, 0.96);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background: rgba(20, 20, 23, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   border-bottom-color: rgba(181, 41, 42, 0.25);
 }
 
@@ -96,7 +97,7 @@
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   font-style: italic;
   text-transform: uppercase;

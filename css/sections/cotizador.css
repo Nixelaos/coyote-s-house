@@ -1,18 +1,19 @@
 /* ==========================================================================
    COYOTE'S HOUSE - WHATSAPP QUOTE & APPOINTMENT BUILDER
+   Ergonomic Dark Mode: Charcoal/Asphalt, Pearl Gray & Anti-Glare Forms
    ========================================================================== */
 
 .quote-section {
-  padding: 5.5rem 0;
+  padding: 5rem 0;
   position: relative;
 }
 
 .quote-box {
-  background: linear-gradient(145deg, #0f172a 0%, #0d1b3e 100%);
-  border: 1px solid rgba(225, 29, 72, 0.35);
+  background: rgba(38, 38, 46, 0.75);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 3rem 2.5rem;
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(13, 27, 62, 0.5);
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
 }
@@ -24,7 +25,7 @@
   right: -100px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(181, 41, 42, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -39,10 +40,10 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  background: rgba(11, 17, 32, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(24, 24, 30, 0.85);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
+  padding: 1.85rem;
   box-shadow: var(--shadow-sm);
   min-width: 0;
 }
@@ -57,7 +58,7 @@
 
 .form-label {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   font-style: italic;
   color: var(--color-text-title);
@@ -71,12 +72,13 @@
 }
 
 .form-control {
-  background: rgba(8, 12, 20, 0.85);
-  border: 1px solid var(--color-border-light);
-  color: var(--color-white);
+  background: rgba(18, 18, 22, 0.95);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-body);
   padding: 0.85rem 1.15rem;
   border-radius: var(--radius-md);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  font-weight: 500;
   transition: all var(--transition-fast);
   outline: none;
   width: 100%;
@@ -87,8 +89,8 @@
 
 .form-control:focus {
   border-color: var(--color-accent);
-  background: rgba(8, 12, 20, 0.98);
-  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.2);
+  background: rgba(18, 18, 22, 1);
+  box-shadow: 0 0 0 3px rgba(181, 41, 42, 0.2);
 }
 
 select.form-control {
@@ -99,8 +101,8 @@ select.form-control {
 }
 
 select.form-control option {
-  background: #0f172a;
-  color: #fff;
+  background: #1f1f24;
+  color: var(--color-text-body);
 }
 
 .form-row-2 {
@@ -113,13 +115,13 @@ select.form-control option {
 
 /* --- WhatsApp Realistic & Spacious Mockup UI --- */
 .whatsapp-mockup-card {
-  background: #0b141a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111b21;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   min-width: 0;
   width: 100%;
 }
@@ -176,7 +178,7 @@ select.form-control option {
 
 .whatsapp-mockup-status {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #8696a0;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -244,8 +246,8 @@ select.form-control option {
   position: relative;
   max-width: 95%;
   padding: 0.85rem 1.1rem 0.5rem;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.58;
   word-break: normal;
   overflow-wrap: break-word;
 }
@@ -259,7 +261,7 @@ select.form-control option {
 
 .whatsapp-received p {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
@@ -302,7 +304,7 @@ select.form-control option {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.35rem 0.5rem;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.45;
   min-width: 0;
 }
@@ -311,7 +313,7 @@ select.form-control option {
   color: #cbd5e1;
   font-weight: 700;
   flex-shrink: 0;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .wsp-item-val {
@@ -322,7 +324,7 @@ select.form-control option {
 }
 
 .wsp-bubble-footer-text {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: #d1d7db;
   line-height: 1.45;
   margin-bottom: 0.25rem;
