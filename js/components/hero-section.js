@@ -30,7 +30,7 @@ class HeroSection extends HTMLElement {
 
               <div class="hero-cta-group">
                 <a href="cotizador.html" class="btn btn-primary btn-lg">
-                  <span>🔧</span> Cotizar Servicio
+                  <span>💬</span> Generar Cotización WhatsApp
                 </a>
                 <a href="contacto.html" class="btn btn-outline btn-lg">
                   <span>📍</span> Cómo Llegar

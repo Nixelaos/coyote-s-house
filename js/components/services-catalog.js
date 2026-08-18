@@ -337,7 +337,7 @@ class ServicesCatalog extends HTMLElement {
           <!-- Botón Cotizador -->
           <div class="text-center" style="margin-top: 4rem;">
             <a href="cotizador.html" class="btn btn-whatsapp btn-lg">
-              <span>💬</span> Ir al Cotizador de WhatsApp
+              <span>💬</span> Generar Cotización WhatsApp
             </a>
           </div>
 
