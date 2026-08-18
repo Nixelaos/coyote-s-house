@@ -1,6 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - WHATSAPP QUOTE & APPOINTMENT BUILDER
-   Ergonomic Dark Mode: Charcoal/Asphalt, Pearl Gray & Anti-Glare Forms
+   Ergonomic Dark Mode: Stepped Luminance & High-Contrast Forms
    ========================================================================== */
 
 .quote-section {
@@ -9,7 +9,7 @@
 }
 
 .quote-box {
-  background: rgba(38, 38, 46, 0.75);
+  background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 3rem 2.5rem;
@@ -40,7 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  background: rgba(24, 24, 30, 0.85);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 1.85rem;
@@ -72,13 +72,14 @@
 }
 
 .form-control {
-  background: rgba(18, 18, 22, 0.95);
+  background: var(--color-bg-main);
   border: 1px solid var(--color-border);
   color: var(--color-text-body);
+  font-family: var(--font-body);
   padding: 0.85rem 1.15rem;
   border-radius: var(--radius-md);
-  font-size: 0.98rem;
-  font-weight: 500;
+  font-size: 0.96rem;
+  font-weight: 400;
   transition: all var(--transition-fast);
   outline: none;
   width: 100%;
@@ -89,7 +90,7 @@
 
 .form-control:focus {
   border-color: var(--color-accent);
-  background: rgba(18, 18, 22, 1);
+  background: var(--color-bg-main);
   box-shadow: 0 0 0 3px rgba(181, 41, 42, 0.2);
 }
 
@@ -101,7 +102,7 @@ select.form-control {
 }
 
 select.form-control option {
-  background: #1f1f24;
+  background: var(--color-bg-card);
   color: var(--color-text-body);
 }
 
@@ -116,7 +117,7 @@ select.form-control option {
 /* --- WhatsApp Realistic & Spacious Mockup UI --- */
 .whatsapp-mockup-card {
   background: #111b21;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;

@@ -304,7 +304,7 @@ class ServicesCatalog extends HTMLElement {
                 </div>
               </div>
 
-              <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; font-style: italic; color: #ffffff; text-transform: uppercase; margin-bottom: 0.75rem;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; font-style: italic; color: var(--color-text-title); text-transform: uppercase; margin-bottom: 0.75rem;">
                 Marcas de Referencia a las que se da Servicio
               </h3>
               <p style="color: var(--color-text-muted); font-size: 0.9rem; max-width: 750px; margin: 0 auto 1.25rem;">

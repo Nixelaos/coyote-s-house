@@ -57,7 +57,7 @@ class AboutAlberto extends HTMLElement {
               <div class="history-header-icon">🏍️</div>
               <div>
                 <span class="section-tag" style="margin-bottom: 0.35rem;">Historia del Taller</span>
-                <h2 style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 900; font-style: italic; color: #ffffff; text-transform: uppercase; margin: 0;">
+                <h2 style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 900; font-style: italic; color: var(--color-text-title); text-transform: uppercase; margin: 0;">
                   El Origen de Coyote's House: <span class="highlight-accent">De la Necesidad a la Vocación</span>
                 </h2>
               </div>
@@ -100,19 +100,19 @@ class AboutAlberto extends HTMLElement {
               <ul class="pillar-list">
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Profesor Validado (desde 2015)</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Profesor Validado (desde 2015)</strong>
                     Validado como docente en Mecánica y Electrónica de Motocicletas.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Instituto Electromechanics (hasta 2021)</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Instituto Electromechanics (hasta 2021)</strong>
                     Docente a cargo de la formación técnica de nuevos mecánicos.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Cursos Actuales Especializados</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Cursos Actuales Especializados</strong>
                     Dictado de cursos intensivos y puntualizados para instituciones del motociclismo y de forma particular.
                   </div>
                 </li>
@@ -128,19 +128,19 @@ class AboutAlberto extends HTMLElement {
               <ul class="pillar-list">
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Atención Personalizada y Transparente</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Atención Personalizada y Transparente</strong>
                     Se le explica al cliente la falla, sus razones de origen y el método exacto de solución técnica.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Pedagogía en Taller</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Pedagogía en Taller</strong>
                     Apoyado en su nivel docente, explica el paso a paso entregándole conocimiento además del arreglo mecánico o electrónico.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: #ffffff; display: block;">Seguimiento con Fotos y Videos</strong>
+                    <strong style="color: var(--color-text-title); display: block;">Seguimiento con Fotos y Videos</strong>
                     Durante todo el proceso se mantiene al cliente informado mediante registros audiovisuales en tiempo real.
                   </div>
                 </li>

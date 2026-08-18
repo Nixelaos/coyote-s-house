@@ -1,6 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - ABOUT ALBERTO PIZARRO & HISTORY SECTION
-   Ergonomic Dark Mode: Charcoal/Asphalt, Pearl Gray & Anti-Glare Text
+   Ergonomic Dark Mode: Stepped Luminance, Readable Sans-Serif Body
    ========================================================================== */
 
 .about-section {
@@ -26,7 +26,7 @@
   overflow: hidden;
   border: 2px solid rgba(181, 41, 42, 0.35);
   box-shadow: var(--shadow-lg), 0 0 40px rgba(181, 41, 42, 0.12);
-  background: var(--color-bg-surface);
+  background: var(--color-bg-card);
 }
 
 .about-photo-wrapper img {
@@ -61,7 +61,7 @@
 
 .experience-tag {
   font-family: var(--font-heading);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
@@ -75,21 +75,21 @@
 }
 
 .about-quote {
-  background: rgba(38, 38, 46, 0.65);
+  background: var(--color-bg-card);
   border-left: 4px solid var(--color-accent);
   padding: 1.35rem 1.65rem;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-style: italic;
-  font-size: 1.06rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: var(--color-text-title);
-  line-height: 1.72;
+  line-height: 1.68;
 }
 
 /* History Box */
 .history-wrap-box {
-  background: rgba(38, 38, 46, 0.65);
-  border: 1px solid rgba(181, 41, 42, 0.25);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 3rem 2.75rem;
   margin-bottom: 4.5rem;
@@ -114,7 +114,7 @@
   gap: 1rem;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .history-header-icon {
@@ -129,22 +129,27 @@
 .history-body-paragraphs {
   display: flex;
   flex-direction: column;
-  gap: 1.45rem;
-  font-size: 1.04rem;
-  font-weight: 500;
+  gap: 1.35rem;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 400;
   color: var(--color-text-body);
-  line-height: 1.8;
+  line-height: 1.68;
+}
+
+.history-body-paragraphs p {
+  max-width: 70ch;
 }
 
 .history-highlight-box {
-  background: rgba(24, 24, 30, 0.85);
+  background: var(--color-bg-surface);
   border-left: 3px solid var(--color-accent);
   padding: 1.4rem 1.65rem;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   color: var(--color-text-title);
-  font-size: 1.02rem;
-  font-weight: 500;
-  line-height: 1.76;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.68;
   margin-top: 0.5rem;
 }
 
@@ -167,7 +172,8 @@
 }
 
 .pillar-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  background: var(--color-bg-card-hover);
   border-color: rgba(181, 41, 42, 0.4);
   box-shadow: var(--shadow-md);
 }
@@ -197,8 +203,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  font-family: var(--font-body);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-text-body);
 }
 
@@ -206,7 +213,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .pillar-list li::before {
@@ -219,7 +226,7 @@
 
 /* Passion Box */
 .passion-quote-box {
-  background: rgba(31, 31, 38, 0.6);
+  background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 2.75rem 2.25rem;
@@ -228,18 +235,19 @@
 }
 
 .passion-text {
-  font-size: 1.08rem;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 400;
   font-style: italic;
   color: var(--color-text-title);
-  line-height: 1.85;
-  max-width: 880px;
+  line-height: 1.72;
+  max-width: 68ch;
   margin: 0 auto 1.35rem;
 }
 
 .passion-author {
   font-family: var(--font-heading);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 800;
   font-style: italic;
   color: var(--color-accent-bright);
