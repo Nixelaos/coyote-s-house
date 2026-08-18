@@ -12,14 +12,14 @@ class HeroSection extends HTMLElement {
     this.innerHTML = `
       <section class="hero-section" id="inicio">
         <div class="container">
+          <div class="hero-badge-wrap">
+            <span class="hero-badge">
+              ⚡ Taller Especializado en Motocicletas
+            </span>
+          </div>
+
           <div class="hero-grid">
             <div class="hero-content">
-              <div class="hero-badge-wrap">
-                <span class="hero-badge">
-                  ⚡ Taller Especializado en Motocicletas
-                </span>
-              </div>
-              
               <h1 class="hero-title">
                 TU MOTO EN MANOS DE UN PROFESIONAL CALIFICADO
               </h1>
@@ -36,27 +36,27 @@ class HeroSection extends HTMLElement {
                   <span>📍</span> Cómo Llegar
                 </a>
               </div>
-
-              <div class="hero-stats-row">
-                <div class="stat-item">
-                  <span class="stat-number">20+</span>
-                  <span class="stat-label">Años de experiencia profesional</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">100%</span>
-                  <span class="stat-label">Atención directa por su dueño</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">Garantizado</span>
-                  <span class="stat-label">Trabajo transparente y sin cobros sorpresa</span>
-                </div>
-              </div>
             </div>
 
             <div class="hero-media">
               <div class="hero-image-frame">
-                <img src="assets/workshop-hero.jpg" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="900" height="900">
+                <img src="assets/workshop-hero.jpg" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="904" height="910" decoding="async">
               </div>
+            </div>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <span class="stat-number">20+</span>
+              <span class="stat-label">Años de experiencia profesional</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Atención directa por su dueño</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">Garantizado</span>
+              <span class="stat-label">Trabajo transparente y sin cobros sorpresa</span>
             </div>
           </div>
         </div>

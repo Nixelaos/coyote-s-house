@@ -162,6 +162,8 @@ class WhatsappCotizador extends HTMLElement {
     if (btnSendQuote) btnSendQuote.addEventListener('click', (e) => this.sendToWhatsApp(e));
     if (btnSendQuotePreview) btnSendQuotePreview.addEventListener('click', (e) => this.sendToWhatsApp(e));
 
+    this.initCustomSelect();
+
     // Leer parámetro URL si viene desde servicios.html (ej: cotizador.html?servicio=motor)
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -170,11 +172,87 @@ class WhatsappCotizador extends HTMLElement {
         if (serviceParam === 'mantencion') serviceParam = 'mantencion-km';
         if (serviceType.querySelector(`option[value="${serviceParam}"]`)) {
           serviceType.value = serviceParam;
+          this.syncCustomSelect(serviceParam);
         }
       }
     } catch (err) {}
 
     this.updatePreview();
+  }
+
+  initCustomSelect() {
+    const wrapper = this.querySelector('#customSelectWrapper');
+    const trigger = this.querySelector('#customSelectTrigger');
+    const nativeSelect = this.querySelector('#serviceType');
+    const options = this.querySelectorAll('.custom-option');
+
+    if (!wrapper || !trigger || !nativeSelect) return;
+
+    // Toggle dropdown
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Option selection
+    options.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt.getAttribute('data-value');
+        nativeSelect.value = val;
+        nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        this.syncCustomSelect(val);
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!wrapper.contains(e.target)) {
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && wrapper.classList.contains('open')) {
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+
+    // Sync custom UI if native select changes
+    nativeSelect.addEventListener('change', () => {
+      this.syncCustomSelect(nativeSelect.value);
+    });
+
+    // Initial sync
+    this.syncCustomSelect(nativeSelect.value);
+  }
+
+  syncCustomSelect(val) {
+    const label = this.querySelector('#customSelectLabel');
+    const options = this.querySelectorAll('.custom-option');
+
+    let matchedText = '';
+    options.forEach(opt => {
+      if (opt.getAttribute('data-value') === val) {
+        opt.classList.add('selected');
+        opt.setAttribute('aria-selected', 'true');
+        matchedText = opt.querySelector('.option-text')?.textContent || opt.textContent;
+      } else {
+        opt.classList.remove('selected');
+        opt.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    if (label && matchedText) {
+      label.textContent = matchedText.trim();
+    }
   }
 
   initGlobalServiceListener() {
@@ -185,6 +263,7 @@ class WhatsappCotizador extends HTMLElement {
         if (selectedService === 'mantencion') selectedService = 'mantencion-km';
         if (serviceType.querySelector(`option[value="${selectedService}"]`)) {
           serviceType.value = selectedService;
+          this.syncCustomSelect(selectedService);
         }
         this.updatePreview();
         const quoteSection = this.querySelector('#cotizador');
@@ -227,14 +306,58 @@ class WhatsappCotizador extends HTMLElement {
 
                   <div class="form-group">
                     <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
-                    <select id="serviceType" class="form-control">
-                      <option value="mantencion-km" selected>Mantención por Kilometraje</option>
-                      <option value="mantencion-prev">Mantención Preventiva</option>
-                      <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
-                      <option value="suspension">Servicio de Suspensión</option>
-                      <option value="scanner">Scanner y Electrónica</option>
-                      <option value="otro">Otro Servicio / Consulta General</option>
-                    </select>
+                    <div class="custom-select-wrapper" id="customSelectWrapper">
+                      <select id="serviceType" class="form-control native-select-hidden" tabindex="-1" aria-hidden="true">
+                        <option value="mantencion-km" selected>Mantención por Kilometraje</option>
+                        <option value="mantencion-prev">Mantención Preventiva</option>
+                        <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
+                        <option value="suspension">Servicio de Suspensión</option>
+                        <option value="scanner">Scanner y Electrónica</option>
+                        <option value="otro">Otro Servicio / Consulta General</option>
+                      </select>
+
+                      <button type="button" class="custom-select-trigger" id="customSelectTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="custom-select-label" id="customSelectLabel">Mantención por Kilometraje</span>
+                        <span class="custom-select-chevron">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </span>
+                      </button>
+
+                      <div class="custom-select-dropdown" id="customSelectDropdown" role="listbox" tabindex="-1">
+                        <div class="custom-option selected" data-value="mantencion-km" role="option" aria-selected="true">
+                          <span class="option-icon">⚙️</span>
+                          <span class="option-text">Mantención por Kilometraje</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                        <div class="custom-option" data-value="mantencion-prev" role="option" aria-selected="false">
+                          <span class="option-icon">🛡️</span>
+                          <span class="option-text">Mantención Preventiva</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                        <div class="custom-option" data-value="motor" role="option" aria-selected="false">
+                          <span class="option-icon">🔧</span>
+                          <span class="option-text">Reparación de Motores (Mecánica Menor y Dura)</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                        <div class="custom-option" data-value="suspension" role="option" aria-selected="false">
+                          <span class="option-icon">🏍️</span>
+                          <span class="option-text">Servicio de Suspensión</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                        <div class="custom-option" data-value="scanner" role="option" aria-selected="false">
+                          <span class="option-icon">💻</span>
+                          <span class="option-text">Scanner y Electrónica</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                        <div class="custom-option" data-value="otro" role="option" aria-selected="false">
+                          <span class="option-icon">💬</span>
+                          <span class="option-text">Otro Servicio / Consulta General</span>
+                          <span class="option-check">✓</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

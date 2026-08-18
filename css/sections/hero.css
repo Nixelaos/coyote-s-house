@@ -11,20 +11,21 @@
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 2rem;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 2.75rem;
   align-items: center;
   position: relative;
 }
 
 .hero-content {
   position: relative;
-  z-index: 3;
-  max-width: 600px;
+  z-index: 2;
+  width: 100%;
+  max-width: 580px;
 }
 
 .hero-badge-wrap {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-badge {
@@ -85,7 +86,7 @@
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 .hero-stats-row {
@@ -93,7 +94,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   padding-top: 2rem;
+  margin-top: 2.5rem;
   border-top: 1px solid var(--color-border);
+  position: relative;
+  z-index: 3;
 }
 
 .stat-item {
@@ -128,19 +132,20 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
+  height: 100%;
+  margin-left: 0;
 }
 
 .hero-image-frame {
   position: relative;
   border-radius: 28px;
   overflow: hidden;
-  border: none;
-  outline: none;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  background: var(--color-bg-main, #18181b);
   width: 100%;
   max-width: 510px;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 904 / 910;
   display: flex;
   margin-left: auto;
 }
@@ -149,7 +154,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #18181b 0%, rgba(24, 24, 27, 0.75) 12%, rgba(24, 24, 27, 0.2) 32%, transparent 55%);
+  background: linear-gradient(180deg, rgba(24, 24, 27, 0.12) 0%, transparent 20%, transparent 80%, rgba(24, 24, 27, 0.25) 100%);
   z-index: 2;
   pointer-events: none;
   border-radius: 28px;
@@ -158,13 +163,18 @@
 .hero-image-frame img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 904 / 910;
   object-fit: cover;
   object-position: center center;
   display: block;
   border-radius: 28px;
   border: none;
   outline: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: transform var(--transition-slow);
 }
 
