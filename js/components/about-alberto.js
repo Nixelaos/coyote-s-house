@@ -1,6 +1,7 @@
 /**
  * Componente: AboutAlberto (<about-alberto>)
- * Sección biográfica y credenciales de Alberto Pizarro (Profesor de Mecánica).
+ * Sección biográfica, trayectoria docente, origen de Coyote's House y filosofía técnica.
+ * Texto y vivencias de Alberto Pizarro.
  */
 
 class AboutAlberto extends HTMLElement {
@@ -12,79 +13,150 @@ class AboutAlberto extends HTMLElement {
     this.innerHTML = `
       <section class="about-section" id="sobre-alberto">
         <div class="container">
-          <div class="about-grid">
+          
+          <!-- 1. Presentación Principal -->
+          <div class="about-hero-grid">
             <div class="about-image-card">
               <div class="about-photo-wrapper">
                 <div class="image-placeholder about-placeholder">
-                  <span class="placeholder-icon">📷</span>
-                  <span class="placeholder-tag">Insertar Imagen</span>
-                  <span class="placeholder-desc">Foto de Alberto Pizarro en taller técnico</span>
-                  <span class="placeholder-spec">Recomendado: 800 x 1000 px</span>
+                  <span class="placeholder-icon">👨‍🔧</span>
+                  <span class="placeholder-tag">Alberto Pizarro</span>
+                  <span class="placeholder-desc">Profesor de Mecánica & Líder Técnico en Coyote's House</span>
+                  <span class="placeholder-spec">Av. Macul 5847, Santiago</span>
                 </div>
               </div>
               <div class="experience-sticker">
-                <span class="experience-years">20+</span>
-                <span class="experience-tag">Años de Trayectoria</span>
+                <span class="experience-years">Docente</span>
+                <span class="experience-tag">Profesor & Mecánico</span>
               </div>
             </div>
 
             <div class="about-content">
-              <span class="section-tag">Liderazgo Técnico</span>
-              <h2 class="section-title">Alberto Pizarro: <span class="highlight-accent">Pasión, Precisión y Docencia</span></h2>
+              <span class="section-tag">Liderazgo Técnico & Pasión</span>
+              <h1 class="section-title">Alberto Pizarro: <span class="highlight-accent">Motociclista, Mecánico y Docente</span></h1>
 
               <div class="about-quote">
-                "Taller mecánico especializado en motocicletas modernas con altos estándares de calidad, atendido por profesional calificado y profesor de mecánica."
+                "Antes de ser mecánico o profesor, primero que todo soy motociclista de corazón. A su servicio."
               </div>
 
-              <p style="color: var(--color-text-body); font-size: 1.05rem;">
-                En el mundo de las motos, la confianza lo es todo. Detrás de <strong>Coyote's House</strong> está <strong>Alberto Pizarro</strong>, un profesional con más de dos décadas de experiencia real en el rubro automotriz y de motocicletas, además de su labor formadora como <strong>profesor de mecánica</strong>.
+              <p style="color: var(--color-text-body); font-size: 1.02rem; line-height: 1.7;">
+                Detrás de <strong>Coyote's House</strong> está <strong>Alberto Pizarro</strong>, profesional con amplia trayectoria en la mecánica de motocicletas y docente calificado. Su trabajo une la pasión pura por las dos ruedas con el rigor técnico, la precisión y la transparencia absoluta en cada diagnóstico y reparación.
               </p>
 
-              <p style="color: var(--color-text-muted);">
-                Esto significa que cada moto que entra a Coyote's House no es tratada con improvisaciones: se aplican métodos rigurosos de diagnóstico, herramientas calibradas y explicaciones transparentes para que como cliente entiendas exactamente qué se le hace a tu vehículo y por qué.
-              </p>
-
-              <div class="credentials-list">
-                <div class="credential-box">
-                  <div class="credential-icon">👨‍🏫</div>
-                  <div class="credential-info">
-                    <h4>Profesor de Mecánica</h4>
-                    <p>Formador de nuevos profesionales técnicos con base teórica y práctica.</p>
-                  </div>
-                </div>
-
-                <div class="credential-box">
-                  <div class="credential-icon">🛠️</div>
-                  <div class="credential-info">
-                    <h4>Mecánica de Precisión</h4>
-                    <p>Uso estricto de torques de manual y herramientas especializadas.</p>
-                  </div>
-                </div>
-
-                <div class="credential-box">
-                  <div class="credential-icon">📋</div>
-                  <div class="credential-info">
-                    <h4>Transparencia y Ética</h4>
-                    <p>Diagnósticos fundamentados y repuestos legítimos.</p>
-                  </div>
-                </div>
-
-                <div class="credential-box">
-                  <div class="credential-icon">🏍️</div>
-                  <div class="credential-info">
-                    <h4>Pasión Motociclista</h4>
-                    <p>Entendimiento real de las necesidades del piloto de calle y ruta.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div style="margin-top: 1rem;">
-                <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20hacerte%20una%20consulta%20técnica%20sobre%20mi%20moto" target="_blank" rel="noopener" class="btn btn-primary">
+              <div style="margin-top: 0.75rem;">
+                <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20hacerte%20una%20consulta%20técnica%20sobre%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp">
                   <span>💬</span> Hablar Directamente con Alberto
                 </a>
               </div>
             </div>
           </div>
+
+          <!-- 2. Historia & Origen de Coyote's House -->
+          <div class="history-wrap-box">
+            <div class="history-header">
+              <div class="history-header-icon">🏍️</div>
+              <div>
+                <span class="section-tag" style="margin-bottom: 0.35rem;">Historia del Taller</span>
+                <h2 style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 900; font-style: italic; color: #ffffff; text-transform: uppercase; margin: 0;">
+                  El Origen de Coyote's House: <span class="highlight-accent">De la Necesidad a la Vocación</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="history-body-paragraphs">
+              <p>
+                <strong>Coyote's House</strong> nace originalmente como un pequeño taller en la casa de <strong>Alberto Pizarro</strong>, apodado <em>"Coyote"</em> —de ahí su nombre, que significa literalmente <em>"La Casa de Coyote"</em>.
+              </p>
+
+              <p>
+                El proyecto surgió ante una necesidad real: tras vivir reiteradas malas experiencias y una constante falta de honestidad en talleres de motos del sector de Lira, Ñuñoa y los alrededores de su domicilio en La Florida, Alberto decidió tomar las riendas. Comenzó a estudiar a fondo la lógica y el funcionamiento de la motocicleta como concepto integral, realizando los primeros arreglos en su propia máquina y en las de sus amigos cercanos.
+              </p>
+
+              <p>
+                Con el tiempo, esa dedicación pasó de ser un trabajo de medio tiempo a una vocación definitiva. Respaldado por un estudio riguroso y la adquisición constante de herramientas de calidad, Alberto tomó la decisión de dejar su empleo convencional para dedicarse por completo a la mecánica de motocicletas.
+              </p>
+
+              <p>
+                El taller creció hasta lograr la representación técnica oficial de una prestigiosa marca de motos, lo que impulsó la apertura de su primer local comercial fuera de casa, expandiéndose luego a un local de mayor envergadura en La Florida y posteriormente a otra sucursal en Maipú, forjando un sólido prestigio en el rubro.
+              </p>
+
+              <div class="history-highlight-box">
+                <p style="margin: 0; font-style: italic;">
+                  "Agobiado por las malas prácticas habituales en las grandes marcas representantes y la competencia desleal en la venta de motocicletas, decidí dar un paso firme y volver a lo que realmente me apasiona: <strong>la mecánica pura</strong>. Comencé nuevamente desde el paso uno, esta vez con un taller completo, dotado de herramientas de alta precisión y con la experiencia de años de dedicación. Volver a las raíces: a solucionar para los clientes con honestidad, criterio y buen servicio."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Trayectoria Docente & Filosofía de Trabajo -->
+          <div class="about-pillars-grid">
+            
+            <!-- Pilar 1: Trayectoria Docente -->
+            <div class="pillar-card">
+              <div class="pillar-header">
+                <span class="pillar-icon">🎓</span>
+                <h3 class="pillar-title">Trayectoria Docente</h3>
+              </div>
+              <ul class="pillar-list">
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Profesor Validado (desde 2015)</strong>
+                    Validado como docente en Mecánica y Electrónica de Motocicletas.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Instituto Electromechanics (hasta 2021)</strong>
+                    Docente a cargo de la formación técnica de nuevos mecánicos.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Cursos Actuales Especializados</strong>
+                    Dictado de cursos intensivos y puntualizados para instituciones del motociclismo y de forma particular.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Pilar 2: Filosofía de Trabajo -->
+            <div class="pillar-card">
+              <div class="pillar-header">
+                <span class="pillar-icon">🔍</span>
+                <h3 class="pillar-title">Filosofía de Trabajo</h3>
+              </div>
+              <ul class="pillar-list">
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Atención Personalizada y Transparente</strong>
+                    Se le explica al cliente la falla, sus razones de origen y el método exacto de solución técnica.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Pedagogía en Taller</strong>
+                    Apoyado en su nivel docente, explica el paso a paso entregándole conocimiento además del arreglo mecánico o electrónico.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: #ffffff; display: block;">Seguimiento con Fotos y Videos</strong>
+                    Durante todo el proceso se mantiene al cliente informado mediante registros audiovisuales en tiempo real.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- 4. Pasión por las Dos Ruedas y el Estudio Continuo -->
+          <div class="passion-quote-box">
+            <p class="passion-text">
+              "Me inicié en el mundo de la mecánica a partir de mi pasión por las motos: me fascina recorrer los caminos y desconectarme de todo mientras viajo en mi motocicleta. Trabajar en ellas es descubrir continuamente los avances tecnológicos aplicados a los nuevos modelos: poder estudiarlos, entender su funcionamiento y resolver problemáticas que significan un verdadero desafío técnico. Así voy alimentando mi conocimiento, basado en el estudio detallado de cada manual y de cada motocicleta nueva en el mercado."
+            </p>
+            <span class="passion-author">— Alberto Pizarro (Coyote)</span>
+          </div>
+
         </div>
       </section>
     `;

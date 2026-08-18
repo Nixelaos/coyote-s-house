@@ -1,17 +1,19 @@
 /* ==========================================================================
-   COYOTE'S HOUSE - ABOUT ALBERTO PIZARRO SECTION
+   COYOTE'S HOUSE - ABOUT ALBERTO PIZARRO & HISTORY SECTION
    ========================================================================== */
 
 .about-section {
-  padding: 6rem 0;
+  padding: 5rem 0 6rem;
   position: relative;
 }
 
-.about-grid {
+/* Header & Intro Grid */
+.about-hero-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 4rem;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 3.5rem;
   align-items: center;
+  margin-bottom: 4.5rem;
 }
 
 .about-image-card {
@@ -21,8 +23,8 @@
 .about-photo-wrapper {
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 2px solid rgba(225, 29, 72, 0.35);
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(225, 29, 72, 0.15);
+  border: 2px solid rgba(181, 41, 42, 0.35);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(181, 41, 42, 0.12);
   background: var(--color-bg-surface);
 }
 
@@ -34,11 +36,11 @@
 
 .experience-sticker {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
-  background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+  bottom: -16px;
+  right: -16px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-dark) 100%);
   color: #fff;
-  padding: 1.15rem 1.4rem;
+  padding: 1rem 1.35rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -47,17 +49,18 @@
 
 .experience-years {
   font-family: var(--font-heading);
-  font-size: 1.95rem;
+  font-size: 1.5rem;
   font-weight: 900;
   font-style: italic;
   letter-spacing: 0.02em;
   line-height: 1;
   display: block;
+  margin-bottom: 0.2rem;
 }
 
 .experience-tag {
   font-family: var(--font-heading);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
@@ -67,11 +70,11 @@
 .about-content {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.25rem;
 }
 
 .about-quote {
-  background: rgba(13, 27, 62, 0.5);
+  background: rgba(13, 27, 62, 0.6);
   border-left: 4px solid var(--color-accent);
   padding: 1.25rem 1.5rem;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -81,38 +84,183 @@
   line-height: 1.6;
 }
 
-.credentials-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-top: 1rem;
+/* History Box */
+.history-wrap-box {
+  background: rgba(13, 21, 38, 0.75);
+  border: 1px solid rgba(181, 41, 42, 0.25);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2.75rem;
+  margin-bottom: 4.5rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
 }
 
-.credential-box {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  padding: 1.15rem;
-  border-radius: var(--radius-md);
+.history-wrap-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-navy-accent), var(--color-accent));
+}
+
+.history-header {
   display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.credential-icon {
-  font-size: 1.4rem;
+.history-header-icon {
+  font-size: 2.2rem;
+  background: rgba(181, 41, 42, 0.15);
+  border: 1px solid rgba(181, 41, 42, 0.3);
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-lg);
   line-height: 1;
 }
 
-.credential-info h4 {
-  font-family: var(--font-heading);
-  font-size: 0.88rem;
-  font-weight: 800;
-  font-style: italic;
-  margin-bottom: 0.2rem;
-  line-height: 1.25;
+.history-body-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  font-size: 1rem;
+  color: var(--color-text-body);
+  line-height: 1.75;
 }
 
-.credential-info p {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
+.history-highlight-box {
+  background: rgba(8, 12, 20, 0.75);
+  border-left: 3px solid var(--color-accent);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: #ffffff;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin-top: 0.5rem;
+}
+
+/* Grid Sections for Teaching & Philosophy */
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 4.5rem;
+}
+
+.pillar-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(181, 41, 42, 0.4);
+  box-shadow: var(--shadow-md);
+}
+
+.pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.pillar-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.pillar-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-style: italic;
+  color: #ffffff;
+}
+
+.pillar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-text-body);
+}
+
+.pillar-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.55;
+}
+
+.pillar-list li::before {
+  content: '▪';
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Passion Box */
+.passion-quote-box {
+  background: rgba(13, 27, 62, 0.45);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2.25rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.passion-text {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.8;
+  max-width: 860px;
+  margin: 0 auto 1.25rem;
+}
+
+.passion-author {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--color-accent-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .history-wrap-box {
+    padding: 2rem 1.35rem;
+  }
+
+  .passion-quote-box {
+    padding: 2rem 1.25rem;
+  }
+
+  .experience-sticker {
+    right: 10px;
+    bottom: 10px;
+    padding: 0.75rem 1rem;
+  }
 }

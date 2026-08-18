@@ -58,21 +58,21 @@ class FaqAccordion extends HTMLElement {
 
             <div class="faq-item">
               <button class="faq-header" type="button">
-                <span>¿Cuáles son los tiempos de entrega habituales?</span>
+                <span>¿Cuáles son los tiempos de entrega de los trabajos?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Las mantenciones preventivas y por kilometraje se entregan en su gran mayoría durante el mismo día (siempre que no surjan imprevistos mecánicos). Las reparaciones de motores pequeños salen de 24 a 48 hrs, mientras que cilindradas mayores dependen de la disponibilidad de repuestos específicos.
+                Los tiempos de entrega varían según el trabajo a realizar y la moto. Las mantenciones en su gran mayoría se entregan en el día (siempre que no se encuentren sorpresas). Las reparaciones de motores pequeños pueden salir en el día o de un día a otro, mientras que los más grandes suelen demorar un poco más según la disponibilidad de repuestos.
               </div>
             </div>
 
             <div class="faq-item">
               <button class="faq-header" type="button">
-                <span>¿Qué marcas y tipos de motocicletas atienden?</span>
+                <span>¿Qué motos y marcas se atienden en el taller?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos motocicletas de calle homologadas para circular de las principales marcas: Honda, Yamaha, Suzuki, Kawasaki, KTM, BMW, Bajaj, CFMOTO, Zontes, Haojue, Aprilia, Benelli, Husqvarna, etc. Otras marcas y modelos quedan sujetos a consulta técnica previa.
+                Se atienden todas las motos de calle que estén homologadas para circular (no se atienden cuadrimotos ni motos fuera de homologación como las pequeñas de delivery). Marcas de referencia habituales: Honda, Yamaha, Suzuki, Kawasaki, KTM, Bajaj, CF MOTO, Zontes, Haojue, Aprilia, Benelli, Husqvarna, BMW, Etc. Otras marcas o modelos no listados quedan a consulta técnica previa.
               </div>
             </div>
 
@@ -82,7 +82,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Es una inspección integral de más de 25 puntos desde el interior hacia el exterior: ajuste/luz de válvulas, torque de culata, aseo de inyector/carburador, prueba de chispa de bujías en probador específico en banco, carga de batería al 100%, scanner con lectura de parámetros, y relubricación de rodamientos y pistas de caliper.
+                Incluye una inspección integral desde dentro hacia el exterior: revisión y/o ajuste de luz de válvulas, torque de culata, aseo a cuerpo de aceleración/carburador, aseo y test de inyector, sensores, actuadores, presión de bomba de combustible, filtro de aire, revisión y limpieza de bujías, apriete perimetral, rodamientos de masa, transmisión, dampers, test de batería, test de carga eléctrica, carga de batería al 100% durante el servicio, cables, partes móviles, scanner con lectura de parámetros y apriete general.
               </div>
             </div>
 

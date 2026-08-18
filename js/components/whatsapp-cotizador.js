@@ -165,9 +165,12 @@ class WhatsappCotizador extends HTMLElement {
     // Leer parámetro URL si viene desde servicios.html (ej: cotizador.html?servicio=motor)
     try {
       const urlParams = new URLSearchParams(window.location.search);
-      const serviceParam = urlParams.get('servicio');
+      let serviceParam = urlParams.get('servicio');
       if (serviceParam && serviceType) {
-        serviceType.value = serviceParam;
+        if (serviceParam === 'mantencion') serviceParam = 'mantencion-km';
+        if (serviceType.querySelector(`option[value="${serviceParam}"]`)) {
+          serviceType.value = serviceParam;
+        }
       }
     } catch (err) {}
 
@@ -176,10 +179,13 @@ class WhatsappCotizador extends HTMLElement {
 
   initGlobalServiceListener() {
     window.addEventListener('select-service', (e) => {
-      const selectedService = e.detail?.service;
+      let selectedService = e.detail?.service;
       const serviceType = this.querySelector('#serviceType');
       if (selectedService && serviceType) {
-        serviceType.value = selectedService;
+        if (selectedService === 'mantencion') selectedService = 'mantencion-km';
+        if (serviceType.querySelector(`option[value="${selectedService}"]`)) {
+          serviceType.value = selectedService;
+        }
         this.updatePreview();
         const quoteSection = this.querySelector('#cotizador');
         if (quoteSection) {
@@ -222,11 +228,11 @@ class WhatsappCotizador extends HTMLElement {
                   <div class="form-group">
                     <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
                     <select id="serviceType" class="form-control">
-                      <option value="mantencion" selected>Mantención por Kilometraje / Pauta Preventiva</option>
-                      <option value="motor">Reparación o Ajuste de Motor (Menor / Pesada)</option>
-                      <option value="suspension">Servicio de Suspensión (Horquillas y Amortiguación)</option>
-                      <option value="scanner">Scanner y Diagnóstico Electrónico OBD</option>
-                      <option value="frenos">Mantenimiento Integral de Frenos</option>
+                      <option value="mantencion-km" selected>Mantención por Kilometraje</option>
+                      <option value="mantencion-prev">Mantención Preventiva</option>
+                      <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
+                      <option value="suspension">Servicio de Suspensión</option>
+                      <option value="scanner">Scanner y Electrónica</option>
                       <option value="otro">Otro Servicio / Consulta General</option>
                     </select>
                   </div>
