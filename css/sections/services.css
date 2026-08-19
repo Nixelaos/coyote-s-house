@@ -140,6 +140,19 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Variante sin badge: icono integrado dentro del body */
+.service-card--no-badge .service-body {
+  padding: 1.75rem 1.75rem 1.75rem;
+}
+
+.service-card--no-badge .service-icon-box {
+  margin-bottom: 1.1rem;
+}
+
+.service-card--no-badge .service-title {
+  margin-top: 0;
+}
+
 /* ==========================================================================
    PAUTA DE MANTENCIÓN COMPLETA
    ========================================================================== */
@@ -376,6 +389,19 @@
   font-weight: 400;
   color: var(--color-text-body);
   line-height: 1.65;
+}
+
+.delivery-disclaimer {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  max-width: 72ch;
 }
 
 /* ==========================================================================

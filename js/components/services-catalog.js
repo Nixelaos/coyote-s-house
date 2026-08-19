@@ -48,12 +48,9 @@ class ServicesCatalog extends HTMLElement {
           <div class="services-main-grid">
             
             <!-- Servicio 1 -->
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-icon-box">🏍️</div>
-                <span class="service-badge-pill">Entrega en el día*</span>
-              </div>
+            <div class="service-card service-card--no-badge">
               <div class="service-body">
+                <div class="service-icon-box">🏍️</div>
                 <h2 class="service-title">Mantenciones por kilometraje</h2>
                 <p class="service-desc">
                   Pauta de mantención completa ejecutada desde dentro hacia el exterior para motos de calle homologadas.
@@ -67,12 +64,9 @@ class ServicesCatalog extends HTMLElement {
             </div>
 
             <!-- Servicio 2 -->
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-icon-box">🛡️</div>
-                <span class="service-badge-pill">Entrega en el día*</span>
-              </div>
+            <div class="service-card service-card--no-badge">
               <div class="service-body">
+                <div class="service-icon-box">🛡️</div>
                 <h2 class="service-title">Mantenciones preventivas</h2>
                 <p class="service-desc">
                   Revisión, ajustes, limpieza y lubricación integral para evitar fallas e imprevistos en ruta.
@@ -86,12 +80,9 @@ class ServicesCatalog extends HTMLElement {
             </div>
 
             <!-- Servicio 3 -->
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-icon-box">⚙️</div>
-                <span class="service-badge-pill">Mecánica Menor y Dura</span>
-              </div>
+            <div class="service-card service-card--no-badge">
               <div class="service-body">
+                <div class="service-icon-box">⚙️</div>
                 <h2 class="service-title">Reparación de motores</h2>
                 <p class="service-desc">
                   Reparación completa de motores incluidos trabajos de soldadura, prensa hidráulica y extractores específicos.
@@ -105,12 +96,9 @@ class ServicesCatalog extends HTMLElement {
             </div>
 
             <!-- Servicio 4 -->
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-icon-box">🔧</div>
-                <span class="service-badge-pill">Mecánica de Calle</span>
-              </div>
+            <div class="service-card service-card--no-badge">
               <div class="service-body">
+                <div class="service-icon-box">🔧</div>
                 <h2 class="service-title">Servicio de suspensión</h2>
                 <p class="service-desc">
                   Inspección, ajuste y servicio técnico para sistemas de suspensión y amortiguación de motocicletas de calle.
@@ -124,12 +112,9 @@ class ServicesCatalog extends HTMLElement {
             </div>
 
             <!-- Servicio 5 -->
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-icon-box">💻</div>
-                <span class="service-badge-pill">Diagnóstico Electrónico</span>
-              </div>
+            <div class="service-card service-card--no-badge">
               <div class="service-body">
+                <div class="service-icon-box">💻</div>
                 <h2 class="service-title">Scanner y electrónica</h2>
                 <p class="service-desc">
                   Scanner con revisión de actuadores, lectura de parámetros de sensores, test de carga eléctrica y batería.
@@ -275,6 +260,10 @@ class ServicesCatalog extends HTMLElement {
                 </p>
               </div>
             </div>
+
+            <p class="delivery-disclaimer">
+              * Los plazos indicados son referenciales. Ante hallazgos técnicos imprevistos durante la intervención, el tiempo de entrega puede extenderse. En ese caso, se notifica al cliente antes de continuar.
+            </p>
           </div>
 
           <!-- 5. Motos y Marcas Atendidas -->
