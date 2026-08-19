@@ -299,7 +299,7 @@ class ServicesCatalog extends HTMLElement {
                 <div class="notice-box reject">
                   <span class="notice-icon">🚫</span>
                   <div>
-                    <strong>No se atienden:</strong> Cuadrimotos ni motos fuera de homologación (las pequeñas de delivery).
+                    <strong>No se atienden:</strong> Cuadrimotos ni motos fuera de homologación.
                   </div>
                 </div>
               </div>
@@ -307,9 +307,6 @@ class ServicesCatalog extends HTMLElement {
               <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; font-style: italic; color: var(--color-text-title); text-transform: uppercase; margin-bottom: 0.75rem;">
                 Marcas de Referencia a las que se da Servicio
               </h3>
-              <p style="color: var(--color-text-muted); font-size: 0.9rem; max-width: 750px; margin: 0 auto 1.25rem;">
-                En esta lista están las mejores marcas reconocidas y las mejores marcas chinas:
-              </p>
 
               <div class="brand-chips-wrap">
                 <span class="brand-chip">Honda</span>

@@ -72,7 +72,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Se atienden todas las motos de calle que estén homologadas para circular (no se atienden cuadrimotos ni motos fuera de homologación como las pequeñas de delivery). Marcas de referencia habituales: Honda, Yamaha, Suzuki, Kawasaki, KTM, Bajaj, CF MOTO, Zontes, Haojue, Aprilia, Benelli, Husqvarna, BMW, Etc. Otras marcas o modelos no listados quedan a consulta técnica previa.
+                Se atienden todas las motos de calle que estén homologadas para circular. Marcas de referencia habituales: Honda, Yamaha, Suzuki, Kawasaki, KTM, Bajaj, CF MOTO, Zontes, Haojue, Aprilia, Benelli, Husqvarna, BMW, Etc. Otras marcas o modelos no listados quedan a consulta técnica previa.
               </div>
             </div>
 
