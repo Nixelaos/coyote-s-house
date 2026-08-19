@@ -18,16 +18,10 @@ class AboutAlberto extends HTMLElement {
           <div class="about-hero-grid">
             <div class="about-image-card">
               <div class="about-photo-wrapper">
-                <div class="image-placeholder about-placeholder">
-                  <span class="placeholder-icon">👨‍🔧</span>
-                  <span class="placeholder-tag">Alberto Pizarro</span>
-                  <span class="placeholder-desc">Profesor de Mecánica & Líder Técnico en Coyote's House</span>
-                  <span class="placeholder-spec">Av. Macul 5847, Santiago</span>
-                </div>
+                <img src="assets/alberto-pizarro.webp" alt="Alberto Pizarro en el taller Coyote's House" loading="eager" width="600" height="700" decoding="async">
               </div>
               <div class="experience-sticker">
-                <span class="experience-years">Docente</span>
-                <span class="experience-tag">Profesor & Mecánico</span>
+                <span class="experience-tag">Mecánico & Profesor</span>
               </div>
             </div>
 

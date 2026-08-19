@@ -33,6 +33,8 @@
   width: 100%;
   height: 520px;
   object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .experience-sticker {
@@ -41,31 +43,22 @@
   right: -16px;
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-dark) 100%);
   color: var(--color-text-title);
-  padding: 1rem 1.35rem;
+  padding: 0.75rem 1.25rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   border: 2px solid rgba(255, 255, 255, 0.15);
   text-align: center;
 }
 
-.experience-years {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 900;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  display: block;
-  margin-bottom: 0.2rem;
-}
-
 .experience-tag {
   font-family: var(--font-heading);
-  font-size: 0.74rem;
+  font-size: 0.95rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: block;
+  white-space: nowrap;
 }
 
 .about-content {
@@ -264,6 +257,10 @@
 }
 
 @media (max-width: 768px) {
+  .about-photo-wrapper img {
+    height: 440px;
+  }
+
   .history-wrap-box {
     padding: 2rem 1.35rem;
   }
@@ -276,5 +273,11 @@
     right: 10px;
     bottom: 10px;
     padding: 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-photo-wrapper img {
+    height: 360px;
   }
 }
