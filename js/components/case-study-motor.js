@@ -16,7 +16,7 @@ class CaseStudyMotor extends HTMLElement {
     this.preloadQueueRunning = false;
 
     this.postData = {
-      tag: 'Caso de Taller #01',
+      tag: 'Caso de Taller • 01',
       category: 'Procedimiento Integral • Ajuste Completo de Motor',
       status: 'Finalizado',
       title: 'Diagnóstico y Solución de Fuga de Aceite: Desmontaje y Reacondicionamiento Integral de Motor',
@@ -89,12 +89,14 @@ class CaseStudyMotor extends HTMLElement {
     const nextBtn = this.querySelector('.js-case-next');
     const stepBtns = this.querySelectorAll('.step-tab-btn');
     const imageFrame = this.querySelector('.viewer-image-frame');
+    const stageBox = this.querySelector('.viewer-stage-box');
     const lightbox = this.querySelector('.case-lightbox-modal');
+    const lightboxBody = this.querySelector('.case-lightbox-body');
     const lightboxClose = this.querySelector('.js-lightbox-close');
     const lightboxPrev = this.querySelector('.js-lightbox-prev');
     const lightboxNext = this.querySelector('.js-lightbox-next');
 
-    // Navegación en visor normal
+    // Navegación con botones
     prevBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
       this.prevPhoto();
@@ -113,10 +115,27 @@ class CaseStudyMotor extends HTMLElement {
       });
     });
 
-    // Abrir Lightbox al hacer clic en la foto
+    // Control táctil (Swipe) para celular en el visor principal
+    this.setupTouchSwipe(stageBox, () => this.nextPhoto(), () => this.prevPhoto());
+
+    // Abrir Lightbox solo al hacer tap / clic (no al deslizar)
+    let touchMoveDetected = false;
+    imageFrame?.addEventListener('touchstart', () => {
+      touchMoveDetected = false;
+    }, { passive: true });
+
+    imageFrame?.addEventListener('touchmove', () => {
+      touchMoveDetected = true;
+    }, { passive: true });
+
     imageFrame?.addEventListener('click', () => {
-      this.openLightbox();
+      if (!touchMoveDetected) {
+        this.openLightbox();
+      }
     });
+
+    // Control táctil (Swipe) dentro del Lightbox ampliado
+    this.setupTouchSwipe(lightboxBody, () => this.nextPhoto(), () => this.prevPhoto());
 
     // Cerrar y navegar en Lightbox
     lightboxClose?.addEventListener('click', () => this.closeLightbox());
@@ -145,6 +164,52 @@ class CaseStudyMotor extends HTMLElement {
       if (e.key === 'ArrowRight') this.nextPhoto();
     };
     document.addEventListener('keydown', this.keydownHandler);
+  }
+
+  /**
+   * Detector de deslizamiento táctil (Swipe) fluido para móviles
+   */
+  setupTouchSwipe(element, onSwipeLeft, onSwipeRight) {
+    if (!element) return;
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
+    let isTracking = false;
+
+    element.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        endX = startX;
+        endY = startY;
+        isTracking = true;
+      }
+    }, { passive: true });
+
+    element.addEventListener('touchmove', (e) => {
+      if (!isTracking || e.touches.length !== 1) return;
+      endX = e.touches[0].clientX;
+      endY = e.touches[0].clientY;
+    }, { passive: true });
+
+    element.addEventListener('touchend', () => {
+      if (!isTracking) return;
+      isTracking = false;
+      const diffX = endX - startX;
+      const diffY = endY - startY;
+
+      // Deslizamiento horizontal mínimo de 35px y mayor que el vertical
+      if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.1) {
+        if (diffX < 0) {
+          // Deslizar hacia la izquierda -> Siguiente
+          onSwipeLeft();
+        } else {
+          // Deslizar hacia la derecha -> Anterior
+          onSwipeRight();
+        }
+      }
+    }, { passive: true });
   }
 
   openLightbox() {
@@ -193,7 +258,11 @@ class CaseStudyMotor extends HTMLElement {
     if (counterEl) counterEl.textContent = `Foto ${index + 1} de ${this.postData.photos.length}`;
 
     stepBtns.forEach((btn, idx) => {
-      btn.classList.toggle('active', idx === index);
+      const isActive = idx === index;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     });
 
     if (imgEl) {
@@ -256,7 +325,7 @@ class CaseStudyMotor extends HTMLElement {
             <!-- Encabezado del Caso -->
             <header class="case-study-header">
               <div class="case-meta-badges">
-                <span class="badge-post-case">🔧 ${post.tag}</span>
+                <span class="badge-post-case">${post.tag}</span>
                 <span class="badge-post-tag">${post.category}</span>
                 <span class="badge-post-status">✓ ${post.status}</span>
               </div>
@@ -329,7 +398,7 @@ class CaseStudyMotor extends HTMLElement {
               <div class="viewer-section-header">
                 <div>
                   <h2 class="viewer-heading">📸 Registro Fotográfico</h2>
-                  <p class="viewer-sub">Haz clic sobre la fotografía para ampliarla a pantalla completa.</p>
+                  <p class="viewer-sub">Desliza o haz clic sobre la foto para ampliarla a pantalla completa.</p>
                 </div>
                 <span class="reader-counter">Foto 1 de 7</span>
               </div>
@@ -343,12 +412,12 @@ class CaseStudyMotor extends HTMLElement {
                 `).join('')}
               </div>
 
-              <!-- Escenario de la Fotografía con Clic para Ampliar -->
+              <!-- Escenario de la Fotografía con Clic para Ampliar y Deslizamiento Táctil -->
               <div class="viewer-stage-box">
                 <button class="viewer-nav-btn nav-prev js-case-prev" aria-label="Foto anterior">❮</button>
                 <button class="viewer-nav-btn nav-next js-case-next" aria-label="Foto siguiente">❯</button>
 
-                <div class="viewer-image-frame" title="Haz clic para ampliar la fotografía">
+                <div class="viewer-image-frame" title="Toca o haz clic para ampliar">
                   <div class="reader-img-spinner" style="display: none;">
                     <div class="spinner-circle"></div>
                     <span>Cargando fotografía...</span>
@@ -363,17 +432,14 @@ class CaseStudyMotor extends HTMLElement {
 
             </section>
 
-            <!-- Llamado a la Acción y Cotización -->
+            <!-- Llamado a la Acción / Cotizador -->
             <div class="case-cta-box">
               <div class="cta-info">
                 <h3 class="cta-title">¿Tu moto presenta fugas de aceite o requiere ajuste de motor?</h3>
                 <p class="cta-desc">Diagnóstico honesto, instrumental técnico y atención personalizada por Alberto Pizarro.</p>
               </div>
               <div class="cta-btns">
-                <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20estuve%20viendo%20el%20Caso%20%2301%20de%20ajuste%20de%20motor%20en%20la%20web%20y%20quiero%20cotizar%20un%20diagnóstico%20para%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-                  <span>💬</span> Consultar este Procedimiento
-                </a>
-                <a href="cotizador.html" class="btn btn-outline btn-lg">
+                <a href="cotizador.html" class="btn btn-primary btn-lg">
                   <span>⚡</span> Cotizador en Línea
                 </a>
               </div>
@@ -383,7 +449,7 @@ class CaseStudyMotor extends HTMLElement {
 
         </div>
 
-        <!-- MODAL LIGHTBOX DE AMPLIACIÓN A PANTALLA COMPLETA -->
+        <!-- MODAL LIGHTBOX DE AMPLIACIÓN A PANTALLA COMPLETA CON SWIPE -->
         <div class="case-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
           <div class="case-lightbox-backdrop"></div>
           <div class="case-lightbox-dialog">
@@ -408,3 +474,4 @@ class CaseStudyMotor extends HTMLElement {
 }
 
 customElements.define('case-study-motor', CaseStudyMotor);
+
