@@ -21,20 +21,20 @@ class AboutAlberto extends HTMLElement {
                 <img src="assets/alberto-pizarro.webp" alt="Alberto Pizarro en el taller Coyote's House" loading="eager" width="600" height="700" decoding="async">
               </div>
               <div class="experience-sticker">
-                <span class="experience-tag">Mecánico & Profesor</span>
+                <span class="experience-tag">Mecánico</span>
               </div>
             </div>
 
             <div class="about-content">
               <span class="section-tag">Liderazgo Técnico & Pasión</span>
-              <h1 class="section-title">Alberto Pizarro: <span class="highlight-accent">Motociclista, Mecánico y Docente</span></h1>
+              <h1 class="section-title">Alberto Pizarro: <span class="highlight-accent">Motociclista y Mecánico</span></h1>
 
               <div class="about-quote">
-                "Antes de ser mecánico o profesor, primero que todo soy motociclista de corazón. A su servicio."
+                "Antes de ser mecánico, primero que todo soy motociclista de corazón. A su servicio."
               </div>
 
               <p style="color: var(--color-text-body); font-size: 1.02rem; line-height: 1.7;">
-                Detrás de <strong>Coyote's House</strong> está <strong>Alberto Pizarro</strong>, profesional con amplia trayectoria en la mecánica de motocicletas y docente calificado. Su trabajo une la pasión pura por las dos ruedas con el rigor técnico, la precisión y la transparencia absoluta en cada diagnóstico y reparación.
+                Detrás de <strong>Coyote's House</strong> está <strong>Alberto Pizarro</strong>, profesional con amplia trayectoria en la mecánica de motocicletas y una sólida experiencia previa como formador e instructor técnico. Su trabajo une la pasión pura por las dos ruedas con el rigor técnico, la precisión y la transparencia absoluta en cada diagnóstico y reparación.
               </p>
 
               <div style="margin-top: 0.75rem;">
@@ -89,25 +89,25 @@ class AboutAlberto extends HTMLElement {
             <div class="pillar-card">
               <div class="pillar-header">
                 <span class="pillar-icon">🎓</span>
-                <h3 class="pillar-title">Trayectoria Docente</h3>
+                <h3 class="pillar-title">Experiencia Docente</h3>
               </div>
               <ul class="pillar-list">
                 <li>
                   <div>
-                    <strong style="color: var(--color-text-title); display: block;">Profesor Validado (desde 2015)</strong>
-                    Validado como docente en Mecánica y Electrónica de Motocicletas.
+                    <strong style="color: var(--color-text-title); display: block;">Profesor e Instructor Técnico</strong>
+                    Fue docente validado en Mecánica y Electrónica de Motocicletas, participando en la formación técnica de nuevas generaciones de mecánicos.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: var(--color-text-title); display: block;">Instituto Electromechanics (hasta 2021)</strong>
-                    Docente a cargo de la formación técnica de nuevos mecánicos.
+                    <strong style="color: var(--color-text-title); display: block;">Formación de Profesionales</strong>
+                    Estuvo a cargo de la preparación teórica y práctica en institutos técnicos especializados del rubro de las dos ruedas.
                   </div>
                 </li>
                 <li>
                   <div>
-                    <strong style="color: var(--color-text-title); display: block;">Cursos Actuales Especializados</strong>
-                    Dictado de cursos intensivos y puntualizados para instituciones del motociclismo y de forma particular.
+                    <strong style="color: var(--color-text-title); display: block;">Cursos y Capacitaciones</strong>
+                    Dictó cursos intensivos y programas de perfeccionamiento para entidades del motociclismo y mecánicos particulares.
                   </div>
                 </li>
               </ul>
@@ -129,7 +129,7 @@ class AboutAlberto extends HTMLElement {
                 <li>
                   <div>
                     <strong style="color: var(--color-text-title); display: block;">Pedagogía en Taller</strong>
-                    Apoyado en su nivel docente, explica el paso a paso entregándole conocimiento además del arreglo mecánico o electrónico.
+                    Apoyado en su experiencia docente previa, explica el paso a paso entregándole conocimiento además del arreglo mecánico o electrónico.
                   </div>
                 </li>
                 <li>

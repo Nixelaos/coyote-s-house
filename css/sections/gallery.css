@@ -1,8 +1,11 @@
 /* ==========================================================================
-   COYOTE'S HOUSE - WORKSHOP GALLERY & FEATURED CASE LOGS
-   Ergonomic Dark Mode: Charcoal Luminance, Progressive On-Demand Image Viewer
+   COYOTE'S HOUSE - WORKSHOP GALLERY & DEDICATED CASE STUDIES
+   Ergonomic Dark Mode: Charcoal Luminance & High-Performance Layout
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   1. Galería General (galeria.html)
+   -------------------------------------------------------------------------- */
 .gallery-section {
   padding: 4.5rem 0 5.5rem;
   background: var(--color-bg-main);
@@ -13,9 +16,6 @@
   margin-bottom: 3rem;
 }
 
-/* --------------------------------------------------------------------------
-   1. Featured Post Preview Card (Vista Previa Reducida a 1 Publicación)
-   -------------------------------------------------------------------------- */
 .featured-post-wrapper {
   max-width: 980px;
   margin: 0 auto;
@@ -28,8 +28,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(0, 0, 0, 0.35);
   transition: all var(--transition-normal);
   position: relative;
 }
@@ -48,48 +47,39 @@
 .featured-post-card:hover {
   transform: translateY(-4px);
   border-color: rgba(181, 41, 42, 0.45);
-  box-shadow: var(--shadow-lg), 0 10px 40px rgba(181, 41, 42, 0.15);
+  box-shadow: var(--shadow-lg), 0 10px 35px rgba(181, 41, 42, 0.15);
 }
 
-/* Cover Image / Placeholder */
+/* Portada con Foto 1 */
 .featured-post-cover {
   position: relative;
-  background: linear-gradient(135deg, #1f1f26 0%, #141418 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #111114;
   min-height: 320px;
   overflow: hidden;
   border-right: 1px solid var(--color-border);
+  display: block;
+  text-decoration: none;
 }
 
-.cover-image-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  z-index: 1;
+.featured-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: transform var(--transition-slow);
 }
 
-.cover-icon {
-  font-size: 3.5rem;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
-  animation: pulseIcon 3s infinite ease-in-out;
+.featured-post-card:hover .featured-cover-img {
+  transform: scale(1.06);
 }
 
-@keyframes pulseIcon {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-}
-
-.cover-hint {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 800;
-  font-style: italic;
-  text-transform: uppercase;
-  color: var(--color-text-dim);
-  letter-spacing: 0.05em;
+.cover-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(24, 24, 27, 0.35) 0%, rgba(24, 24, 27, 0.1) 40%, rgba(24, 24, 27, 0.75) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .cover-badge-top {
@@ -102,11 +92,59 @@
   z-index: 3;
 }
 
+.badge-post-case {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text-title);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.badge-post-tag {
+  background: rgba(44, 44, 52, 0.85);
+  color: var(--color-text-title);
+  border: 1px solid var(--color-border-light);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.badge-post-status {
+  background: rgba(31, 157, 85, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(31, 157, 85, 0.45);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 800;
+  font-style: italic;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
 .cover-hover-prompt {
   position: absolute;
   inset: 0;
   background: rgba(18, 18, 21, 0.75);
-  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,15 +165,15 @@
 
 .prompt-text {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
   font-style: italic;
   text-transform: uppercase;
   color: var(--color-text-title);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
-/* Post Card Body */
+/* Cuerpo de la Tarjeta */
 .featured-post-body {
   padding: 2.25rem 2.25rem 2rem;
   display: flex;
@@ -146,14 +184,14 @@
 .post-meta-line {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
   margin-bottom: 0.85rem;
   flex-wrap: wrap;
 }
 
 .meta-time {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   font-style: italic;
   color: var(--color-accent-bright);
@@ -162,18 +200,30 @@
 
 .featured-post-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 900;
   font-style: italic;
   color: var(--color-text-title);
   line-height: 1.28;
   text-transform: uppercase;
   margin-bottom: 0.95rem;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.title-link:hover {
+  color: var(--color-accent-bright);
 }
 
 .featured-post-summary {
   font-family: var(--font-body);
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   line-height: 1.62;
   color: var(--color-text-body);
   margin-bottom: 1.25rem;
@@ -236,117 +286,66 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. Full Publication Reader Modal (Detalle & Fotos Progresivas)
+   2. Página Dedicada del Caso Técnico (caso-ajuste-motor.html)
    -------------------------------------------------------------------------- */
-.post-reader-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 10, 14, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal);
-}
-
-.post-reader-modal.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.post-reader-dialog {
-  width: 100%;
-  max-width: 1100px;
-  max-height: 92vh;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.case-study-section {
+  padding: 3.5rem 0 6rem;
+  background: var(--color-bg-main);
   position: relative;
 }
 
-/* Topbar */
-.reader-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.75rem;
-  background: var(--color-bg-surface);
-  border-bottom: 1px solid var(--color-border);
-  z-index: 10;
+.case-back-nav {
+  margin-bottom: 1.75rem;
 }
 
-.reader-top-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.reader-top-category {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-}
-
-.reader-close-btn {
-  background: rgba(45, 45, 54, 0.85);
+.case-study-card {
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  color: var(--color-text-title);
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  font-weight: 800;
-  font-style: italic;
-  text-transform: uppercase;
-  padding: 0.45rem 1rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-xl);
+  padding: 2.75rem 2.5rem;
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
-.reader-close-btn:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
+.case-study-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-border-light) 50%, var(--color-accent) 100%);
 }
 
-/* Scrollable Content */
-.reader-scrollable-content {
-  overflow-y: auto;
-  padding: 2.25rem 2rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.reader-header {
-  padding-bottom: 1.5rem;
+.case-study-header {
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.75rem;
   border-bottom: 1px solid var(--color-border);
 }
 
-.reader-title {
+.case-meta-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.case-study-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  font-size: clamp(1.35rem, 2.6vw, 2.1rem);
   font-weight: 900;
   font-style: italic;
   color: var(--color-text-title);
   line-height: 1.25;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
-.reader-meta-row {
+.case-author-bar {
   display: flex;
   align-items: center;
   gap: 1.75rem;
@@ -355,17 +354,16 @@
   color: var(--color-text-muted);
 }
 
-.reader-meta-row strong {
+.case-author-bar strong {
   color: var(--color-text-title);
 }
 
-/* --------------------------------------------------------------------------
-   3. Ficha Técnica / Report Grid (Diagnóstico, Trabajos, Objetivo)
-   -------------------------------------------------------------------------- */
-.reader-report-grid {
+/* Ficha Técnica / 3 Bloques */
+.case-report-grid {
   display: grid;
   grid-template-columns: 1fr 1.35fr 1fr;
   gap: 1.35rem;
+  margin-bottom: 3rem;
 }
 
 .report-block {
@@ -402,6 +400,7 @@
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 .block-text {
@@ -439,14 +438,14 @@
 }
 
 /* --------------------------------------------------------------------------
-   4. Visor Interactivo Paso a Paso (Carga On-Demand)
+   3. Visor de Fotos Ligero (Carga Bajo Demanda sin Títulos)
    -------------------------------------------------------------------------- */
-.reader-photo-viewer {
+.case-photo-viewer {
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 1.75rem;
-  box-shadow: var(--shadow-sm);
+  margin-bottom: 3rem;
 }
 
 .viewer-section-header {
@@ -483,7 +482,7 @@
   text-transform: uppercase;
 }
 
-/* Step Tabs Strip */
+/* Step Tabs */
 .step-tabs-strip {
   display: flex;
   gap: 0.5rem;
@@ -584,7 +583,7 @@
 .viewer-image-frame {
   position: relative;
   width: 100%;
-  height: 460px;
+  height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -613,8 +612,8 @@
 }
 
 .spinner-circle {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border: 3px solid rgba(181, 41, 42, 0.2);
   border-top-color: var(--color-accent);
   border-radius: 50%;
@@ -651,15 +650,6 @@
   border-radius: var(--radius-sm);
 }
 
-.reader-photo-title {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 800;
-  font-style: italic;
-  color: var(--color-text-title);
-  margin: 0;
-}
-
 .reader-photo-desc {
   font-family: var(--font-body);
   font-size: 0.92rem;
@@ -668,44 +658,47 @@
   margin: 0;
 }
 
-/* --------------------------------------------------------------------------
-   5. CTA Box Inside Reader
-   -------------------------------------------------------------------------- */
-.reader-cta-box {
+/* CTA Box */
+.case-cta-box {
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 1.5rem 1.85rem;
+  padding: 1.85rem 2.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.75rem;
   flex-wrap: wrap;
+}
+
+.cta-info {
+  max-width: 580px;
 }
 
 .cta-title {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   font-style: italic;
   color: var(--color-text-title);
   margin: 0 0 0.35rem 0;
+  overflow-wrap: break-word;
 }
 
 .cta-desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--color-text-muted);
   margin: 0;
 }
 
 .cta-btns {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Breakpoints
+   4. Responsive Breakpoints & Prevención de Palabras Cortadas
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .featured-post-card {
@@ -713,31 +706,53 @@
   }
 
   .featured-post-cover {
-    min-height: 220px;
+    min-height: 240px;
     border-right: none;
     border-bottom: 1px solid var(--color-border);
   }
 
-  .reader-report-grid {
+  .case-report-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
   .viewer-image-frame {
-    height: 340px;
+    height: 360px;
   }
 }
 
 @media (max-width: 600px) {
+  .case-study-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .case-study-title {
+    font-size: clamp(1.1rem, 4.5vw, 1.45rem);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  .featured-post-title {
+    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
   .featured-post-body {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.2rem;
   }
 
-  .reader-scrollable-content {
-    padding: 1.5rem 1.15rem;
+  .featured-post-footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .reader-cta-box {
+  .featured-post-footer .btn {
+    width: 100%;
+  }
+
+  .case-cta-box {
+    padding: 1.35rem 1.15rem;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -755,7 +770,13 @@
   }
 
   .viewer-image-frame {
-    height: 260px;
+    height: 280px;
+  }
+
+  .badge-post-case,
+  .badge-post-tag,
+  .badge-post-status {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
   }
 }
-

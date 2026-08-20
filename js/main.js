@@ -17,6 +17,7 @@
     'sobre-alberto.html',
     'cotizador.html',
     'galeria.html',
+    'caso-ajuste-motor.html',
     'faq.html',
     'contacto.html'
   ];
@@ -32,6 +33,7 @@
     'js/components/about-alberto.js',
     'js/components/whatsapp-cotizador.js',
     'js/components/workshop-gallery.js',
+    'js/components/case-study-motor.js',
     'js/components/faq-accordion.js',
     'js/components/contact-location.js',
     'js/components/site-footer.js',
