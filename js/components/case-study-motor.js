@@ -1,14 +1,19 @@
 /**
  * Componente: CaseStudyMotor (<case-study-motor>)
- * Página dedicada para el Caso Técnico #01: Ajuste Completo y Solución de Fuga de Aceite.
- * Visor de fotos ligero con carga bajo demanda (on-demand) y diseño 100% responsivo en español.
+ * Página dedicada para el Caso Técnico #01.
+ * - Descarga secuencial ordenada de fotos (1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7) al ingresar a la página.
+ * - Selector numérico limpio (1..7) sin textos redundantes.
+ * - Sin descripciones debajo de la foto.
+ * - Ampliación de fotografía a pantalla completa (Lightbox) al hacer clic.
  */
 
 class CaseStudyMotor extends HTMLElement {
   constructor() {
     super();
     this.currentStep = 0;
+    this.isLightboxOpen = false;
     this.loadedImages = new Set();
+    this.preloadQueueRunning = false;
 
     this.postData = {
       tag: 'Caso de Taller #01',
@@ -27,41 +32,13 @@ class CaseStudyMotor extends HTMLElement {
       ],
       goal: 'Garantizar un sellado óptimo y restaurar el rendimiento del motor según los estándares solicitados por el cliente.',
       photos: [
-        {
-          src: 'assets/1-motor-desarmado-completo.webp',
-          step: 'Foto 01',
-          desc: 'Desmonte íntegro de la unidad de motor para inspección general y localización de la fuga de aceite activa.'
-        },
-        {
-          src: 'assets/2-motor-analizando.webp',
-          step: 'Foto 02',
-          desc: 'Evaluación visual detallada de desgaste en componentes, tolerancias y estado de sellos.'
-        },
-        {
-          src: 'assets/3-motor-analizando-2.webp',
-          step: 'Foto 03',
-          desc: 'Inspección del estado de rodamientos internos, juego axial y verificación de holguras mecánicas.'
-        },
-        {
-          src: 'assets/4-motor-desamblaje.webp',
-          step: 'Foto 04',
-          desc: 'Separación técnica de componentes; preparación de culata y cilindro para rectificadora.'
-        },
-        {
-          src: 'assets/5-motor-talado-desatornillando-2.webp',
-          step: 'Foto 05',
-          desc: 'Desmontaje controlado de embrague y piñones con herramientas de precisión.'
-        },
-        {
-          src: 'assets/6-motor-taladro-atornillando.webp',
-          step: 'Foto 06',
-          desc: 'Instalación de nueva cadenilla de distribución, piñón antivibración y kit completo de empaquetaduras y sellos.'
-        },
-        {
-          src: 'assets/7-motor-armado-completo.webp',
-          step: 'Foto 07',
-          desc: 'Unidad de motor 100% armada, sellada y testeada con tolerancias originales y óptimo rendimiento.'
-        }
+        { src: 'assets/1-motor-desarmado-completo.webp', num: 1 },
+        { src: 'assets/2-motor-analizando.webp', num: 2 },
+        { src: 'assets/3-motor-analizando-2.webp', num: 3 },
+        { src: 'assets/4-motor-desamblaje.webp', num: 4 },
+        { src: 'assets/5-motor-talado-desatornillando-2.webp', num: 5 },
+        { src: 'assets/6-motor-taladro-atornillando.webp', num: 6 },
+        { src: 'assets/7-motor-armado-completo.webp', num: 7 }
       ]
     };
   }
@@ -69,8 +46,10 @@ class CaseStudyMotor extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initEvents();
-    // Cargar la primera foto al inicio de la página del caso
+    // Mostrar la foto 1 de inmediato
     this.loadStepPhoto(0);
+    // Iniciar descarga secuencial en orden de todas las fotos en segundo plano
+    this.startSequentialPreload();
   }
 
   disconnectedCallback() {
@@ -79,25 +58,125 @@ class CaseStudyMotor extends HTMLElement {
     }
   }
 
+  /**
+   * Descarga secuencial ordenada (1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7)
+   */
+  async startSequentialPreload() {
+    if (this.preloadQueueRunning) return;
+    this.preloadQueueRunning = true;
+
+    for (let i = 0; i < this.postData.photos.length; i++) {
+      const src = this.postData.photos[i].src;
+      if (!this.loadedImages.has(src)) {
+        await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            this.loadedImages.add(src);
+            resolve();
+          };
+          img.onerror = () => {
+            resolve();
+          };
+          img.src = src;
+        });
+      }
+    }
+    this.preloadQueueRunning = false;
+  }
+
   initEvents() {
     const prevBtn = this.querySelector('.js-case-prev');
     const nextBtn = this.querySelector('.js-case-next');
     const stepBtns = this.querySelectorAll('.step-tab-btn');
+    const imageFrame = this.querySelector('.viewer-image-frame');
+    const lightbox = this.querySelector('.case-lightbox-modal');
+    const lightboxClose = this.querySelector('.js-lightbox-close');
+    const lightboxPrev = this.querySelector('.js-lightbox-prev');
+    const lightboxNext = this.querySelector('.js-lightbox-next');
 
-    prevBtn?.addEventListener('click', () => this.prevPhoto());
-    nextBtn?.addEventListener('click', () => this.nextPhoto());
+    // Navegación en visor normal
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.prevPhoto();
+    });
 
-    stepBtns.forEach((btn, idx) => {
-      btn.addEventListener('click', () => {
-        this.loadStepPhoto(idx);
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.nextPhoto();
+    });
+
+    stepBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const step = parseInt(btn.getAttribute('data-step'), 10);
+        this.loadStepPhoto(step);
       });
     });
 
+    // Abrir Lightbox al hacer clic en la foto
+    imageFrame?.addEventListener('click', () => {
+      this.openLightbox();
+    });
+
+    // Cerrar y navegar en Lightbox
+    lightboxClose?.addEventListener('click', () => this.closeLightbox());
+    lightboxPrev?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.prevPhoto();
+    });
+    lightboxNext?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.nextPhoto();
+    });
+
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('case-lightbox-backdrop')) {
+        this.closeLightbox();
+      }
+    });
+
+    // Teclas Flechas y Escape
     this.keydownHandler = (e) => {
+      if (e.key === 'Escape' && this.isLightboxOpen) {
+        this.closeLightbox();
+        return;
+      }
       if (e.key === 'ArrowLeft') this.prevPhoto();
       if (e.key === 'ArrowRight') this.nextPhoto();
     };
     document.addEventListener('keydown', this.keydownHandler);
+  }
+
+  openLightbox() {
+    const lightbox = this.querySelector('.case-lightbox-modal');
+    if (!lightbox) return;
+    this.isLightboxOpen = true;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    this.updateLightboxImage();
+  }
+
+  closeLightbox() {
+    const lightbox = this.querySelector('.case-lightbox-modal');
+    if (!lightbox) return;
+    this.isLightboxOpen = false;
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  updateLightboxImage() {
+    if (!this.isLightboxOpen) return;
+    const photo = this.postData.photos[this.currentStep];
+    const lightboxImg = this.querySelector('.case-lightbox-img');
+    const lightboxCounter = this.querySelector('.case-lightbox-counter');
+
+    if (lightboxImg) {
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = `Fotografía ${photo.num} de ${this.postData.photos.length}`;
+    }
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${this.currentStep + 1} / ${this.postData.photos.length}`;
+    }
   }
 
   loadStepPhoto(index) {
@@ -108,13 +187,9 @@ class CaseStudyMotor extends HTMLElement {
     const photo = this.postData.photos[index];
     const imgEl = this.querySelector('.reader-current-img');
     const spinner = this.querySelector('.reader-img-spinner');
-    const descEl = this.querySelector('.reader-photo-desc');
-    const stepEl = this.querySelector('.reader-step-badge');
     const counterEl = this.querySelector('.reader-counter');
     const stepBtns = this.querySelectorAll('.step-tab-btn');
 
-    if (descEl) descEl.textContent = photo.desc;
-    if (stepEl) stepEl.textContent = photo.step;
     if (counterEl) counterEl.textContent = `Foto ${index + 1} de ${this.postData.photos.length}`;
 
     stepBtns.forEach((btn, idx) => {
@@ -123,13 +198,15 @@ class CaseStudyMotor extends HTMLElement {
 
     if (imgEl) {
       if (imgEl.src !== photo.src && !imgEl.src.endsWith(photo.src)) {
-        if (spinner) spinner.style.display = 'flex';
-        imgEl.style.opacity = '0.2';
+        if (!this.loadedImages.has(photo.src)) {
+          if (spinner) spinner.style.display = 'flex';
+          imgEl.style.opacity = '0.2';
+        }
 
         const temp = new Image();
         temp.onload = () => {
           imgEl.src = photo.src;
-          imgEl.alt = `Registro fotográfico ${photo.step}`;
+          imgEl.alt = `Registro fotográfico paso ${photo.num}`;
           imgEl.style.opacity = '1';
           if (spinner) spinner.style.display = 'none';
           this.loadedImages.add(photo.src);
@@ -144,6 +221,10 @@ class CaseStudyMotor extends HTMLElement {
         imgEl.style.opacity = '1';
         if (spinner) spinner.style.display = 'none';
       }
+    }
+
+    if (this.isLightboxOpen) {
+      this.updateLightboxImage();
     }
   }
 
@@ -242,46 +323,41 @@ class CaseStudyMotor extends HTMLElement {
 
             </div>
 
-            <!-- Visor de Fotos Ligero (Carga Bajo Demanda sin Títulos) -->
+            <!-- Visor de Fotos Limpio (Selector 1..7 sin Descripciones) -->
             <section class="case-photo-viewer">
               
               <div class="viewer-section-header">
                 <div>
-                  <h2 class="viewer-heading">📸 Registro Fotográfico Paso a Paso</h2>
-                  <p class="viewer-sub">Selecciona cada foto para visualizarla en alta resolución.</p>
+                  <h2 class="viewer-heading">📸 Registro Fotográfico</h2>
+                  <p class="viewer-sub">Haz clic sobre la fotografía para ampliarla a pantalla completa.</p>
                 </div>
                 <span class="reader-counter">Foto 1 de 7</span>
               </div>
 
-              <!-- Botones Selector 1 a 7 -->
+              <!-- Selector Numérico Limpio (1 al 7) -->
               <div class="step-tabs-strip">
                 ${post.photos.map((p, idx) => `
-                  <button class="step-tab-btn ${idx === 0 ? 'active' : ''}" data-step="${idx}" aria-label="Ver foto ${idx + 1}">
-                    <span class="tab-step-num">${idx + 1}</span>
-                    <span class="tab-step-label">Foto ${idx + 1}</span>
+                  <button class="step-tab-btn ${idx === 0 ? 'active' : ''}" data-step="${idx}" aria-label="Ver foto ${p.num}">
+                    ${p.num}
                   </button>
                 `).join('')}
               </div>
 
-              <!-- Escenario de la Fotografía -->
+              <!-- Escenario de la Fotografía con Clic para Ampliar -->
               <div class="viewer-stage-box">
                 <button class="viewer-nav-btn nav-prev js-case-prev" aria-label="Foto anterior">❮</button>
                 <button class="viewer-nav-btn nav-next js-case-next" aria-label="Foto siguiente">❯</button>
 
-                <div class="viewer-image-frame">
+                <div class="viewer-image-frame" title="Haz clic para ampliar la fotografía">
                   <div class="reader-img-spinner" style="display: none;">
                     <div class="spinner-circle"></div>
                     <span>Cargando fotografía...</span>
                   </div>
                   <img class="reader-current-img" src="" alt="Registro fotográfico del caso de taller" loading="eager">
-                </div>
-
-                <!-- Pie Descriptivo (Sin Títulos) -->
-                <div class="viewer-caption-box">
-                  <div class="caption-header">
-                    <span class="reader-step-badge">Foto 01</span>
+                  
+                  <div class="frame-zoom-hint">
+                    <span>🔍 Clic para ampliar</span>
                   </div>
-                  <p class="reader-photo-desc">Desmonte íntegro de la unidad de motor para inspección general y localización de la fuga de aceite activa.</p>
                 </div>
               </div>
 
@@ -290,7 +366,7 @@ class CaseStudyMotor extends HTMLElement {
             <!-- Llamado a la Acción y Cotización -->
             <div class="case-cta-box">
               <div class="cta-info">
-                <h3 class="cta-title">¿Tu moto presenta fugas de aceite o pérdida de compresión?</h3>
+                <h3 class="cta-title">¿Tu moto presenta fugas de aceite o requiere ajuste de motor?</h3>
                 <p class="cta-desc">Diagnóstico honesto, instrumental técnico y atención personalizada por Alberto Pizarro.</p>
               </div>
               <div class="cta-btns">
@@ -306,6 +382,26 @@ class CaseStudyMotor extends HTMLElement {
           </article>
 
         </div>
+
+        <!-- MODAL LIGHTBOX DE AMPLIACIÓN A PANTALLA COMPLETA -->
+        <div class="case-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
+          <div class="case-lightbox-backdrop"></div>
+          <div class="case-lightbox-dialog">
+            
+            <div class="case-lightbox-topbar">
+              <span class="case-lightbox-counter">1 / 7</span>
+              <button class="case-lightbox-close js-lightbox-close" aria-label="Cerrar ampliación">✕ Cerrar</button>
+            </div>
+
+            <div class="case-lightbox-body">
+              <button class="case-lightbox-nav nav-prev js-lightbox-prev" aria-label="Foto anterior">❮</button>
+              <button class="case-lightbox-nav nav-next js-lightbox-next" aria-label="Foto siguiente">❯</button>
+              <img class="case-lightbox-img" src="" alt="Fotografía ampliada en alta resolución">
+            </div>
+
+          </div>
+        </div>
+
       </section>
     `;
   }
