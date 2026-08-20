@@ -589,10 +589,23 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-.viewer-image-frame:hover .reader-current-img {
+.reader-current-img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reader-current-img.loading {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.viewer-image-frame:hover .reader-current-img.loaded {
   transform: scale(1.015);
 }
 
@@ -776,7 +789,20 @@
   object-fit: contain;
   border-radius: var(--radius-md);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
-  transition: transform var(--transition-fast);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.case-lightbox-img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.case-lightbox-img.loading {
+  opacity: 0;
+  transform: scale(0.96);
 }
 
 .case-lightbox-nav {

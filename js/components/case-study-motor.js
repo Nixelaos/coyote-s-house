@@ -236,8 +236,24 @@ class CaseStudyMotor extends HTMLElement {
     const lightboxCounter = this.querySelector('.case-lightbox-counter');
 
     if (lightboxImg) {
-      lightboxImg.src = photo.src;
-      lightboxImg.alt = `Fotografía ${photo.num} de ${this.postData.photos.length}`;
+      lightboxImg.classList.remove('loaded');
+      lightboxImg.classList.add('loading');
+
+      const temp = new Image();
+      temp.onload = () => {
+        lightboxImg.src = photo.src;
+        lightboxImg.alt = `Fotografía ${photo.num} de ${this.postData.photos.length}`;
+        requestAnimationFrame(() => {
+          lightboxImg.classList.remove('loading');
+          lightboxImg.classList.add('loaded');
+        });
+      };
+      temp.onerror = () => {
+        lightboxImg.src = photo.src;
+        lightboxImg.classList.remove('loading');
+        lightboxImg.classList.add('loaded');
+      };
+      temp.src = photo.src;
     }
     if (lightboxCounter) {
       lightboxCounter.textContent = `${this.currentStep + 1} / ${this.postData.photos.length}`;
@@ -266,30 +282,36 @@ class CaseStudyMotor extends HTMLElement {
     });
 
     if (imgEl) {
-      if (imgEl.src !== photo.src && !imgEl.src.endsWith(photo.src)) {
-        if (!this.loadedImages.has(photo.src)) {
-          if (spinner) spinner.style.display = 'flex';
-          imgEl.style.opacity = '0.2';
-        }
+      // Iniciar transición fluida suave
+      imgEl.classList.remove('loaded');
+      imgEl.classList.add('loading');
 
-        const temp = new Image();
-        temp.onload = () => {
-          imgEl.src = photo.src;
-          imgEl.alt = `Registro fotográfico paso ${photo.num}`;
-          imgEl.style.opacity = '1';
-          if (spinner) spinner.style.display = 'none';
-          this.loadedImages.add(photo.src);
-        };
-        temp.onerror = () => {
-          imgEl.src = photo.src;
-          imgEl.style.opacity = '1';
-          if (spinner) spinner.style.display = 'none';
-        };
-        temp.src = photo.src;
-      } else {
-        imgEl.style.opacity = '1';
-        if (spinner) spinner.style.display = 'none';
+      if (!this.loadedImages.has(photo.src)) {
+        if (spinner) spinner.style.display = 'flex';
       }
+
+      const temp = new Image();
+      temp.onload = () => {
+        imgEl.src = photo.src;
+        imgEl.alt = `Registro fotográfico paso ${photo.num}`;
+        this.loadedImages.add(photo.src);
+        if (spinner) spinner.style.display = 'none';
+
+        // Animación suave de aparición fluida
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            imgEl.classList.remove('loading');
+            imgEl.classList.add('loaded');
+          }, 30);
+        });
+      };
+      temp.onerror = () => {
+        imgEl.src = photo.src;
+        if (spinner) spinner.style.display = 'none';
+        imgEl.classList.remove('loading');
+        imgEl.classList.add('loaded');
+      };
+      temp.src = photo.src;
     }
 
     if (this.isLightboxOpen) {
