@@ -30,7 +30,7 @@ class SiteFooter extends HTMLElement {
                 <li><a href="servicios.html">Servicios y Especialidades</a></li>
                 <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
                 <li><a href="cotizador.html">Cotizador</a></li>
-                <!-- <li><a href="galeria.html">Galería del Taller</a></li> -->
+                <li><a href="galeria.html">Galería de Trabajos</a></li>
                 <li><a href="faq.html">Preguntas Frecuentes</a></li>
                 <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>

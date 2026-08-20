@@ -40,7 +40,7 @@ class HeroSection extends HTMLElement {
 
             <div class="hero-media">
               <div class="hero-image-frame">
-                <img src="assets/workshop-hero.jpg" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="904" height="910" decoding="async">
+                <img src="assets/workshop-hero.webp" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="904" height="910" decoding="async">
               </div>
             </div>
           </div>
