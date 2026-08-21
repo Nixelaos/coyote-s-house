@@ -130,7 +130,8 @@ class CustomerReviews extends HTMLElement {
     const rating = typeof data.rating === 'number' ? data.rating : 5.0;
     const userRatingCount = typeof data.userRatingCount === 'number' ? data.userRatingCount : 0;
     const mapsUri = escapeHtml(data.googleMapsUri || 'https://maps.app.goo.gl/e7bNXcAvnVxL1CTN9');
-    const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+    const rawReviewsList = Array.isArray(data.reviews) ? data.reviews : [];
+    const reviews = rawReviewsList.filter((rev) => (typeof rev.rating === 'number' ? rev.rating : 5) >= 3);
 
     // Formatear texto de contador de reseñas
     const reviewCountLabel = userRatingCount > 0 ? `(${userRatingCount} opiniones en Google)` : '(Opiniones en Google Maps)';

@@ -9,8 +9,12 @@ function normalizePlacesData(raw) {
   const userRatingCount = typeof raw.userRatingCount === "number" ? raw.userRatingCount : 0;
   const googleMapsUri = raw.googleMapsUri || FALLBACK_MAPS_URI;
 
+  const MIN_RATING = 3;
   const rawReviews = Array.isArray(raw.reviews) ? raw.reviews : [];
-  const normalizedReviews = rawReviews.slice(0, 5).map((rev) => {
+  const normalizedReviews = rawReviews
+    .filter((rev) => (typeof rev.rating === "number" ? rev.rating : 5) >= MIN_RATING)
+    .slice(0, 5)
+    .map((rev) => {
     const author = rev.authorAttribution?.displayName || "Cliente de Coyote's House";
     const authorPhoto = rev.authorAttribution?.photoUri || "";
     const authorUri = rev.authorAttribution?.uri || "";
