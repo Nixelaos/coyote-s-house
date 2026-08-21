@@ -40,7 +40,7 @@ class SiteFooter extends HTMLElement {
             <div class="footer-links">
               <h4>Contacto Oficial</h4>
               <ul>
-                <li>📍 Av. Macul 5847, Macul, Santiago</li>
+                <li>📍 Av. Macul 5845, Macul, Santiago</li>
                 <li>💬 WhatsApp: <a href="https://wa.me/56954750993" target="_blank" rel="noopener" style="color: var(--color-whatsapp);">+56 9 5475 0993</a></li>
                 <li>🕒 Lun a Vie: 09:00 a 17:00 hrs</li>
                 <li>📸 <a href="https://www.instagram.com/tallercoyoteshouse/" target="_blank" rel="noopener">@tallercoyoteshouse</a></li>

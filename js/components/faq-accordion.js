@@ -102,7 +102,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5847, Macul, Santiago. Aceptamos transferencias bancarias y efectivo.
+                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5845, Macul, Santiago. Aceptamos transferencias bancarias y efectivo.
               </div>
             </div>
           </div>
