@@ -92,23 +92,26 @@ class SiteHeader extends HTMLElement {
     this.innerHTML = `
       <header class="site-header">
         <div class="container nav-container">
-          <a href="index.html" class="brand-logo" title="Coyote's House - Taller de Motos">
-            <div class="logo-circle-wrapper">
-              <img src="assets/logo.jpg" alt="Logo Coyote's House" width="52" height="52">
-            </div>
-            <div class="brand-text">
-              <span class="brand-name">Coyote's <span>House</span></span>
-            </div>
-          </a>
+          <div class="nav-brand-box">
+            <a href="index.html" class="brand-logo" title="Coyote's House - Taller de Motos">
+              <div class="logo-circle-wrapper">
+                <img src="assets/logo.jpg" alt="Logo Coyote's House" width="50" height="50">
+              </div>
+              <div class="brand-text">
+                <span class="brand-name">COYOTE'S</span>
+                <span class="brand-sub">HOUSE</span>
+              </div>
+            </a>
+          </div>
 
           <nav class="nav-menu" id="navMenu">
             <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
             <a href="servicios.html" class="nav-link" data-page="servicios">Servicios</a>
-            <a href="sobre-alberto.html" class="nav-link" data-page="sobre-alberto">Alberto Pizarro</a>
+            <a href="sobre-alberto.html" class="nav-link" data-page="sobre-alberto">Alberto<br>Pizarro</a>
             <a href="cotizador.html" class="nav-link" data-page="cotizador">Cotizador</a>
             <a href="galeria.html" class="nav-link" data-page="galeria">Galería</a>
             <a href="resenas.html" class="nav-link" data-page="resenas">Reseñas</a>
-            <a href="faq.html" class="nav-link" data-page="faq">Preguntas Frecuentes</a>
+            <a href="faq.html" class="nav-link" data-page="faq">Preguntas<br>Frecuentes</a>
             <a href="contacto.html" class="nav-link" data-page="contacto">Ubicación</a>
           </nav>
 

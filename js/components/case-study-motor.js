@@ -17,7 +17,7 @@ class CaseStudyMotor extends HTMLElement {
     this.lightboxModal = null;
 
     this.postData = {
-      tag: 'Caso de Taller • 01',
+      tag: 'Caso 01',
       category: 'Procedimiento Integral • Ajuste Completo de Motor',
       status: 'Finalizado',
       title: 'Diagnóstico y Solución de Fuga de Aceite: Desmontaje y Reacondicionamiento Integral de Motor',
@@ -533,7 +533,7 @@ class CaseStudyMotor extends HTMLElement {
             <!-- Barra Superior del Lightbox con Contador y Botón 'X' -->
             <div class="case-lightbox-topbar">
               <div class="case-lightbox-badge-wrap">
-                <span class="badge-post-case">Caso #01</span>
+                <span class="badge-post-case">Caso 01</span>
                 <span class="case-lightbox-counter">Foto 1 de 7</span>
               </div>
               

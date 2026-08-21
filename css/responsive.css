@@ -48,6 +48,96 @@
   .footer-top {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Menú responsive para tablets y pantallas compactas */
+  .nav-container {
+    position: static;
+    height: var(--header-height, 70px);
+    justify-content: space-between;
+  }
+
+  .nav-brand-box,
+  .nav-actions {
+    flex: 0 0 auto;
+  }
+  
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100dvh - 100% - var(--topbar-height, 34px));
+    height: calc(100vh - 100% - var(--topbar-height, 34px));
+    background: rgba(8, 12, 20, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1.75rem 1.25rem 3rem;
+    gap: 0.65rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    z-index: 999;
+  }
+  
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .nav-link {
+    font-size: 1.05rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: 1.25;
+    box-sizing: border-box;
+    transition: all var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(181, 41, 42, 0.2);
+    border-color: rgba(181, 41, 42, 0.5);
+    color: #ffffff;
+    transform: none;
+  }
+
+  .nav-link::after {
+    display: none !important;
+  }
+  
+  .mobile-toggle {
+    display: flex;
+  }
+  
+  .nav-actions .btn-whatsapp {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -490,11 +580,11 @@
   }
 
   .brand-name {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
   }
 
   .brand-sub {
-    font-size: 0.62rem;
+    font-size: 0.78rem;
   }
 
   .mobile-toggle {

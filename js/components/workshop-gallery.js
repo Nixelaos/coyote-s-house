@@ -47,7 +47,7 @@ class WorkshopGallery extends HTMLElement {
               <div class="featured-post-body">
                 <div class="post-meta-line">
                   <span class="badge-post-tag">Procedimiento Integral • Ajuste de Motor</span>
-                  <span class="meta-time">Caso Técnico • 01</span>
+                  <span class="meta-time">Caso 01</span>
                 </div>
 
                 <h2 class="featured-post-title">
