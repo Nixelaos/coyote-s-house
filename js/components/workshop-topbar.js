@@ -110,7 +110,7 @@ class WorkshopTopbar extends HTMLElement {
               <span class="status-dot"></span> <span class="status-text">Abierto hoy hasta 17:00</span>
             </div>
             <span class="top-link top-address">
-              📍 Av. Macul 5847, Macul, Santiago
+              📍 Av. Macul 5845, Macul, Santiago
             </span>
           </div>
           <div class="top-info-right">

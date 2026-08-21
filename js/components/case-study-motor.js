@@ -4,7 +4,7 @@
  * - Descarga secuencial ordenada de fotos (1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7) al ingresar a la página.
  * - Selector numérico limpio (1..7) sin textos redundantes.
  * - Sin descripciones debajo de la foto.
- * - Ampliación de fotografía a pantalla completa (Lightbox) al hacer clic.
+ * - Modal Lightbox fijado directamente al viewport (Body Teleport) para abrirse exactamente donde está el scroll.
  */
 
 class CaseStudyMotor extends HTMLElement {
@@ -14,9 +14,10 @@ class CaseStudyMotor extends HTMLElement {
     this.isLightboxOpen = false;
     this.loadedImages = new Set();
     this.preloadQueueRunning = false;
+    this.lightboxModal = null;
 
     this.postData = {
-      tag: 'Caso de Taller • 01',
+      tag: 'Caso 01',
       category: 'Procedimiento Integral • Ajuste Completo de Motor',
       status: 'Finalizado',
       title: 'Diagnóstico y Solución de Fuga de Aceite: Desmontaje y Reacondicionamiento Integral de Motor',
@@ -45,11 +46,25 @@ class CaseStudyMotor extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.setupLightboxTeleport();
     this.initEvents();
-    // Mostrar la foto 1 de inmediato
     this.loadStepPhoto(0);
-    // Iniciar descarga secuencial en orden de todas las fotos en segundo plano
     this.startSequentialPreload();
+  }
+
+  setupLightboxTeleport() {
+    // Si había una modal previa en el body de una navegación anterior, limpiarla
+    const orphanModal = document.body.querySelector(':scope > .case-lightbox-modal');
+    if (orphanModal && orphanModal !== this.lightboxModal) {
+      orphanModal.remove();
+    }
+
+    // Mover la modal interna directamente al body para desacoplarla de cualquier contenedor
+    const modalInComponent = this.querySelector('.case-lightbox-modal');
+    if (modalInComponent) {
+      this.lightboxModal = modalInComponent;
+      document.body.appendChild(this.lightboxModal);
+    }
   }
 
   disconnectedCallback() {
@@ -59,17 +74,14 @@ class CaseStudyMotor extends HTMLElement {
     if (this.popstateHandler) {
       window.removeEventListener('popstate', this.popstateHandler);
     }
+    if (this.lightboxModal && this.lightboxModal.parentElement === document.body) {
+      this.lightboxModal.remove();
+      this.lightboxModal = null;
+    }
     document.documentElement.classList.remove('lightbox-active');
     document.body.classList.remove('lightbox-active');
-    document.body.style.removeProperty('overflow');
-    document.documentElement.style.removeProperty('overflow');
-    document.body.style.removeProperty('touch-action');
-    document.documentElement.style.removeProperty('touch-action');
   }
 
-  /**
-   * Descarga secuencial ordenada (1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7)
-   */
   async startSequentialPreload() {
     if (this.preloadQueueRunning) return;
     this.preloadQueueRunning = true;
@@ -99,13 +111,16 @@ class CaseStudyMotor extends HTMLElement {
     const stepBtns = this.querySelectorAll('.step-tab-btn');
     const imageFrame = this.querySelector('.viewer-image-frame');
     const stageBox = this.querySelector('.viewer-stage-box');
-    const lightbox = this.querySelector('.case-lightbox-modal');
-    const lightboxBody = this.querySelector('.case-lightbox-body');
-    const lightboxClose = this.querySelector('.js-lightbox-close');
-    const lightboxPrev = this.querySelector('.js-lightbox-prev');
-    const lightboxNext = this.querySelector('.js-lightbox-next');
 
-    // Navegación con botones
+    const modal = this.lightboxModal || document.querySelector('.case-lightbox-modal');
+    const lightboxBody = modal?.querySelector('.case-lightbox-body');
+    const lightboxClose = modal?.querySelector('.js-lightbox-close');
+    const lightboxPrev = modal?.querySelector('.js-lightbox-prev');
+    const lightboxNext = modal?.querySelector('.js-lightbox-next');
+    const lightboxBackdrop = modal?.querySelector('.case-lightbox-backdrop');
+    const lightboxThumbBtns = modal?.querySelectorAll('.lightbox-thumb-btn');
+
+    // Navegación con botones del visor de la página
     prevBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
       this.prevPhoto();
@@ -127,48 +142,42 @@ class CaseStudyMotor extends HTMLElement {
     // Control táctil (Swipe) para celular en el visor principal
     this.setupTouchSwipe(stageBox, () => this.nextPhoto(), () => this.prevPhoto());
 
-    // Abrir Lightbox solo al hacer tap / clic (no al deslizar)
-    let touchMoveDetected = false;
-    imageFrame?.addEventListener('touchstart', () => {
-      touchMoveDetected = false;
-    }, { passive: true });
-
-    imageFrame?.addEventListener('touchmove', () => {
-      touchMoveDetected = true;
-    }, { passive: true });
-
-    imageFrame?.addEventListener('click', () => {
-      if (!touchMoveDetected) {
-        this.openLightbox();
-      }
+    // Abrir Lightbox al hacer clic en la foto
+    imageFrame?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.openLightbox();
     });
 
-    // Control táctil (Swipe) dentro del Lightbox ampliado
-    this.setupTouchSwipe(lightboxBody, () => this.nextPhoto(), () => this.prevPhoto());
+    // Navegación y cierre del Lightbox
+    lightboxClose?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.closeLightbox();
+    });
 
-    // Bloqueo estricto de scroll vertical mientras el Lightbox esté abierto
-    lightbox?.addEventListener('touchmove', (e) => {
-      if (this.isLightboxOpen) {
-        e.preventDefault();
-      }
-    }, { passive: false });
+    lightboxBackdrop?.addEventListener('click', () => {
+      this.closeLightbox();
+    });
 
-    // Cerrar y navegar en Lightbox
-    lightboxClose?.addEventListener('click', () => this.closeLightbox());
     lightboxPrev?.addEventListener('click', (e) => {
       e.stopPropagation();
       this.prevPhoto();
     });
+
     lightboxNext?.addEventListener('click', (e) => {
       e.stopPropagation();
       this.nextPhoto();
     });
 
-    lightbox?.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.classList.contains('case-lightbox-backdrop')) {
-        this.closeLightbox();
-      }
+    lightboxThumbBtns?.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const step = parseInt(btn.getAttribute('data-step'), 10);
+        this.loadStepPhoto(step);
+      });
     });
+
+    // Control táctil (Swipe) dentro del Lightbox ampliado
+    this.setupTouchSwipe(lightboxBody, () => this.nextPhoto(), () => this.prevPhoto());
 
     // Teclas Flechas y Escape
     this.keydownHandler = (e) => {
@@ -190,9 +199,6 @@ class CaseStudyMotor extends HTMLElement {
     window.addEventListener('popstate', this.popstateHandler);
   }
 
-  /**
-   * Detector de deslizamiento táctil (Swipe) fluido para móviles
-   */
   setupTouchSwipe(element, onSwipeLeft, onSwipeRight) {
     if (!element) return;
     let startX = 0;
@@ -223,13 +229,10 @@ class CaseStudyMotor extends HTMLElement {
       const diffX = endX - startX;
       const diffY = endY - startY;
 
-      // Deslizamiento horizontal mínimo de 35px y mayor que el vertical
       if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.1) {
         if (diffX < 0) {
-          // Deslizar hacia la izquierda -> Siguiente
           onSwipeLeft();
         } else {
-          // Deslizar hacia la derecha -> Anterior
           onSwipeRight();
         }
       }
@@ -237,18 +240,13 @@ class CaseStudyMotor extends HTMLElement {
   }
 
   openLightbox() {
-    const lightbox = this.querySelector('.case-lightbox-modal');
-    if (!lightbox) return;
-
-    // Guardar posición de scroll actual antes de abrir
-    this.savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    const modal = this.lightboxModal || document.querySelector('.case-lightbox-modal');
+    if (!modal) return;
 
     this.isLightboxOpen = true;
-    lightbox.classList.add('active');
-    document.documentElement.classList.add('lightbox-active');
+    modal.classList.add('active');
     document.body.classList.add('lightbox-active');
 
-    // Registrar estado en el historial para permitir cerrar la foto al pulsar "Atrás" en el celular
     try {
       history.pushState({ caseLightboxOpen: true }, '');
     } catch (e) {}
@@ -257,37 +255,33 @@ class CaseStudyMotor extends HTMLElement {
   }
 
   closeLightbox(shouldPopHistory = true) {
-    const lightbox = this.querySelector('.case-lightbox-modal');
-    if (!lightbox || !this.isLightboxOpen) return;
+    const modal = this.lightboxModal || document.querySelector('.case-lightbox-modal');
+    if (!modal || !this.isLightboxOpen) return;
     this.isLightboxOpen = false;
-    lightbox.classList.remove('active');
+    modal.classList.remove('active');
 
-    // Quitar clases y estilos de bloqueo
-    document.documentElement.classList.remove('lightbox-active');
     document.body.classList.remove('lightbox-active');
-    document.body.style.removeProperty('overflow');
-    document.documentElement.style.removeProperty('overflow');
-    document.body.style.removeProperty('touch-action');
-    document.documentElement.style.removeProperty('touch-action');
 
-    // Si se cerró con el botón X o clic en fondo, y el estado de historial sigue activo, volver atrás
     if (shouldPopHistory && history.state?.caseLightboxOpen) {
       try {
         history.back();
       } catch (e) {}
-    }
-
-    // Restaurar posición de scroll exacta sin saltos
-    if (typeof this.savedScrollY === 'number') {
-      window.scrollTo(0, this.savedScrollY);
     }
   }
 
   updateLightboxImage() {
     if (!this.isLightboxOpen) return;
     const photo = this.postData.photos[this.currentStep];
-    const lightboxImg = this.querySelector('.case-lightbox-img');
-    const lightboxCounter = this.querySelector('.case-lightbox-counter');
+    const modal = this.lightboxModal || document.querySelector('.case-lightbox-modal');
+    if (!modal) return;
+
+    const lightboxImg = modal.querySelector('.case-lightbox-img');
+    const lightboxCounter = modal.querySelector('.case-lightbox-counter');
+    const lightboxThumbBtns = modal.querySelectorAll('.lightbox-thumb-btn');
+
+    lightboxThumbBtns?.forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === this.currentStep);
+    });
 
     if (lightboxImg) {
       lightboxImg.classList.remove('loaded');
@@ -310,7 +304,7 @@ class CaseStudyMotor extends HTMLElement {
       temp.src = photo.src;
     }
     if (lightboxCounter) {
-      lightboxCounter.textContent = `${this.currentStep + 1} / ${this.postData.photos.length}`;
+      lightboxCounter.textContent = `Foto ${this.currentStep + 1} de ${this.postData.photos.length}`;
     }
   }
 
@@ -325,6 +319,9 @@ class CaseStudyMotor extends HTMLElement {
     const counterEl = this.querySelector('.reader-counter');
     const stepBtns = this.querySelectorAll('.step-tab-btn');
 
+    const modal = this.lightboxModal || document.querySelector('.case-lightbox-modal');
+    const lightboxThumbBtns = modal?.querySelectorAll('.lightbox-thumb-btn');
+
     if (counterEl) counterEl.textContent = `Foto ${index + 1} de ${this.postData.photos.length}`;
 
     stepBtns.forEach((btn, idx) => {
@@ -335,8 +332,11 @@ class CaseStudyMotor extends HTMLElement {
       }
     });
 
+    lightboxThumbBtns?.forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === index);
+    });
+
     if (imgEl) {
-      // Iniciar transición fluida suave
       imgEl.classList.remove('loaded');
       imgEl.classList.add('loading');
 
@@ -351,7 +351,6 @@ class CaseStudyMotor extends HTMLElement {
         this.loadedImages.add(photo.src);
         if (spinner) spinner.style.display = 'none';
 
-        // Animación suave de aparición fluida
         requestAnimationFrame(() => {
           setTimeout(() => {
             imgEl.classList.remove('loading');
@@ -415,7 +414,7 @@ class CaseStudyMotor extends HTMLElement {
               </div>
             </header>
 
-            <!-- Ficha Técnica del Informe (3 Bloques Solicitados) -->
+            <!-- Ficha Técnica del Informe (3 Bloques) -->
             <div class="case-report-grid">
               
               <!-- 1. Diagnóstico Inicial -->
@@ -468,13 +467,13 @@ class CaseStudyMotor extends HTMLElement {
 
             </div>
 
-            <!-- Visor de Fotos Limpio (Selector 1..7 sin Descripciones) -->
+            <!-- Visor de Fotos Limpio (Selector 1..7) -->
             <section class="case-photo-viewer">
               
               <div class="viewer-section-header">
                 <div>
                   <h2 class="viewer-heading">📸 Registro Fotográfico</h2>
-                  <p class="viewer-sub">Desliza o haz clic sobre la foto para ampliarla a pantalla completa.</p>
+                  <p class="viewer-sub">Haz clic sobre la foto para ampliarla a pantalla completa.</p>
                 </div>
                 <span class="reader-counter">Foto 1 de 7</span>
               </div>
@@ -488,12 +487,12 @@ class CaseStudyMotor extends HTMLElement {
                 `).join('')}
               </div>
 
-              <!-- Escenario de la Fotografía con Clic para Ampliar y Deslizamiento Táctil -->
+              <!-- Escenario de la Fotografía -->
               <div class="viewer-stage-box">
                 <button class="viewer-nav-btn nav-prev js-case-prev" aria-label="Foto anterior">❮</button>
                 <button class="viewer-nav-btn nav-next js-case-next" aria-label="Foto siguiente">❯</button>
 
-                <div class="viewer-image-frame" title="Toca o haz clic para ampliar">
+                <div class="viewer-image-frame" title="Haz clic para ampliar la foto">
                   <div class="reader-img-spinner" style="display: none;">
                     <div class="spinner-circle"></div>
                     <span>Cargando fotografía...</span>
@@ -525,20 +524,44 @@ class CaseStudyMotor extends HTMLElement {
 
         </div>
 
-        <!-- MODAL LIGHTBOX DE AMPLIACIÓN A PANTALLA COMPLETA CON SWIPE -->
+        <!-- MODAL LIGHTBOX DE AMPLIACIÓN A PANTALLA COMPLETA -->
         <div class="case-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
-          <div class="case-lightbox-backdrop"></div>
+          <div class="case-lightbox-backdrop" title="Clic para cerrar"></div>
+          
           <div class="case-lightbox-dialog">
             
+            <!-- Barra Superior del Lightbox con Contador y Botón 'X' -->
             <div class="case-lightbox-topbar">
-              <span class="case-lightbox-counter">1 / 7</span>
-              <button class="case-lightbox-close js-lightbox-close" aria-label="Cerrar ampliación">✕ Cerrar</button>
+              <div class="case-lightbox-badge-wrap">
+                <span class="badge-post-case">Caso 01</span>
+                <span class="case-lightbox-counter">Foto 1 de 7</span>
+              </div>
+              
+              <button class="case-lightbox-close-btn js-lightbox-close" aria-label="Cerrar ampliación" title="Cerrar (Esc)">
+                <span class="close-icon">✕</span>
+                <span class="close-label">Cerrar</span>
+              </button>
             </div>
 
+            <!-- Cuerpo del Lightbox con Flechas y Foto Ampliada -->
             <div class="case-lightbox-body">
-              <button class="case-lightbox-nav nav-prev js-lightbox-prev" aria-label="Foto anterior">❮</button>
-              <button class="case-lightbox-nav nav-next js-lightbox-next" aria-label="Foto siguiente">❯</button>
-              <img class="case-lightbox-img" src="" alt="Fotografía ampliada en alta resolución">
+              <button class="case-lightbox-nav nav-prev js-lightbox-prev" aria-label="Foto anterior (Flecha izquierda)" title="Anterior">❮</button>
+              <button class="case-lightbox-nav nav-next js-lightbox-next" aria-label="Foto siguiente (Flecha derecha)" title="Siguiente">❯</button>
+              
+              <div class="case-lightbox-img-wrapper">
+                <img class="case-lightbox-img" src="" alt="Fotografía ampliada en alta resolución">
+              </div>
+            </div>
+
+            <!-- Selector Numérico Inferior en el Lightbox -->
+            <div class="case-lightbox-bottombar">
+              <div class="lightbox-thumbs-strip">
+                ${post.photos.map((p, idx) => `
+                  <button class="lightbox-thumb-btn ${idx === 0 ? 'active' : ''}" data-step="${idx}" aria-label="Ir a foto ${p.num}">
+                    ${p.num}
+                  </button>
+                `).join('')}
+              </div>
             </div>
 
           </div>
@@ -550,4 +573,3 @@ class CaseStudyMotor extends HTMLElement {
 }
 
 customElements.define('case-study-motor', CaseStudyMotor);
-

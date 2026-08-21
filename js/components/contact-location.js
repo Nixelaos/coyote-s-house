@@ -25,7 +25,7 @@ class ContactLocation extends HTMLElement {
                   <div class="info-icon-box">📍</div>
                   <div class="info-text">
                     <h4>Dirección del Taller</h4>
-                    <p>Av. Macul 5847, Macul, Región Metropolitana, Santiago de Chile.</p>
+                    <p>Av. Macul 5845, Macul, Región Metropolitana, Santiago de Chile.</p>
                   </div>
                 </div>
 
@@ -50,7 +50,7 @@ class ContactLocation extends HTMLElement {
                 <a href="https://maps.app.goo.gl/e7bNXcAvnVxL1CTN9" target="_blank" rel="noopener" class="btn btn-primary" style="flex: 1;">
                   <span>🗺️</span> Abrir en Google Maps
                 </a>
-                <a href="https://waze.com/ul?q=Av.+Macul+5847+Macul+Santiago" target="_blank" rel="noopener" class="btn btn-outline" style="flex: 1;">
+                <a href="https://waze.com/ul?q=Av.+Macul+5845+Macul+Santiago" target="_blank" rel="noopener" class="btn btn-outline" style="flex: 1;">
                   <span>🚗</span> Abrir en Waze
                 </a>
               </div>
@@ -68,7 +68,7 @@ class ContactLocation extends HTMLElement {
 
             <div class="map-card-wrapper">
               <iframe 
-                src="https://maps.google.com/maps?q=Av.+Macul+5847,+Macul,+Santiago,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                src="https://maps.google.com/maps?q=Av.+Macul+5845,+Macul,+Santiago,+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"

@@ -31,6 +31,7 @@ class SiteFooter extends HTMLElement {
                 <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
                 <li><a href="cotizador.html">Cotizador</a></li>
                 <li><a href="galeria.html">Galería de Trabajos</a></li>
+                <li><a href="resenas.html">Reseñas de Google</a></li>
                 <li><a href="faq.html">Preguntas Frecuentes</a></li>
                 <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>
@@ -39,7 +40,7 @@ class SiteFooter extends HTMLElement {
             <div class="footer-links">
               <h4>Contacto Oficial</h4>
               <ul>
-                <li>📍 Av. Macul 5847, Macul, Santiago</li>
+                <li>📍 Av. Macul 5845, Macul, Santiago</li>
                 <li>💬 WhatsApp: <a href="https://wa.me/56954750993" target="_blank" rel="noopener" style="color: var(--color-whatsapp);">+56 9 5475 0993</a></li>
                 <li>🕒 Lun a Vie: 09:00 a 17:00 hrs</li>
                 <li>📸 <a href="https://www.instagram.com/tallercoyoteshouse/" target="_blank" rel="noopener">@tallercoyoteshouse</a></li>

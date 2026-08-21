@@ -17,6 +17,7 @@
     'sobre-alberto.html',
     'cotizador.html',
     'galeria.html',
+    'resenas.html',
     'caso-ajuste-motor.html',
     'faq.html',
     'contacto.html'
