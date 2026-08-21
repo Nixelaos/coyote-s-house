@@ -238,10 +238,22 @@
     });
   }
 
+  // Limpieza automática de cualquier badge/iframe de Netlify inyectado
+  function purgeNetlifyBadge() {
+    document.querySelectorAll('iframe').forEach(el => {
+      if (el.src && (el.src.includes('netlify') || el.src.includes('badge') || el.id.includes('netlify') || el.className.includes('netlify'))) {
+        el.remove();
+      }
+    });
+  }
+
   // Inicialización
   document.addEventListener('DOMContentLoaded', () => {
     cacheCurrentPage();
     setupLinkInterceptor();
     startBackgroundPreload();
+    purgeNetlifyBadge();
   });
+
+  window.addEventListener('load', purgeNetlifyBadge);
 })();
