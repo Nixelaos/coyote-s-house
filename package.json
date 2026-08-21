@@ -1,0 +1,10 @@
+{
+  "name": "coyotes-house",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio web de Coyote's House - Taller Mecánico de Motocicletas",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

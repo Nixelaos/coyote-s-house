@@ -82,13 +82,15 @@
   z-index: 2;
 }
 
-.cover-badge-top {
-  position: absolute;
-  top: 18px;
-  left: 18px;
+.featured-card-badges-top {
+  grid-column: 1 / -1;
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.75rem;
+  background: rgba(22, 22, 26, 0.95);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
   z-index: 3;
 }
 
@@ -701,17 +703,30 @@
 }
 
 /* --------------------------------------------------------------------------
-   4. Modal Lightbox (Ampliación a Pantalla Completa)
+   4. Modal Lightbox (Ampliación a Pantalla Completa y Bloqueo de Scroll)
    -------------------------------------------------------------------------- */
+html.lightbox-active,
+body.lightbox-active {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
 .case-lightbox-modal {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
+  touch-action: none;
+  overscroll-behavior: none;
+  overflow: hidden;
   transition: opacity var(--transition-fast);
 }
 
@@ -726,23 +741,31 @@
   background: rgba(5, 5, 8, 0.96);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  touch-action: none;
 }
 
 .case-lightbox-dialog {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   z-index: 2;
-  padding: 1.25rem;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .case-lightbox-topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 0.75rem;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .case-lightbox-counter {
@@ -766,6 +789,7 @@
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--transition-fast);
+  touch-action: manipulation;
 }
 
 .case-lightbox-close:hover {
@@ -776,16 +800,22 @@
 .case-lightbox-body {
   position: relative;
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
 }
 
 .case-lightbox-img {
-  max-width: 95vw;
-  max-height: 85vh;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   border-radius: var(--radius-md);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
@@ -793,6 +823,9 @@
   transform: scale(0.96);
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
 .case-lightbox-img.loaded {
@@ -822,6 +855,7 @@
   cursor: pointer;
   z-index: 10;
   transition: all var(--transition-fast);
+  touch-action: manipulation;
 }
 
 .case-lightbox-nav:hover {
@@ -862,6 +896,11 @@
 }
 
 @media (max-width: 600px) {
+  .featured-card-badges-top {
+    padding: 0.85rem 1.15rem;
+    gap: 0.5rem;
+  }
+
   .case-study-card {
     padding: 1.75rem 1.25rem;
   }
@@ -920,6 +959,18 @@
     height: 290px;
   }
 
+  .case-lightbox-dialog {
+    padding: 0.4rem;
+  }
+
+  .case-lightbox-topbar {
+    padding: 0.25rem 0.4rem 0.4rem;
+  }
+
+  .case-lightbox-body {
+    padding: 0.25rem;
+  }
+
   .case-lightbox-nav {
     width: 42px;
     height: 42px;
@@ -927,11 +978,11 @@
   }
 
   .case-lightbox-nav.nav-prev {
-    left: 8px;
+    left: 6px;
   }
 
   .case-lightbox-nav.nav-next {
-    right: 8px;
+    right: 6px;
   }
 
   .badge-post-case,

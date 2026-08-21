@@ -56,6 +56,15 @@ class CaseStudyMotor extends HTMLElement {
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
     }
+    if (this.popstateHandler) {
+      window.removeEventListener('popstate', this.popstateHandler);
+    }
+    document.documentElement.classList.remove('lightbox-active');
+    document.body.classList.remove('lightbox-active');
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
+    document.body.style.removeProperty('touch-action');
+    document.documentElement.style.removeProperty('touch-action');
   }
 
   /**
@@ -137,6 +146,13 @@ class CaseStudyMotor extends HTMLElement {
     // Control táctil (Swipe) dentro del Lightbox ampliado
     this.setupTouchSwipe(lightboxBody, () => this.nextPhoto(), () => this.prevPhoto());
 
+    // Bloqueo estricto de scroll vertical mientras el Lightbox esté abierto
+    lightbox?.addEventListener('touchmove', (e) => {
+      if (this.isLightboxOpen) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
     // Cerrar y navegar en Lightbox
     lightboxClose?.addEventListener('click', () => this.closeLightbox());
     lightboxPrev?.addEventListener('click', (e) => {
@@ -164,6 +180,14 @@ class CaseStudyMotor extends HTMLElement {
       if (e.key === 'ArrowRight') this.nextPhoto();
     };
     document.addEventListener('keydown', this.keydownHandler);
+
+    // Soporte para botón "Atrás" del celular y del navegador
+    this.popstateHandler = () => {
+      if (this.isLightboxOpen) {
+        this.closeLightbox(false);
+      }
+    };
+    window.addEventListener('popstate', this.popstateHandler);
   }
 
   /**
@@ -215,18 +239,48 @@ class CaseStudyMotor extends HTMLElement {
   openLightbox() {
     const lightbox = this.querySelector('.case-lightbox-modal');
     if (!lightbox) return;
+
+    // Guardar posición de scroll actual antes de abrir
+    this.savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+
     this.isLightboxOpen = true;
     lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('lightbox-active');
+    document.body.classList.add('lightbox-active');
+
+    // Registrar estado en el historial para permitir cerrar la foto al pulsar "Atrás" en el celular
+    try {
+      history.pushState({ caseLightboxOpen: true }, '');
+    } catch (e) {}
+
     this.updateLightboxImage();
   }
 
-  closeLightbox() {
+  closeLightbox(shouldPopHistory = true) {
     const lightbox = this.querySelector('.case-lightbox-modal');
-    if (!lightbox) return;
+    if (!lightbox || !this.isLightboxOpen) return;
     this.isLightboxOpen = false;
     lightbox.classList.remove('active');
-    document.body.style.overflow = '';
+
+    // Quitar clases y estilos de bloqueo
+    document.documentElement.classList.remove('lightbox-active');
+    document.body.classList.remove('lightbox-active');
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
+    document.body.style.removeProperty('touch-action');
+    document.documentElement.style.removeProperty('touch-action');
+
+    // Si se cerró con el botón X o clic en fondo, y el estado de historial sigue activo, volver atrás
+    if (shouldPopHistory && history.state?.caseLightboxOpen) {
+      try {
+        history.back();
+      } catch (e) {}
+    }
+
+    // Restaurar posición de scroll exacta sin saltos
+    if (typeof this.savedScrollY === 'number') {
+      window.scrollTo(0, this.savedScrollY);
+    }
   }
 
   updateLightboxImage() {

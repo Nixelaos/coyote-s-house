@@ -27,14 +27,16 @@ class WorkshopGallery extends HTMLElement {
           <div class="featured-post-wrapper">
             <article class="featured-post-card">
               
+              <!-- Barra Superior de Etiquetas (Arriba de la Foto) -->
+              <div class="featured-card-badges-top">
+                <span class="badge-post-case">Publicación Destacada</span>
+                <span class="badge-post-status">✓ 7 Fotos Documentadas</span>
+              </div>
+
               <!-- Portada con Foto 1 -->
               <a href="caso-ajuste-motor.html" class="featured-post-cover" title="Ver caso de ajuste de motor">
                 <img src="assets/1-motor-desarmado-completo.webp" alt="Foto 1: Desmontaje y ajuste de motor" class="featured-cover-img" loading="lazy" width="450" height="320">
                 <div class="cover-gradient-overlay"></div>
-                <div class="cover-badge-top">
-                  <span class="badge-post-case">Publicación Destacada</span>
-                  <span class="badge-post-status">✓ 7 Fotos Documentadas</span>
-                </div>
                 <div class="cover-hover-prompt">
                   <span class="prompt-icon">🔍</span>
                   <span class="prompt-text">Ver Publicación Completa</span>
