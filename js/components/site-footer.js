@@ -31,6 +31,7 @@ class SiteFooter extends HTMLElement {
                 <li><a href="sobre-alberto.html">Sobre Alberto Pizarro</a></li>
                 <li><a href="cotizador.html">Cotizador</a></li>
                 <li><a href="galeria.html">Galería de Trabajos</a></li>
+                <li><a href="resenas.html">Reseñas de Google</a></li>
                 <li><a href="faq.html">Preguntas Frecuentes</a></li>
                 <li><a href="contacto.html">Ubicación y Horarios</a></li>
               </ul>

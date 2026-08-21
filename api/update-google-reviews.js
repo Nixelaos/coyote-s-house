@@ -19,7 +19,7 @@ function normalizePlacesData(raw) {
     const authorPhoto = rev.authorAttribution?.photoUri || "";
     const authorUri = rev.authorAttribution?.uri || "";
     const revRating = typeof rev.rating === "number" ? rev.rating : 5;
-    const text = rev.text?.text || rev.originalText?.text || "";
+    const text = rev.originalText?.text || rev.text?.text || "";
     const relativePublishTime = rev.relativePublishTimeDescription || "";
     const publishTime = rev.publishTime || "";
     const reviewGoogleMapsUri = rev.googleMapsUri || googleMapsUri;
