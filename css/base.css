@@ -135,3 +135,20 @@ main.is-transitioning {
   transform: translateY(6px);
   will-change: opacity, transform;
 }
+
+/* Ocultar cualquier inyección o iframe de badge de Netlify */
+iframe[src*="netlify"],
+iframe[id*="netlify"],
+iframe[class*="netlify"],
+div[id*="netlify"],
+div[class*="netlify-badge"],
+[data-netlify-badge],
+.netlify-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
