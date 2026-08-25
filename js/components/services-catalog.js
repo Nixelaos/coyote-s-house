@@ -101,7 +101,7 @@ class ServicesCatalog extends HTMLElement {
                 <div class="service-icon-box">🔧</div>
                 <h2 class="service-title">Servicio de suspensión</h2>
                 <p class="service-desc">
-                  Inspección, ajuste y servicio técnico para sistemas de suspensión y amortiguación de motocicletas de calle.
+                  Inspección, ajuste, reparación de barras de suspensión con prensa hidráulica y servicio integral para motocicletas de calle.
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="suspension" style="width: 100%;">
@@ -211,7 +211,7 @@ class ServicesCatalog extends HTMLElement {
                 <span class="equip-card-icon">🏗️</span>
                 <h3 class="equip-card-title">Prensa Hidráulica</h3>
                 <p class="equip-card-desc">
-                  Prensa hidráulica para montaje y desmontaje de rodamientos y piezas con ajuste a presión.
+                  Prensa hidráulica para montaje y desmontaje de rodamientos, piezas con ajuste a presión y reparación de barras de suspensión.
                 </p>
               </div>
 
