@@ -308,6 +308,7 @@ class WhatsappCotizador extends HTMLElement {
                     <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
                     <div class="custom-select-wrapper" id="customSelectWrapper">
                       <select id="serviceType" class="form-control native-select-hidden" tabindex="-1" aria-hidden="true">
+                        <option value="mantencion-completa">Mantención Completa</option>
                         <option value="mantencion-km" selected>Mantención por Kilometraje</option>
                         <option value="mantencion-prev">Mantención Preventiva</option>
                         <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
@@ -326,6 +327,11 @@ class WhatsappCotizador extends HTMLElement {
                       </button>
 
                       <div class="custom-select-dropdown" id="customSelectDropdown" role="listbox" tabindex="-1">
+                        <div class="custom-option" data-value="mantencion-completa" role="option" aria-selected="false">
+                          <span class="option-icon">📋</span>
+                          <span class="option-text">Mantención Completa</span>
+                          <span class="option-check">✓</span>
+                        </div>
                         <div class="custom-option selected" data-value="mantencion-km" role="option" aria-selected="true">
                           <span class="option-icon">⚙️</span>
                           <span class="option-text">Mantención por Kilometraje</span>
