@@ -515,7 +515,7 @@ class CaseStudyMotor extends HTMLElement {
               </div>
               <div class="cta-btns">
                 <a href="cotizador.html" class="btn btn-primary btn-lg">
-                  <span>⚡</span> Cotizador en Línea
+                  <span>📅</span> Solicitar Agendamiento o Cotización
                 </a>
               </div>
             </div>

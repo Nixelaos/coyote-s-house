@@ -108,7 +108,7 @@ class SiteHeader extends HTMLElement {
             <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
             <a href="servicios.html" class="nav-link" data-page="servicios">Servicios</a>
             <a href="sobre-alberto.html" class="nav-link" data-page="sobre-alberto">Alberto<br>Pizarro</a>
-            <a href="cotizador.html" class="nav-link" data-page="cotizador">Cotizador</a>
+            <a href="cotizador.html" class="nav-link" data-page="cotizador">Agendar / Cotizar</a>
             <a href="galeria.html" class="nav-link" data-page="galeria">Galería</a>
             <a href="resenas.html" class="nav-link" data-page="resenas">Reseñas</a>
             <a href="faq.html" class="nav-link" data-page="faq">Preguntas<br>Frecuentes</a>

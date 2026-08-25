@@ -57,7 +57,7 @@ class ServicesCatalog extends HTMLElement {
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="mantencion-km" style="width: 100%;">
-                    Cotizar Mantención por KM
+                    Agendar Mantención por KM
                   </button>
                 </div>
               </div>
@@ -73,7 +73,7 @@ class ServicesCatalog extends HTMLElement {
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="mantencion-prev" style="width: 100%;">
-                    Cotizar Mantención Preventiva
+                    Agendar Mantención Preventiva
                   </button>
                 </div>
               </div>
@@ -89,7 +89,7 @@ class ServicesCatalog extends HTMLElement {
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="motor" style="width: 100%;">
-                    Cotizar Reparación de Motores
+                    Agendar Revisión de Motor
                   </button>
                 </div>
               </div>
@@ -105,7 +105,7 @@ class ServicesCatalog extends HTMLElement {
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="suspension" style="width: 100%;">
-                    Cotizar Servicio de Suspensión
+                    Agendar Servicio de Suspensión
                   </button>
                 </div>
               </div>
@@ -121,7 +121,7 @@ class ServicesCatalog extends HTMLElement {
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="scanner" style="width: 100%;">
-                    Cotizar Scanner y Electrónica
+                    Agendar Scanner y Diagnóstico
                   </button>
                 </div>
               </div>
@@ -320,10 +320,10 @@ class ServicesCatalog extends HTMLElement {
             </div>
           </div>
 
-          <!-- Botón Cotizador -->
+          <!-- Botón Agendamiento y Cotización -->
           <div class="text-center" style="margin-top: 4rem;">
             <a href="cotizador.html" class="btn btn-whatsapp btn-lg">
-              <span>💬</span> Generar Cotización WhatsApp
+              <span>📅</span> Solicitar Agendamiento o Cotización por WhatsApp
             </a>
           </div>
 

@@ -23,21 +23,24 @@ class WhatsappCotizador extends HTMLElement {
   }
 
   getQuoteData() {
+    const clientName = this.querySelector('#clientName');
     const motoBrand = this.querySelector('#motoBrand');
     const motoModel = this.querySelector('#motoModel');
     const motoMileage = this.querySelector('#motoMileage');
     const serviceType = this.querySelector('#serviceType');
     const clientNotes = this.querySelector('#clientNotes');
 
+    const rawName = (clientName && clientName.value) ? clientName.value.trim() : '';
     const rawBrand = (motoBrand && motoBrand.value) ? motoBrand.value.trim() : '';
     const rawModel = (motoModel && motoModel.value) ? motoModel.value.trim() : '';
     const rawMileage = (motoMileage && motoMileage.value) ? motoMileage.value.trim() : '';
-    const service = (serviceType && serviceType.options[serviceType.selectedIndex]) 
-      ? serviceType.options[serviceType.selectedIndex].text 
-      : 'Mantenimiento Preventivo / Pauta por KM';
+    const service = (serviceType && serviceType.options[serviceType.selectedIndex])
+      ? serviceType.options[serviceType.selectedIndex].text
+      : 'Mantención Completa';
     const rawNotes = (clientNotes && clientNotes.value) ? clientNotes.value.trim() : '';
 
     return {
+      name: rawName,
       brand: rawBrand,
       model: rawModel,
       mileage: rawMileage,
@@ -48,18 +51,19 @@ class WhatsappCotizador extends HTMLElement {
 
   generateWhatsAppMessage() {
     const data = this.getQuoteData();
+    const nameGreeting = data.name ? `Mi nombre es *${data.name}* y quisiera` : 'Quisiera';
     const brandText = data.brand || 'Por confirmar';
     const modelText = data.model || 'Por confirmar';
     const mileageText = data.mileage || 'Por confirmar';
     const notesText = data.notes ? `\n💬 *Detalle / Síntoma:* ${data.notes}` : '';
 
-    const message = `¡Hola Alberto! 👋 Quisiera cotizar y agendar un servicio en *Coyote's House*:\n\n` +
+    const message = `¡Hola Alberto! 👋 ${nameGreeting} solicitar agendamiento para revisión en taller (o cotización estimada) en *Coyote's House*:\n\n` +
       `🏍️ *Marca:* ${brandText}\n` +
       `📌 *Modelo / Año:* ${modelText}\n` +
       `🛣️ *Kilometraje:* ${mileageText}\n` +
-      `🔧 *Servicio:* ${data.service}` +
+      `🔧 *Motivo / Servicio:* ${data.service}` +
       `${notesText}\n\n` +
-      `¿Podrías indicarme disponibilidad de hora y presupuesto estimado? ¡Muchas gracias!`;
+      `¿Qué disponibilidad de hora tienes en el taller para coordinar la visita y entrega de presupuesto? ¡Muchas gracias!`;
 
     return message;
   }
@@ -82,27 +86,39 @@ class WhatsappCotizador extends HTMLElement {
       timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     }
 
-    const brandDisplay = data.brand 
+    const nameHeader = data.name
+      ? `Mi nombre es <strong>${this.escapeHtml(data.name)}</strong> y quisiera`
+      : `Quisiera`;
+
+    const nameDisplay = data.name
+      ? `<span class="wsp-item-val">${this.escapeHtml(data.name)}</span>`
+      : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: Alberto Pizarro</span>`;
+
+    const brandDisplay = data.brand
       ? `<span class="wsp-item-val">${this.escapeHtml(data.brand)}</span>`
       : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: Yamaha</span>`;
 
-    const modelDisplay = data.model 
+    const modelDisplay = data.model
       ? `<span class="wsp-item-val">${this.escapeHtml(data.model)}</span>`
       : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: MT-07 2022</span>`;
 
-    const mileageDisplay = data.mileage 
+    const mileageDisplay = data.mileage
       ? `<span class="wsp-item-val">${this.escapeHtml(data.mileage)}</span>`
       : `<span class="wsp-item-val" style="opacity: 0.6; font-style: italic;">Ej: 15.000 km</span>`;
 
-    const notesDisplay = data.notes 
+    const notesDisplay = data.notes
       ? `<span class="wsp-item-val">${this.escapeHtml(data.notes)}</span>`
-      : `<span class="wsp-item-val" style="opacity: 0.55; font-style: italic;">(Opcional) Ej: Mantención periódica...</span>`;
+      : `<span class="wsp-item-val" style="opacity: 0.55; font-style: italic;">(Opcional) Ej: Revisar ruido o mantención periódica...</span>`;
 
     whatsappPreview.innerHTML = `
       <div class="wsp-bubble-header">
-        ¡Hola Alberto! 👋 Quisiera cotizar y agendar un servicio en <strong>Coyote's House</strong>:
+        ¡Hola Alberto! 👋 ${nameHeader} solicitar agendamiento para revisión en taller (o cotización estimada) en <strong>Coyote's House</strong>:
       </div>
       <div class="wsp-bubble-list">
+        <div class="wsp-item">
+          <span class="wsp-item-label">👤 Tu Nombre:</span>
+          ${nameDisplay}
+        </div>
         <div class="wsp-item">
           <span class="wsp-item-label">🏍️ Marca:</span>
           ${brandDisplay}
@@ -116,7 +132,7 @@ class WhatsappCotizador extends HTMLElement {
           ${mileageDisplay}
         </div>
         <div class="wsp-item">
-          <span class="wsp-item-label">🔧 Servicio:</span>
+          <span class="wsp-item-label">🔧 Motivo / Servicio:</span>
           <span class="wsp-item-val">${this.escapeHtml(data.service)}</span>
         </div>
         <div class="wsp-item">
@@ -125,7 +141,7 @@ class WhatsappCotizador extends HTMLElement {
         </div>
       </div>
       <div class="wsp-bubble-footer-text">
-        ¿Podrías indicarme disponibilidad de hora y presupuesto estimado? ¡Muchas gracias!
+        ¿Qué disponibilidad de hora tienes en el taller para coordinar la visita y entrega de presupuesto? ¡Muchas gracias!
       </div>
       <div class="whatsapp-meta-row">
         <span class="whatsapp-time">${timeStr}</span>
@@ -143,6 +159,7 @@ class WhatsappCotizador extends HTMLElement {
   }
 
   initCotizador() {
+    const clientName = this.querySelector('#clientName');
     const motoBrand = this.querySelector('#motoBrand');
     const motoModel = this.querySelector('#motoModel');
     const motoMileage = this.querySelector('#motoMileage');
@@ -153,6 +170,7 @@ class WhatsappCotizador extends HTMLElement {
 
     const updateHandler = () => this.updatePreview();
 
+    if (clientName) clientName.addEventListener('input', updateHandler);
     if (motoBrand) motoBrand.addEventListener('input', updateHandler);
     if (motoModel) motoModel.addEventListener('input', updateHandler);
     if (motoMileage) motoMileage.addEventListener('input', updateHandler);
@@ -170,12 +188,13 @@ class WhatsappCotizador extends HTMLElement {
       let serviceParam = urlParams.get('servicio');
       if (serviceParam && serviceType) {
         if (serviceParam === 'mantencion') serviceParam = 'mantencion-km';
+        if (serviceParam === 'mantencion-integral') serviceParam = 'mantencion-completa';
         if (serviceType.querySelector(`option[value="${serviceParam}"]`)) {
           serviceType.value = serviceParam;
           this.syncCustomSelect(serviceParam);
         }
       }
-    } catch (err) {}
+    } catch (err) { }
 
     this.updatePreview();
   }
@@ -261,6 +280,7 @@ class WhatsappCotizador extends HTMLElement {
       const serviceType = this.querySelector('#serviceType');
       if (selectedService && serviceType) {
         if (selectedService === 'mantencion') selectedService = 'mantencion-km';
+        if (selectedService === 'mantencion-integral') selectedService = 'mantencion-completa';
         if (serviceType.querySelector(`option[value="${selectedService}"]`)) {
           serviceType.value = selectedService;
           this.syncCustomSelect(selectedService);
@@ -279,9 +299,9 @@ class WhatsappCotizador extends HTMLElement {
       <section class="quote-section" id="cotizador">
         <div class="container">
           <div class="text-center" style="margin-bottom: 2.5rem;">
-            <span class="section-tag">Cotización Inmediata</span>
-            <h2 class="section-title">Genera tu consulta para <span class="highlight-accent">WhatsApp</span></h2>
-            <p class="section-subtitle center-block">Completa los datos de tu moto a continuación. Se generará un mensaje claro y ordenado para que Alberto te responda con disponibilidad y presupuesto.</p>
+            <span class="section-tag">Agendamiento & Presupuesto</span>
+            <h2 class="section-title">Solicita tu cotización o <span class="highlight-accent">agendamiento</span></h2>
+            <p class="section-subtitle center-block">Prioriza tu visita para una inspección técnica presencial en el taller de Alberto Pizarro, o solicita un presupuesto estimado para tu motocicleta.</p>
           </div>
 
           <div class="quote-box">
@@ -289,91 +309,95 @@ class WhatsappCotizador extends HTMLElement {
               <form class="quote-form" id="quoteForm" onsubmit="return false;">
                 <div class="form-row-2">
                   <div class="form-group">
-                    <label class="form-label" for="motoBrand">🏍️ Marca de tu Moto</label>
-                    <input type="text" id="motoBrand" class="form-control" placeholder="Ej: Honda, Yamaha, BMW, Kawasaki...">
+                    <label class="form-label" for="clientName">👤 Tu Nombre</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="Ej: Alberto Pizarro">
                   </div>
                   <div class="form-group">
-                    <label class="form-label" for="motoModel">📌 Modelo y Año</label>
-                    <input type="text" id="motoModel" class="form-control" placeholder="Ej: MT-07 2022 / Duke 390 2021">
+                    <label class="form-label" for="motoBrand">🏍️ Marca de tu Moto</label>
+                    <input type="text" id="motoBrand" class="form-control" placeholder="Ej: Honda, Yamaha, BMW, Kawasaki...">
                   </div>
                 </div>
 
                 <div class="form-row-2">
                   <div class="form-group">
+                    <label class="form-label" for="motoModel">📌 Modelo y Año</label>
+                    <input type="text" id="motoModel" class="form-control" placeholder="Ej: MT-07 2022 / Duke 390 2021">
+                  </div>
+                  <div class="form-group">
                     <label class="form-label" for="motoMileage">🛣️ Kilometraje</label>
                     <input type="text" id="motoMileage" class="form-control" placeholder="Ej: 15.000 km / 25.000 km">
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <label class="form-label" for="serviceType">🔧 Servicio Requerido</label>
-                    <div class="custom-select-wrapper" id="customSelectWrapper">
-                      <select id="serviceType" class="form-control native-select-hidden" tabindex="-1" aria-hidden="true">
-                        <option value="mantencion-completa">Mantención Completa</option>
-                        <option value="mantencion-km" selected>Mantención por Kilometraje</option>
-                        <option value="mantencion-prev">Mantención Preventiva</option>
-                        <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
-                        <option value="suspension">Servicio de Suspensión</option>
-                        <option value="scanner">Scanner y Electrónica</option>
-                        <option value="otro">Otro Servicio / Consulta General</option>
-                      </select>
+                <div class="form-group">
+                  <label class="form-label" for="serviceType">🔧 Motivo de la Visita / Servicio</label>
+                  <div class="custom-select-wrapper" id="customSelectWrapper">
+                    <select id="serviceType" class="form-control native-select-hidden" tabindex="-1" aria-hidden="true">
+                      <option value="mantencion-completa">Mantención Completa</option>
+                      <option value="mantencion-km" selected>Mantención por Kilometraje</option>
+                      <option value="mantencion-prev">Mantención Preventiva</option>
+                      <option value="motor">Reparación de Motores (Mecánica Menor y Dura)</option>
+                      <option value="suspension">Servicio de Suspensión</option>
+                      <option value="scanner">Scanner y Electrónica</option>
+                      <option value="otro">Otro Servicio / Consulta General</option>
+                    </select>
 
-                      <button type="button" class="custom-select-trigger" id="customSelectTrigger" aria-haspopup="listbox" aria-expanded="false">
-                        <span class="custom-select-label" id="customSelectLabel">Mantención por Kilometraje</span>
-                        <span class="custom-select-chevron">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                          </svg>
-                        </span>
-                      </button>
+                    <button type="button" class="custom-select-trigger" id="customSelectTrigger" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="custom-select-label" id="customSelectLabel">Mantención por Kilometraje</span>
+                      <span class="custom-select-chevron">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </span>
+                    </button>
 
-                      <div class="custom-select-dropdown" id="customSelectDropdown" role="listbox" tabindex="-1">
-                        <div class="custom-option" data-value="mantencion-completa" role="option" aria-selected="false">
-                          <span class="option-icon">📋</span>
-                          <span class="option-text">Mantención Completa</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option selected" data-value="mantencion-km" role="option" aria-selected="true">
-                          <span class="option-icon">⚙️</span>
-                          <span class="option-text">Mantención por Kilometraje</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option" data-value="mantencion-prev" role="option" aria-selected="false">
-                          <span class="option-icon">🛡️</span>
-                          <span class="option-text">Mantención Preventiva</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option" data-value="motor" role="option" aria-selected="false">
-                          <span class="option-icon">🔧</span>
-                          <span class="option-text">Reparación de Motores (Mecánica Menor y Dura)</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option" data-value="suspension" role="option" aria-selected="false">
-                          <span class="option-icon">🏍️</span>
-                          <span class="option-text">Servicio de Suspensión</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option" data-value="scanner" role="option" aria-selected="false">
-                          <span class="option-icon">💻</span>
-                          <span class="option-text">Scanner y Electrónica</span>
-                          <span class="option-check">✓</span>
-                        </div>
-                        <div class="custom-option" data-value="otro" role="option" aria-selected="false">
-                          <span class="option-icon">💬</span>
-                          <span class="option-text">Otro Servicio / Consulta General</span>
-                          <span class="option-check">✓</span>
-                        </div>
+                    <div class="custom-select-dropdown" id="customSelectDropdown" role="listbox" tabindex="-1">
+                      <div class="custom-option" data-value="mantencion-completa" role="option" aria-selected="false">
+                        <span class="option-icon">📋</span>
+                        <span class="option-text">Mantención Completa</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option selected" data-value="mantencion-km" role="option" aria-selected="true">
+                        <span class="option-icon">⚙️</span>
+                        <span class="option-text">Mantención por Kilometraje</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option" data-value="mantencion-prev" role="option" aria-selected="false">
+                        <span class="option-icon">🛡️</span>
+                        <span class="option-text">Mantención Preventiva</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option" data-value="motor" role="option" aria-selected="false">
+                        <span class="option-icon">🔧</span>
+                        <span class="option-text">Reparación de Motores (Mecánica Menor y Dura)</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option" data-value="suspension" role="option" aria-selected="false">
+                        <span class="option-icon">🏍️</span>
+                        <span class="option-text">Servicio de Suspensión</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option" data-value="scanner" role="option" aria-selected="false">
+                        <span class="option-icon">💻</span>
+                        <span class="option-text">Scanner y Electrónica</span>
+                        <span class="option-check">✓</span>
+                      </div>
+                      <div class="custom-option" data-value="otro" role="option" aria-selected="false">
+                        <span class="option-icon">💬</span>
+                        <span class="option-text">Otro Servicio / Consulta General</span>
+                        <span class="option-check">✓</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label" for="clientNotes">💬 Detalle, Síntoma o Consulta Adicional (Opcional)</label>
-                  <textarea id="clientNotes" class="form-control" rows="3" placeholder="Ej: Le toca la mantención de los 20.000 km y siento un ruido leve en el freno delantero..."></textarea>
+                  <label class="form-label" for="clientNotes">💬 Detalle, Síntoma o Motivo de Consulta (Opcional)</label>
+                  <textarea id="clientNotes" class="form-control" rows="3" placeholder="Ej: Quisiera llevar la moto para revisar un ruido en el tren delantero y coordinar mantención..."></textarea>
                 </div>
 
                 <button type="button" class="btn btn-whatsapp btn-lg" id="btnSendQuote" style="width: 100%;">
-                  <span>💬</span> Enviar Consulta a Alberto por WhatsApp
+                  <span>📅</span> Solicitar Agendamiento o Cotización por WhatsApp
                 </button>
               </form>
 
@@ -404,7 +428,7 @@ class WhatsappCotizador extends HTMLElement {
                   <!-- Mensaje de bienvenida oficial -->
                   <div class="whatsapp-bubble-wrap received">
                     <div class="whatsapp-bubble whatsapp-received">
-                      <p>¡Hola! 👋 Bienvenido a <strong>Coyote's House</strong>. Completa tus datos y envíame este mensaje para coordinar tu hora y darte presupuesto.</p>
+                      <p>¡Hola! 👋 Bienvenido a <strong>Coyote's House</strong>. Completa tus datos para coordinar tu día y hora de visita al taller o entregarte un presupuesto estimado.</p>
                       <div class="whatsapp-meta-row">
                         <span class="whatsapp-time">09:00</span>
                       </div>
