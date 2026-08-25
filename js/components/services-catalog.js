@@ -85,7 +85,7 @@ class ServicesCatalog extends HTMLElement {
                 <div class="service-icon-box">⚙️</div>
                 <h2 class="service-title">Reparación de motores</h2>
                 <p class="service-desc">
-                  Reparación completa de motores incluidos trabajos de soldadura, prensa hidráulica y extractores específicos.
+                  Reparación completa de motores, fugas de aceite, inspección de rodamientos internos, ajustes de precisión, entre otros.
                 </p>
                 <div class="service-footer">
                   <button class="btn btn-outline btn-sm btn-service-select" data-service="motor" style="width: 100%;">
