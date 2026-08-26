@@ -82,7 +82,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Incluye una inspección integral desde dentro hacia el exterior: revisión y/o ajuste de luz de válvulas, torque de culata, aseo a cuerpo de aceleración/carburador, aseo y test de inyector, sensores, actuadores, presión de bomba de combustible, filtro de aire, revisión y limpieza de bujías, apriete perimetral, rodamientos de masa, transmisión, dampers, test de batería, test de carga eléctrica, carga de batería al 100% durante el servicio, cables, partes móviles, scanner con lectura de parámetros y apriete general.
+                Incluye una inspección integral desde dentro hacia el exterior: revisión y/o ajuste de luz de válvulas, torque de culata, aseo a cuerpo de aceleración/carburador, aseo y test de inyector, sensores, actuadores, presión de bomba de combustible, filtro de aire, revisión y limpieza de bujías, apriete perimetral, rodamientos de masa, transmisión, dampers, test de batería, test de carga eléctrica, carga de batería al 100% durante el servicio, cables, partes móviles, scanner con lectura de parámetros, apriete general, entre otras cosas para asegurar el correcto funcionamiento de toda la motocicleta, también se detectan potenciales fallas por desgaste la que se pueden evitar con la correcta inspección.
               </div>
             </div>
 
@@ -98,11 +98,11 @@ class FaqAccordion extends HTMLElement {
 
             <div class="faq-item">
               <button class="faq-header" type="button">
-                <span>¿Cuáles son los horarios de atención y ubicación?</span>
+                <span>¿Cuáles son los horarios de atención, ubicación y medios de pago?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5845, Macul, Santiago. Aceptamos transferencias bancarias y efectivo.
+                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5845, Macul, Santiago. Contamos con todos los medios de pago (excepto cheques): efectivo, transferencia bancaria, pago con tarjeta de crédito y débito presencial en taller, y link de compra a distancia, con opción de hasta 12 cuotas precio contado.
               </div>
             </div>
           </div>
