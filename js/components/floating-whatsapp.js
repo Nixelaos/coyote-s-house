@@ -84,8 +84,8 @@ class FloatingWhatsapp extends HTMLElement {
             <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera pedir hora para mantención de mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
               <span>🔧 Pedir hora de mantención</span>
             </button>
-            <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera agendar una visita al taller para revisar el motor o frenos de mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
-              <span>🛠️ Revisión de motor o frenos</span>
+            <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera pedir hora para una reparación en mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
+              <span>🛠️ Pedir hora para reparación</span>
             </button>
             <button type="button" class="btn btn-outline btn-sm quick-msg-btn" data-text="¡Hola Alberto! 👋 Quisiera hacer una consulta para mi moto." style="justify-content: flex-start; text-align: left; font-size: 0.82rem;">
               <span>💬 Consulta general</span>
