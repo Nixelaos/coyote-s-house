@@ -38,8 +38,8 @@ class AboutAlberto extends HTMLElement {
               </p>
 
               <div style="margin-top: 0.75rem;">
-                <a href="https://wa.me/56954750993?text=Hola%20Alberto%2C%20quisiera%20hacerte%20una%20consulta%20técnica%20sobre%20mi%20moto" target="_blank" rel="noopener" class="btn btn-whatsapp">
-                  <span>💬</span> Hablar Directamente con Alberto
+                <a href="cotizador.html" class="btn btn-primary">
+                  <span>📅</span> Agendar / Cotizar con Alberto
                 </a>
               </div>
             </div>

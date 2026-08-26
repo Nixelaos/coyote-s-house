@@ -56,8 +56,8 @@ class ServicesCatalog extends HTMLElement {
                   Pauta de mantención completa ejecutada desde dentro hacia el exterior para motos de calle homologadas.
                 </p>
                 <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="mantencion-km" style="width: 100%;">
-                    Agendar Mantención por KM
+                  <button class="btn btn-primary btn-sm btn-service-select" data-service="mantencion-km" style="width: 100%;">
+                    <span>🗓️ Agendar Mantención por KM</span>
                   </button>
                 </div>
               </div>
@@ -72,8 +72,8 @@ class ServicesCatalog extends HTMLElement {
                   Revisión, ajustes, limpieza y lubricación integral para evitar fallas e imprevistos en ruta.
                 </p>
                 <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="mantencion-prev" style="width: 100%;">
-                    Agendar Mantención Preventiva
+                  <button class="btn btn-primary btn-sm btn-service-select" data-service="mantencion-prev" style="width: 100%;">
+                    <span>🗓️ Agendar Mantención Preventiva</span>
                   </button>
                 </div>
               </div>
@@ -88,8 +88,8 @@ class ServicesCatalog extends HTMLElement {
                   Reparación completa de motores, fugas de aceite, inspección de rodamientos internos, ajustes de precisión, entre otros.
                 </p>
                 <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="motor" style="width: 100%;">
-                    Agendar Revisión de Motor
+                  <button class="btn btn-primary btn-sm btn-service-select" data-service="motor" style="width: 100%;">
+                    <span>⚙️ Agendar Revisión de Motor</span>
                   </button>
                 </div>
               </div>
@@ -104,8 +104,8 @@ class ServicesCatalog extends HTMLElement {
                   Inspección, ajuste, reparación de barras de suspensión con prensa hidráulica y servicio integral para motocicletas de calle.
                 </p>
                 <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="suspension" style="width: 100%;">
-                    Agendar Servicio de Suspensión
+                  <button class="btn btn-primary btn-sm btn-service-select" data-service="suspension" style="width: 100%;">
+                    <span>🔧 Agendar Servicio de Suspensión</span>
                   </button>
                 </div>
               </div>
@@ -120,8 +120,8 @@ class ServicesCatalog extends HTMLElement {
                   Scanner con revisión de actuadores, lectura de parámetros de sensores, test de carga eléctrica y batería.
                 </p>
                 <div class="service-footer">
-                  <button class="btn btn-outline btn-sm btn-service-select" data-service="scanner" style="width: 100%;">
-                    Agendar Scanner y Diagnóstico
+                  <button class="btn btn-primary btn-sm btn-service-select" data-service="scanner" style="width: 100%;">
+                    <span>💻 Agendar Scanner y Diagnóstico</span>
                   </button>
                 </div>
               </div>
@@ -203,7 +203,7 @@ class ServicesCatalog extends HTMLElement {
                 <span class="equip-card-icon">⚡</span>
                 <h3 class="equip-card-title">Máquinas de Soldar</h3>
                 <p class="equip-card-desc">
-                  Cuento con máquinas de soldar para reparación completa de motores y trabajos dedicados.
+                  Cuento con sistema de soldadura Inverter y Mig para reparación de piezas de acero en chasis y accesorios de montaje.
                 </p>
               </div>
 
