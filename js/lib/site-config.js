@@ -20,18 +20,30 @@
   // ======================================================================
 
   /**
-   * Dirección del backend.
-   * Al desplegar, cambia PRODUCCION por la URL real del servidor Fastify
-   * (Render / Railway / Fly). También se puede fijar desde el HTML declarando
-   * window.COYOTE_API_BASE antes de cargar este archivo.
+   * Dirección del backend, según dónde se esté sirviendo el sitio.
+   * Se puede forzar desde el HTML declarando window.COYOTE_API_BASE antes de
+   * cargar este archivo; es lo que conviene para pruebas puntuales, en vez de
+   * editar este archivo y arriesgarse a subir el cambio sin querer.
    */
   var API_BASE = (function () {
     if (typeof window.COYOTE_API_BASE === 'string') return window.COYOTE_API_BASE;
 
     var host = window.location.hostname;
-    var esLocal = host === 'localhost' || host === '127.0.0.1' || host === '';
 
-    return esLocal ? 'http://localhost:3000' : 'https://backend-coyotes-house.onrender.com';
+    // Desarrollo: el backend corre aparte, en su propio puerto.
+    if (host === 'localhost' || host === '127.0.0.1' || host === '') {
+      return 'http://localhost:3000';
+    }
+
+    // Ensayo en Vercel: el sitio y el backend son dos proyectos distintos, así
+    // que hay que nombrar al backend. Rellenar tras desplegarlo.
+    if (/\.vercel\.app$/.test(host)) {
+      return 'https://BACKEND-EN-VERCEL.vercel.app';
+    }
+
+    // Producción: nginx sirve el sitio y hace de proxy al backend bajo el mismo
+    // origen, así que una ruta relativa basta y no hay CORS de por medio.
+    return '';
   })();
 
   var ENDPOINT = API_BASE + '/api/public/site-config';

@@ -1,7 +1,13 @@
 /**
  * Componente Web: CustomerReviews (<customer-reviews>)
  * Coyote's House - Taller Mecánico de Motocicletas
- * Renderiza dinámicamente reseñas reales de Google Maps desde /.netlify/functions/google-reviews
+ * Renderiza dinámicamente reseñas reales de Google Maps desde
+ * /.netlify/functions/google-reviews, un JSON estático que nginx sirve en la VM
+ * y que un script diario refresca contra Google Places. La ruta conserva el
+ * prefijo heredado de Netlify para no romper enlaces ni cachés antiguas.
+ *
+ * Si el JSON no está (por ejemplo en un despliegue de prueba fuera de la VM),
+ * se dibuja la tarjeta de respaldo y la página sigue intacta.
  */
 
 // Memoria RAM compartida para evitar peticiones repetidas en la navegación SPA
@@ -62,7 +68,7 @@ class CustomerReviews extends HTMLElement {
             return res.json();
           })
           .catch((err) => {
-            console.warn('[customer-reviews] Aviso al cargar reseñas de Netlify:', err.message);
+            console.warn('[customer-reviews] No se pudieron cargar las reseñas:', err.message);
             return null;
           })
           .finally(() => {
