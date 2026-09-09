@@ -75,6 +75,14 @@
   --color-whatsapp: #1f9d55;
   --color-whatsapp-dark: #167a42;
 
+  /* Announcement Banner - High-Visibility Orange
+     Se mantiene separado del rojo de marca (#b5292a) a propósito: el banner
+     debe leerse como un aviso puntual, no como parte de la identidad. */
+  --color-orange: #F97316;          /* Fondo de la franja */
+  --color-orange-bright: #FB923C;   /* Brillo central del degradado */
+  --color-orange-ink: #1A1207;      /* Tinta sobre naranjo (8.9:1, WCAG AAA) */
+  --color-orange-glow: rgba(249, 115, 22, 0.35);
+
   /* Typography Stack */
   --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
   --font-body: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -99,7 +107,11 @@
   --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Header & Topbar Heights */
+  /* Banner, Header & Topbar Heights
+     --banner-height la actualiza <announcement-banner> midiendo su altura
+     real. Vale 0px cuando no hay anuncio activo, de modo que el apilamiento
+     queda idéntico al que había antes de que existiera el banner. */
+  --banner-height: 0px;
   --topbar-height: 38px;
   --header-height: 78px;
 }

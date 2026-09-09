@@ -7,6 +7,34 @@ class FaqAccordion extends HTMLElement {
   connectedCallback() {
     this.render();
     this.initAccordion();
+
+    this.boundConfig = () => this.updateSchedule();
+    window.addEventListener('siteconfig:ready', this.boundConfig);
+  }
+
+  disconnectedCallback() {
+    if (this.boundConfig) {
+      window.removeEventListener('siteconfig:ready', this.boundConfig);
+    }
+  }
+
+  /**
+   * Redacta el horario en prosa para que encaje dentro de la respuesta:
+   * "de Lunes a Viernes de 09:00 a 17:00 hrs".
+   */
+  updateSchedule() {
+    const label = this.querySelector('.faq-schedule');
+    if (!label || !window.CoyoteSiteConfig) return;
+
+    const detalle = window.CoyoteSiteConfig.getDetail();
+    if (detalle.abiertos.length === 0) {
+      label.textContent = 'con horario especial (consultanos por WhatsApp)';
+      return;
+    }
+
+    label.textContent = detalle.abiertos
+      .map((grupo) => `de ${grupo.dias} de ${grupo.horario}`)
+      .join(' y ');
   }
 
   initAccordion() {
@@ -102,13 +130,15 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul 5845, Macul, Santiago. Contamos con todos los medios de pago (excepto cheques): efectivo, transferencia bancaria, pago con tarjeta de crédito y débito presencial en taller, y link de compra a distancia, con opción de hasta 12 cuotas precio contado.
+                Atendemos <span class="faq-schedule">de Lunes a Viernes de 09:00 a 17:00 hrs</span> en Av. Macul 5845, Macul, Santiago. Contamos con todos los medios de pago (excepto cheques): efectivo, transferencia bancaria, pago con tarjeta de crédito y débito presencial en taller, y link de compra a distancia, con opción de hasta 12 cuotas precio contado.
               </div>
             </div>
           </div>
         </div>
       </section>
     `;
+
+    this.updateSchedule();
   }
 }
 

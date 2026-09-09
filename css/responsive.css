@@ -67,8 +67,8 @@
     left: 0;
     width: 100%;
     max-width: 100vw;
-    height: calc(100dvh - 100% - var(--topbar-height, 34px));
-    height: calc(100vh - 100% - var(--topbar-height, 34px));
+    height: calc(100dvh - 100% - var(--topbar-height, 34px) - var(--banner-height, 0px));
+    height: calc(100vh - 100% - var(--topbar-height, 34px) - var(--banner-height, 0px));
     background: rgba(8, 12, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -206,8 +206,8 @@
     left: 0;
     width: 100%;
     max-width: 100vw;
-    height: calc(100dvh - 100% - var(--topbar-height, 34px));
-    height: calc(100vh - 100% - var(--topbar-height, 34px));
+    height: calc(100dvh - 100% - var(--topbar-height, 34px) - var(--banner-height, 0px));
+    height: calc(100vh - 100% - var(--topbar-height, 34px) - var(--banner-height, 0px));
     background: rgba(8, 12, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);

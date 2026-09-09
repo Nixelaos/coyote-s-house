@@ -1,7 +1,10 @@
 /**
  * Componente: WorkshopTopbar (<workshop-topbar>)
  * Barra superior con horario dinámico en tiempo real y datos de contacto rápido.
- * Utiliza zona horaria oficial 'America/Santiago' (Chile UTC-4 / UTC-3 automático).
+ *
+ * El horario ya no está escrito en este archivo: lo administra el taller desde
+ * el panel y llega por <site-config.js>, que resuelve el estado en la zona
+ * horaria oficial 'America/Santiago' (UTC-4 / UTC-3 automático).
  */
 
 class WorkshopTopbar extends HTMLElement {
@@ -9,8 +12,13 @@ class WorkshopTopbar extends HTMLElement {
     this.render();
     this.initScheduleTimer();
     this.updateCssHeight();
+
     this.boundResize = () => this.updateCssHeight();
+    // El horario real llega unos milisegundos después del primer pintado.
+    this.boundConfig = () => this.render();
+
     window.addEventListener('resize', this.boundResize);
+    window.addEventListener('siteconfig:ready', this.boundConfig);
   }
 
   disconnectedCallback() {
@@ -19,6 +27,9 @@ class WorkshopTopbar extends HTMLElement {
     }
     if (this.boundResize) {
       window.removeEventListener('resize', this.boundResize);
+    }
+    if (this.boundConfig) {
+      window.removeEventListener('siteconfig:ready', this.boundConfig);
     }
   }
 
@@ -31,73 +42,71 @@ class WorkshopTopbar extends HTMLElement {
     });
   }
 
-  getChileTime() {
-    const now = new Date();
-    try {
-      const formatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Santiago',
-        weekday: 'short',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: false
-      });
-
-      const parts = formatter.formatToParts(now);
-      const partMap = {};
-      for (const p of parts) {
-        partMap[p.type] = p.value;
-      }
-
-      const daysMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
-      const day = daysMap[partMap.weekday] ?? now.getDay();
-      let hour = parseInt(partMap.hour, 10);
-      if (hour === 24) hour = 0;
-      const minutes = parseInt(partMap.minute, 10) || 0;
-
-      return { day, hour, minutes, currentTime: hour + minutes / 60 };
-    } catch (e) {
-      // Fallback a horario local si Intl no estuviera disponible
-      const day = now.getDay();
-      const hour = now.getHours();
-      const minutes = now.getMinutes();
-      return { day, hour, minutes, currentTime: hour + minutes / 60 };
+  /**
+   * Estado de atención calculado a partir del horario configurado.
+   * Si site-config.js no llegó a cargar, se prefiere no afirmar nada sobre si
+   * el taller está abierto: mostrar "Abierto" sin datos sería peor que no
+   * mostrar el indicador.
+   */
+  getStatus() {
+    if (window.CoyoteSiteConfig) {
+      return window.CoyoteSiteConfig.getStatus();
     }
+    return null;
+  }
+
+  getSummary() {
+    if (window.CoyoteSiteConfig) {
+      return window.CoyoteSiteConfig.getSummary();
+    }
+    return '';
   }
 
   updateWorkshopStatus() {
     const badge = this.querySelector('.status-badge');
     if (!badge) return;
 
-    const { day, currentTime } = this.getChileTime();
+    const status = this.getStatus();
 
-    let isOpen = false;
-    let statusText = '';
-
-    // Lunes (1) a Viernes (5) de 09:00 a 17:00 (Hora de Santiago de Chile)
-    if (day >= 1 && day <= 5) {
-      if (currentTime >= 9.0 && currentTime < 17.0) {
-        isOpen = true;
-        statusText = 'Abierto hoy hasta 17:00';
-      } else if (currentTime < 9.0) {
-        statusText = 'Cerrado (Abre 09:00 hrs)';
-      } else {
-        if (day === 5) {
-          statusText = 'Cerrado (Abre lunes 09:00)';
-        } else {
-          statusText = 'Cerrado (Abre mañana 09:00)';
-        }
-      }
-    } else {
-      statusText = 'Cerrado (Abre lunes 09:00)';
+    if (!status) {
+      badge.hidden = true;
+      return;
     }
 
-    badge.className = `status-badge ${isOpen ? 'open' : 'closed'}`;
-    badge.innerHTML = `<span class="status-dot"></span> <span class="status-text">${statusText}</span>`;
+    badge.hidden = false;
+    badge.className = `status-badge ${status.isOpen ? 'open' : 'closed'}`;
+
+    // Se reconstruye con nodos en vez de innerHTML: el texto proviene de la API.
+    badge.textContent = '';
+
+    const dot = document.createElement('span');
+    dot.className = 'status-dot';
+    dot.setAttribute('aria-hidden', 'true');
+
+    const text = document.createElement('span');
+    text.className = 'status-text';
+    text.textContent = status.text;
+
+    badge.appendChild(dot);
+    badge.appendChild(document.createTextNode(' '));
+    badge.appendChild(text);
+
     this.updateCssHeight();
   }
 
+  updateScheduleLabel() {
+    const label = this.querySelector('.top-schedule-text');
+    if (!label) return;
+
+    const summary = this.getSummary();
+    label.textContent = summary;
+    // Sin horario que mostrar, el reloj suelto no aporta nada.
+    const container = this.querySelector('.top-schedule');
+    if (container) container.hidden = !summary;
+  }
+
   initScheduleTimer() {
-    this.updateWorkshopStatus();
+    // El estado cambia con el reloj aunque nadie recargue la página.
     this.timer = setInterval(() => this.updateWorkshopStatus(), 60000);
   }
 
@@ -106,8 +115,8 @@ class WorkshopTopbar extends HTMLElement {
       <div class="top-bar">
         <div class="container top-bar-container">
           <div class="top-info-left">
-            <div class="status-badge open">
-              <span class="status-dot"></span> <span class="status-text">Abierto hoy hasta 17:00</span>
+            <div class="status-badge closed">
+              <span class="status-dot" aria-hidden="true"></span> <span class="status-text">Consultando horario...</span>
             </div>
             <span class="top-link top-address">
               📍 Av. Macul 5845, Macul, Santiago
@@ -115,7 +124,7 @@ class WorkshopTopbar extends HTMLElement {
           </div>
           <div class="top-info-right">
             <span class="top-link top-schedule">
-              🕒 Lun a Vie: 09:00 a 17:00 hrs
+              🕒 <span class="top-schedule-text"></span>
             </span>
             <a href="https://wa.me/56954750993" target="_blank" rel="noopener" class="top-link top-whatsapp" style="color: var(--color-whatsapp); font-weight: 700;">
               💬 <span class="whatsapp-label">WhatsApp:</span> +56 9 5475 0993
@@ -124,6 +133,9 @@ class WorkshopTopbar extends HTMLElement {
         </div>
       </div>
     `;
+
+    this.updateWorkshopStatus();
+    this.updateScheduleLabel();
   }
 }
 

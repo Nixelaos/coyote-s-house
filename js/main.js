@@ -25,6 +25,8 @@
 
   // Componentes para precargar en background
   const componentScripts = [
+    'js/lib/site-config.js',
+    'js/components/announcement-banner.js',
     'js/components/workshop-topbar.js',
     'js/components/site-header.js',
     'js/components/hero-section.js',

@@ -10,6 +10,7 @@
 
 /* 2. Global Reusable Components */
 @import url('./components/buttons.css');
+@import url('./components/announcement-banner.css');
 @import url('./components/topbar.css');
 @import url('./components/header.css');
 @import url('./components/placeholders.css');

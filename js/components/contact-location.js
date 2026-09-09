@@ -6,6 +6,45 @@
 class ContactLocation extends HTMLElement {
   connectedCallback() {
     this.render();
+
+    this.boundConfig = () => this.updateSchedule();
+    window.addEventListener('siteconfig:ready', this.boundConfig);
+  }
+
+  disconnectedCallback() {
+    if (this.boundConfig) {
+      window.removeEventListener('siteconfig:ready', this.boundConfig);
+    }
+  }
+
+  /**
+   * Reconstruye el bloque de horarios a partir de la configuracion del taller.
+   * Se arma con nodos del DOM y no con innerHTML porque el contenido proviene
+   * de la API.
+   */
+  updateSchedule() {
+    const contenedor = this.querySelector('.contact-schedule');
+    if (!contenedor || !window.CoyoteSiteConfig) return;
+
+    const detalle = window.CoyoteSiteConfig.getDetail();
+    contenedor.textContent = '';
+
+    detalle.abiertos.forEach((grupo, indice) => {
+      if (indice > 0) contenedor.appendChild(document.createElement('br'));
+
+      contenedor.appendChild(document.createTextNode(grupo.dias + ': '));
+
+      const horas = document.createElement('strong');
+      horas.textContent = grupo.horario;
+      contenedor.appendChild(horas);
+    });
+
+    if (detalle.cerrados.length > 0) {
+      if (detalle.abiertos.length > 0) contenedor.appendChild(document.createElement('br'));
+      contenedor.appendChild(
+        document.createTextNode(detalle.cerrados.join(', ') + ' y Festivos: Cerrado')
+      );
+    }
   }
 
   render() {
@@ -33,7 +72,7 @@ class ContactLocation extends HTMLElement {
                   <div class="info-icon-box">🕒</div>
                   <div class="info-text">
                     <h4>Horario de Atención</h4>
-                    <p>Lunes a Viernes: <strong>09:00 a 17:00 hrs</strong><br>Sábados, Domingos y Festivos: Cerrado</p>
+                    <p class="contact-schedule">Lunes a Viernes: <strong>09:00 a 17:00 hrs</strong><br>Sábados, Domingos y Festivos: Cerrado</p>
                   </div>
                 </div>
 
@@ -79,6 +118,8 @@ class ContactLocation extends HTMLElement {
         </div>
       </section>
     `;
+
+    this.updateSchedule();
   }
 }
 

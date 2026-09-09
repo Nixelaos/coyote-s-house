@@ -6,6 +6,26 @@
 class SiteFooter extends HTMLElement {
   connectedCallback() {
     this.render();
+
+    // El horario lo administra el taller desde el panel; puede llegar despues
+    // del primer pintado.
+    this.boundConfig = () => this.updateSchedule();
+    window.addEventListener('siteconfig:ready', this.boundConfig);
+  }
+
+  disconnectedCallback() {
+    if (this.boundConfig) {
+      window.removeEventListener('siteconfig:ready', this.boundConfig);
+    }
+  }
+
+  updateSchedule() {
+    const label = this.querySelector('.footer-schedule');
+    if (!label) return;
+
+    label.textContent = window.CoyoteSiteConfig
+      ? window.CoyoteSiteConfig.getSummary()
+      : 'Lun a Vie: 09:00 a 17:00 hrs';
   }
 
   render() {
@@ -42,7 +62,7 @@ class SiteFooter extends HTMLElement {
               <ul>
                 <li>📍 Av. Macul 5845, Macul, Santiago</li>
                 <li>💬 WhatsApp: <a href="https://wa.me/56954750993" target="_blank" rel="noopener" style="color: var(--color-whatsapp);">+56 9 5475 0993</a></li>
-                <li>🕒 Lun a Vie: 09:00 a 17:00 hrs</li>
+                <li>🕒 <span class="footer-schedule">Lun a Vie: 09:00 a 17:00 hrs</span></li>
                 <li>📸 <a href="https://www.instagram.com/tallercoyoteshouse/" target="_blank" rel="noopener">@tallercoyoteshouse</a></li>
               </ul>
             </div>
@@ -59,6 +79,8 @@ class SiteFooter extends HTMLElement {
         </div>
       </footer>
     `;
+
+    this.updateSchedule();
   }
 }
 

@@ -1,0 +1,133 @@
+/* ==========================================================================
+   COYOTE'S HOUSE - BANNER DE ANUNCIOS (MARQUEE)
+   Franja naranja de alta visibilidad sobre la barra de horario.
+   ========================================================================== */
+
+announcement-banner {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  position: sticky;
+  top: 0;
+  /* Por encima de la topbar (1002) y del header (1000): es lo primero que
+     debe verse y nada puede taparlo al hacer scroll. */
+  z-index: 1003;
+  box-sizing: border-box;
+}
+
+/* Sin anuncio activo el componente desaparece por completo y el sitio queda
+   exactamente como antes de que esta barra existiera. */
+announcement-banner[hidden] {
+  display: none;
+}
+
+.announcement-bar {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(0.42rem, 0.8vw, 0.6rem) 0;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-orange) 0%,
+    var(--color-orange-bright) 50%,
+    var(--color-orange) 100%
+  );
+  /* Tinta casi negra sobre naranja: 8.9:1 de contraste (WCAG AAA). El blanco
+     sobre naranja no llega ni a AA. */
+  color: var(--color-orange-ink);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.32);
+  box-shadow: 0 2px 12px var(--color-orange-glow);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.6vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  text-decoration: none;
+
+  /* El texto se mueve solo; seleccionarlo con el mouse es imposible en la
+     práctica y solo genera arrastres accidentales. */
+  user-select: none;
+}
+
+.announcement-bar--link {
+  cursor: pointer;
+  color: var(--color-orange-ink);
+}
+
+.announcement-bar--link:hover {
+  filter: brightness(1.07);
+}
+
+.announcement-bar--link:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: -3px;
+}
+
+.announcement-track {
+  display: flex;
+  width: max-content;
+  /* translate3d fuerza composición en GPU: en móvil evita repintados
+     constantes que se comen la batería. */
+  animation: coyote-marquee var(--marquee-duration, 26s) linear infinite;
+  will-change: transform;
+}
+
+.announcement-item {
+  padding-right: clamp(2rem, 6vw, 4rem);
+  white-space: nowrap;
+}
+
+@keyframes coyote-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Pausa al pasar el mouse o al enfocar con teclado: sin esto el anuncio no se
+   puede terminar de leer ni se puede hacer clic con precisión. */
+.announcement-bar:hover .announcement-track,
+.announcement-bar:focus-within .announcement-track {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD
+   El texto en movimiento es un disparador conocido de mareo vestibular. Con
+   la preferencia del sistema activada el anuncio se muestra fijo y centrado.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .announcement-item {
+    padding-right: 0;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Solo sobrevive la primera copia; el resto existía para el desplazamiento. */
+  .announcement-item[aria-hidden='true'] {
+    display: none;
+  }
+
+  .announcement-bar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 0.76rem;
+    padding: 0.4rem 0;
+  }
+}

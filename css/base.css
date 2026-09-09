@@ -32,7 +32,9 @@ workshop-topbar {
   width: 100%;
   max-width: 100%;
   position: sticky;
-  top: 0;
+  /* Queda justo debajo del banner de anuncios; con el banner apagado
+     --banner-height vale 0px y esto equivale a top: 0. */
+  top: var(--banner-height, 0px);
   z-index: 1002;
   box-sizing: border-box;
 }
@@ -42,7 +44,7 @@ site-header {
   width: 100%;
   max-width: 100%;
   position: sticky;
-  top: var(--topbar-height, 38px);
+  top: calc(var(--banner-height, 0px) + var(--topbar-height, 38px));
   z-index: 1000;
   box-sizing: border-box;
 }
