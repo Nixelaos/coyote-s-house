@@ -35,12 +35,6 @@
       return 'http://localhost:3000';
     }
 
-    // Ensayo en Vercel: el sitio y el backend son dos proyectos distintos, así
-    // que hay que nombrar al backend. Rellenar tras desplegarlo.
-    if (/\.vercel\.app$/.test(host)) {
-      return 'https://BACKEND-EN-VERCEL.vercel.app';
-    }
-
     // Producción: nginx sirve el sitio y hace de proxy al backend bajo el mismo
     // origen, así que una ruta relativa basta y no hay CORS de por medio.
     return '';
