@@ -2,9 +2,11 @@
  * Componente: WorkshopTopbar (<workshop-topbar>)
  * Barra superior con horario dinámico en tiempo real y datos de contacto rápido.
  *
- * El horario ya no está escrito en este archivo: lo administra el taller desde
- * el panel y llega por <site-config.js>, que resuelve el estado en la zona
- * horaria oficial 'America/Santiago' (UTC-4 / UTC-3 automático).
+ * El horario lo administra el taller desde el panel y llega por
+ * <site-config.js>, que resuelve el estado en la zona horaria oficial
+ * 'America/Santiago' (UTC-4 / UTC-3 automático). Sin datos reales, el
+ * indicador y el horario quedan ocultos: la dirección y el WhatsApp siempre se
+ * ven.
  */
 
 class WorkshopTopbar extends HTMLElement {
@@ -43,10 +45,9 @@ class WorkshopTopbar extends HTMLElement {
   }
 
   /**
-   * Estado de atención calculado a partir del horario configurado.
-   * Si site-config.js no llegó a cargar, se prefiere no afirmar nada sobre si
-   * el taller está abierto: mostrar "Abierto" sin datos sería peor que no
-   * mostrar el indicador.
+   * Estado de atención calculado a partir del horario configurado, o null si
+   * no hay datos reales. Mostrar "Abierto" sin datos sería peor que no mostrar
+   * el indicador.
    */
   getStatus() {
     if (window.CoyoteSiteConfig) {
@@ -70,6 +71,7 @@ class WorkshopTopbar extends HTMLElement {
 
     if (!status) {
       badge.hidden = true;
+      this.updateCssHeight();
       return;
     }
 
@@ -111,19 +113,18 @@ class WorkshopTopbar extends HTMLElement {
   }
 
   render() {
+    // Indicador y horario nacen ocultos y vacíos: solo aparecen con datos reales.
     this.innerHTML = `
       <div class="top-bar">
         <div class="container top-bar-container">
           <div class="top-info-left">
-            <div class="status-badge closed">
-              <span class="status-dot" aria-hidden="true"></span> <span class="status-text">Consultando horario...</span>
-            </div>
+            <div class="status-badge closed" hidden></div>
             <span class="top-link top-address">
               📍 Av. Macul 5845, Macul, Santiago
             </span>
           </div>
           <div class="top-info-right">
-            <span class="top-link top-schedule">
+            <span class="top-link top-schedule" hidden>
               🕒 <span class="top-schedule-text"></span>
             </span>
             <a href="https://wa.me/56954750993" target="_blank" rel="noopener" class="top-link top-whatsapp" style="color: var(--color-whatsapp); font-weight: 700;">

@@ -1,6 +1,6 @@
 /* ==========================================================================
    COYOTE'S HOUSE - BANNER DE ANUNCIOS (MARQUEE)
-   Franja naranja de alta visibilidad sobre la barra de horario.
+   Franja verde de alta visibilidad sobre la barra de horario.
    ========================================================================== */
 
 announcement-banner {
@@ -29,15 +29,15 @@ announcement-banner[hidden] {
 
   background: linear-gradient(
     90deg,
-    var(--color-orange) 0%,
-    var(--color-orange-bright) 50%,
-    var(--color-orange) 100%
+    var(--color-banner) 0%,
+    var(--color-banner-bright) 50%,
+    var(--color-banner) 100%
   );
-  /* Tinta casi negra sobre naranja: 8.9:1 de contraste (WCAG AAA). El blanco
-     sobre naranja no llega ni a AA. */
-  color: var(--color-orange-ink);
+  /* Tinta casi negra sobre verde: 8:1 de contraste (WCAG AAA). El blanco
+     sobre este verde no llega ni a AA. */
+  color: var(--color-banner-ink);
   border-bottom: 2px solid rgba(0, 0, 0, 0.32);
-  box-shadow: 0 2px 12px var(--color-orange-glow);
+  box-shadow: 0 2px 12px var(--color-banner-glow);
 
   font-family: var(--font-body);
   font-size: clamp(0.78rem, 1.6vw, 0.9rem);
@@ -53,7 +53,7 @@ announcement-banner[hidden] {
 
 .announcement-bar--link {
   cursor: pointer;
-  color: var(--color-orange-ink);
+  color: var(--color-banner-ink);
 }
 
 .announcement-bar--link:hover {

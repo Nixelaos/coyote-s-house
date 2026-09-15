@@ -1,7 +1,7 @@
 /**
  * Componente: AnnouncementBanner (<announcement-banner>)
  *
- * Franja naranja en la parte superior del sitio con el anuncio del taller
+ * Franja verde en la parte superior del sitio con el anuncio del taller
  * desplazándose de forma continua. El contenido se administra desde el panel
  * (backend-coyote-s-house) y llega a través de <site-config.js>.
  *
@@ -84,8 +84,10 @@ class AnnouncementBanner extends HTMLElement {
 
   render() {
     const config = window.CoyoteSiteConfig;
+    // getBanner() ya resuelve interruptor, mensaje y vigencia: si en este
+    // instante no hay nada que mostrar, devuelve null.
     const banner = config ? config.getBanner() : null;
-    const mensaje = banner && banner.enabled ? (banner.message || '').trim() : '';
+    const mensaje = banner ? (banner.message || '').trim() : '';
 
     if (!mensaje) {
       this.textContent = '';

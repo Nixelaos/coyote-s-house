@@ -75,13 +75,13 @@
   --color-whatsapp: #1f9d55;
   --color-whatsapp-dark: #167a42;
 
-  /* Announcement Banner - High-Visibility Orange
+  /* Announcement Banner - High-Visibility Green
      Se mantiene separado del rojo de marca (#b5292a) a propósito: el banner
      debe leerse como un aviso puntual, no como parte de la identidad. */
-  --color-orange: #F97316;          /* Fondo de la franja */
-  --color-orange-bright: #FB923C;   /* Brillo central del degradado */
-  --color-orange-ink: #1A1207;      /* Tinta sobre naranjo (8.9:1, WCAG AAA) */
-  --color-orange-glow: rgba(249, 115, 22, 0.35);
+  --color-banner: #22C55E;          /* Fondo de la franja */
+  --color-banner-bright: #4ADE80;   /* Brillo central del degradado */
+  --color-banner-ink: #011A0B;      /* Tinta sobre verde (8:1, WCAG AAA) */
+  --color-banner-glow: rgba(34, 197, 94, 0.35);
 
   /* Typography Stack */
   --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;

@@ -19,22 +19,31 @@ class FaqAccordion extends HTMLElement {
   }
 
   /**
-   * Redacta el horario en prosa para que encaje dentro de la respuesta:
-   * "de Lunes a Viernes de 09:00 a 17:00 hrs".
+   * Redacta el horario en prosa dentro de la respuesta:
+   * "Atendemos de Lunes a Viernes de 09:00 a 17:00 hrs en Av. Macul...".
+   * Sin datos reales la frase queda "Atendemos en Av. Macul...": no hay
+   * horario de respaldo.
    */
   updateSchedule() {
     const label = this.querySelector('.faq-schedule');
-    if (!label || !window.CoyoteSiteConfig) return;
+    if (!label) return;
 
-    const detalle = window.CoyoteSiteConfig.getDetail();
-    if (detalle.abiertos.length === 0) {
-      label.textContent = 'con horario especial (consultanos por WhatsApp)';
+    const detalle = window.CoyoteSiteConfig ? window.CoyoteSiteConfig.getDetail() : null;
+
+    // El espacio inicial va en el texto y no en la plantilla, para que sin
+    // horario la frase no quede con un espacio doble.
+    if (!detalle) {
+      label.textContent = '';
       return;
     }
 
-    label.textContent = detalle.abiertos
-      .map((grupo) => `de ${grupo.dias} de ${grupo.horario}`)
-      .join(' y ');
+    if (detalle.abiertos.length === 0) {
+      label.textContent = ' con horario especial (consúltanos por WhatsApp)';
+      return;
+    }
+
+    label.textContent =
+      ' ' + detalle.abiertos.map((grupo) => `de ${grupo.dias} de ${grupo.horario}`).join(' y ');
   }
 
   initAccordion() {
@@ -130,7 +139,7 @@ class FaqAccordion extends HTMLElement {
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-body">
-                Atendemos <span class="faq-schedule">de Lunes a Viernes de 09:00 a 17:00 hrs</span> en Av. Macul 5845, Macul, Santiago. Contamos con todos los medios de pago (excepto cheques): efectivo, transferencia bancaria, pago con tarjeta de crédito y débito presencial en taller, y link de compra a distancia, con opción de hasta 12 cuotas precio contado.
+                Atendemos<span class="faq-schedule"></span> en Av. Macul 5845, Macul, Santiago. Contamos con todos los medios de pago (excepto cheques): efectivo, transferencia bancaria, pago con tarjeta de crédito y débito presencial en taller, y link de compra a distancia, con opción de hasta 12 cuotas precio contado.
               </div>
             </div>
           </div>

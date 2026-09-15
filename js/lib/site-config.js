@@ -2,12 +2,17 @@
  * COYOTE'S HOUSE - CONFIGURACIÓN DINÁMICA DEL SITIO
  *
  * Punto único de acceso al horario y al banner que el taller edita desde el
- * panel de administración.
+ * panel de administración. Los pide a /api/public/site-config al cargar.
  *
- * REGLA DE ORO: el sitio nunca puede romperse porque el backend esté caído.
- * Por eso el horario que hoy está escrito a mano vive aquí como respaldo, la
- * respuesta se guarda en sessionStorage y la petición tiene un tiempo límite
- * corto. En el peor de los casos el visitante ve exactamente lo de siempre.
+ * REGLA DE ORO: nunca datos inventados. Sin datos reales (el backend no
+ * responde, responde 503 o la respuesta no trae el horario completo) no hay
+ * horario ni anuncio que mostrar: getStatus() devuelve null, getSummary() una
+ * cadena vacía y los componentes se ocultan. No existe un horario de respaldo.
+ *
+ * La última respuesta buena se guarda 5 minutos en sessionStorage: evita una
+ * petición por página y es lo máximo que tarda un cambio del panel en verse
+ * para quien ya está navegando. Pasado ese plazo, sin respuesta nueva no se
+ * muestra nada.
  *
  * Este archivo debe cargarse ANTES que los componentes que lo consumen.
  */
@@ -45,23 +50,8 @@
   var VIGENCIA_CACHE_MS = 5 * 60 * 1000;
   var TIEMPO_LIMITE_MS = 3000;
 
-  /** Horario vigente antes de que existiera el panel: el respaldo de siempre. */
-  var CONFIG_POR_DEFECTO = {
-    schedule: {
-      timezone: 'America/Santiago',
-      days: {
-        0: { open: '09:00', close: '13:00', closed: true },
-        1: { open: '09:00', close: '17:00', closed: false },
-        2: { open: '09:00', close: '17:00', closed: false },
-        3: { open: '09:00', close: '17:00', closed: false },
-        4: { open: '09:00', close: '17:00', closed: false },
-        5: { open: '09:00', close: '17:00', closed: false },
-        6: { open: '09:00', close: '13:00', closed: true }
-      },
-      exceptions: []
-    },
-    banner: { enabled: false, message: '', linkUrl: '', speed: 'normal' }
-  };
+  /** setTimeout no admite esperas más largas (unos 24,8 días). */
+  var ESPERA_MAXIMA_MS = 2147483647;
 
   var DIA_CORTO = { 0: 'Dom', 1: 'Lun', 2: 'Mar', 3: 'Mié', 4: 'Jue', 5: 'Vie', 6: 'Sáb' };
   var DIA_LARGO = {
@@ -72,6 +62,15 @@
     4: 'Jueves',
     5: 'Viernes',
     6: 'Sábado'
+  };
+  var NOMBRE_SCHEMA = {
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Friday',
+    6: 'Saturday'
   };
   var ORDEN_SEMANA = [1, 2, 3, 4, 5, 6, 0];
 
@@ -296,11 +295,58 @@
   }
 
   // ======================================================================
-  // Caché en sessionStorage
+  // Vigencia del banner
   //
-  // Evita una petición por cada navegación del SPA. Todo va envuelto en
-  // try/catch porque en modo incógnito el acceso puede lanzar excepción.
+  // Espeja src/lib/banner-visibility.js del backend; la prueba de paridad
+  // compara las dos. La API entrega el banner con sus fechas y la decisión se
+  // toma aquí, para que una pestaña abierta muestre u oculte el anuncio justo
+  // cuando empieza o termina.
   // ======================================================================
+
+  function bannerVisible(banner, ahoraMs) {
+    if (!banner || !banner.enabled || !banner.message) return false;
+
+    if (banner.startsAt) {
+      var inicio = Date.parse(banner.startsAt);
+      if (isFinite(inicio) && ahoraMs < inicio) return false;
+    }
+
+    if (banner.endsAt) {
+      var fin = Date.parse(banner.endsAt);
+      if (isFinite(fin) && ahoraMs > fin) return false;
+    }
+
+    return true;
+  }
+
+  // ======================================================================
+  // Validación y caché en sessionStorage
+  //
+  // Todo lo que toca sessionStorage va envuelto en try/catch porque en modo
+  // incógnito el acceso puede lanzar excepción.
+  // ======================================================================
+
+  /**
+   * Acepta la respuesta solo si trae los 7 días. Nada se completa por defecto:
+   * una respuesta incompleta cuenta como "sin datos".
+   */
+  function normalizar(datos) {
+    var horario = datos && datos.schedule;
+    if (!horario || !horario.days) return null;
+
+    for (var dia = 0; dia < 7; dia += 1) {
+      if (!horario.days[dia]) return null;
+    }
+
+    return {
+      schedule: {
+        timezone: horario.timezone || 'America/Santiago',
+        days: horario.days,
+        exceptions: horario.exceptions || []
+      },
+      banner: datos.banner || null
+    };
+  }
 
   function leerCache() {
     try {
@@ -310,7 +356,7 @@
       var guardado = JSON.parse(crudo);
       if (!guardado || Date.now() - guardado.t > VIGENCIA_CACHE_MS) return null;
 
-      return guardado.v;
+      return normalizar(guardado.v);
     } catch (e) {
       return null;
     }
@@ -324,38 +370,67 @@
     }
   }
 
+  function borrarCache() {
+    try {
+      window.sessionStorage.removeItem(CLAVE_CACHE);
+    } catch (e) {
+      // Nada que borrar.
+    }
+  }
+
   // ======================================================================
   // Estado del módulo
   // ======================================================================
 
-  var config = leerCache() || CONFIG_POR_DEFECTO;
-  var esRespaldo = true;
-
-  function normalizar(datos) {
-    if (!datos || !datos.schedule || !datos.schedule.days) return null;
-
-    return {
-      schedule: {
-        timezone: datos.schedule.timezone || 'America/Santiago',
-        days: datos.schedule.days,
-        exceptions: datos.schedule.exceptions || []
-      },
-      banner: datos.banner || CONFIG_POR_DEFECTO.banner
-    };
-  }
+  /** Datos reales vigentes, o null si no los hay. */
+  var config = leerCache();
+  var temporizadorVigencia = null;
 
   function anunciarCambio() {
     window.dispatchEvent(
       new CustomEvent('siteconfig:ready', {
-        detail: { config: config, esRespaldo: esRespaldo }
+        detail: { config: config }
       })
     );
   }
 
   /**
-   * Mantiene sincronizado el JSON-LD de Schema.org con el horario real.
-   * Si no se actualizara, Google seguiría mostrando en los resultados de
-   * búsqueda un horario que el taller ya cambió.
+   * Programa un aviso para el próximo inicio o término de la vigencia del
+   * banner: así los componentes se repintan sin recargar la página.
+   */
+  function programarCambioDeVigencia() {
+    clearTimeout(temporizadorVigencia);
+    temporizadorVigencia = null;
+
+    var banner = config && config.banner;
+    if (!banner || !banner.enabled || !banner.message) return;
+
+    var ahora = Date.now();
+    var proxima = null;
+
+    [banner.startsAt, banner.endsAt].forEach(function (iso) {
+      var instante = iso ? Date.parse(iso) : NaN;
+      if (isFinite(instante) && instante > ahora && (proxima === null || instante < proxima)) {
+        proxima = instante;
+      }
+    });
+
+    if (proxima === null) return;
+
+    // Un segundo de margen: el término se compara con "después de", así que en
+    // el instante exacto el anuncio todavía se ve.
+    var espera = proxima - ahora + 1000;
+    if (espera > ESPERA_MAXIMA_MS) return; // Faltan más de 24 días: lo resuelve una recarga.
+
+    temporizadorVigencia = setTimeout(function () {
+      anunciarCambio();
+      programarCambioDeVigencia();
+    }, espera);
+  }
+
+  /**
+   * Mantiene el JSON-LD de Schema.org con el horario real. El HTML no trae un
+   * horario escrito: se agrega aquí cuando hay datos y se quita cuando no.
    */
   function actualizarDatosEstructurados() {
     var bloque = document.querySelector('script[type="application/ld+json"]');
@@ -363,42 +438,35 @@
 
     try {
       var datos = JSON.parse(bloque.textContent);
-      if (!datos.openingHoursSpecification) return;
 
-      var nombresSchema = {
-        0: 'Sunday',
-        1: 'Monday',
-        2: 'Tuesday',
-        3: 'Wednesday',
-        4: 'Thursday',
-        5: 'Friday',
-        6: 'Saturday'
-      };
+      if (!config) {
+        delete datos.openingHoursSpecification;
+      } else {
+        var especificaciones = [];
+        var grupos = {};
 
-      var especificaciones = [];
-      var grupos = {};
+        for (var i = 0; i < ORDEN_SEMANA.length; i += 1) {
+          var dia = ORDEN_SEMANA[i];
+          var d = config.schedule.days[dia];
+          if (!d || d.closed) continue;
 
-      for (var i = 0; i < ORDEN_SEMANA.length; i += 1) {
-        var dia = ORDEN_SEMANA[i];
-        var d = config.schedule.days[dia];
-        if (!d || d.closed) continue;
-
-        var clave = d.open + '-' + d.close;
-        if (!grupos[clave]) {
-          grupos[clave] = { opens: d.open, closes: d.close, dayOfWeek: [] };
-          especificaciones.push(grupos[clave]);
+          var clave = d.open + '-' + d.close;
+          if (!grupos[clave]) {
+            grupos[clave] = { opens: d.open, closes: d.close, dayOfWeek: [] };
+            especificaciones.push(grupos[clave]);
+          }
+          grupos[clave].dayOfWeek.push(NOMBRE_SCHEMA[dia]);
         }
-        grupos[clave].dayOfWeek.push(nombresSchema[dia]);
-      }
 
-      datos.openingHoursSpecification = especificaciones.map(function (spec) {
-        return {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: spec.dayOfWeek,
-          opens: spec.opens,
-          closes: spec.closes
-        };
-      });
+        datos.openingHoursSpecification = especificaciones.map(function (spec) {
+          return {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: spec.dayOfWeek,
+            opens: spec.opens,
+            closes: spec.closes
+          };
+        });
+      }
 
       bloque.textContent = JSON.stringify(datos, null, 2);
     } catch (e) {
@@ -419,23 +487,33 @@
         mode: 'cors'
       });
 
+      if (respuesta.status === 503) {
+        // El backend responde y dice que no hay horario publicado (nadie lo
+        // ha guardado o el archivo no es válido). Es definitivo: también se
+        // descarta la copia de esta sesión.
+        config = null;
+        borrarCache();
+        return;
+      }
+
       if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
 
       var normalizado = normalizar(await respuesta.json());
-      if (!normalizado) throw new Error('Respuesta sin horario');
+      if (!normalizado) throw new Error('Respuesta sin horario completo');
 
       config = normalizado;
-      esRespaldo = false;
       escribirCache(normalizado);
     } catch (e) {
-      // Silencio deliberado: el respaldo ya está en pantalla y una consola
-      // llena de errores rojos no ayuda a nadie que visite el taller.
-      if (window.console && window.console.info) {
-        window.console.info('[Coyote] Horario servido desde el respaldo local.');
+      // Backend caído o lento: vale la copia real de esta sesión si sigue
+      // vigente; si no la hay, no se muestra nada.
+      config = leerCache();
+      if (!config && window.console && window.console.info) {
+        window.console.info('[Coyote] Sin datos del horario: no se muestra horario ni anuncio.');
       }
     } finally {
       clearTimeout(temporizador);
       actualizarDatosEstructurados();
+      programarCambioDeVigencia();
       anunciarCambio();
     }
   }
@@ -445,40 +523,44 @@
   // ======================================================================
 
   window.CoyoteSiteConfig = {
-    /** Configuración vigente (respaldo, caché o servidor). Nunca es null. */
+    /** true si hay datos reales que mostrar. */
+    hasData: function () {
+      return config !== null;
+    },
+
+    /** Datos reales vigentes, o null. */
     get: function () {
       return config;
     },
 
     getSchedule: function () {
-      return config.schedule;
+      return config ? config.schedule : null;
     },
 
+    /**
+     * El banner, solo si corresponde mostrarlo en este instante (interruptor,
+     * mensaje y vigencia). En cualquier otro caso, null.
+     */
     getBanner: function () {
-      return config.banner;
+      return config && bannerVisible(config.banner, Date.now()) ? config.banner : null;
     },
 
-    /** Estado del taller en este instante. */
+    /** Estado del taller en este instante, o null sin datos. */
     getStatus: function () {
-      return calcularEstado(config.schedule);
+      return config ? calcularEstado(config.schedule) : null;
     },
 
-    /** "Lun a Vie: 09:00 a 17:00 hrs" */
+    /** "Lun a Vie: 09:00 a 17:00 hrs", o cadena vacía sin datos. */
     getSummary: function () {
-      return resumirHorario(config.schedule);
+      return config ? resumirHorario(config.schedule) : '';
     },
 
-    /** Desglose por grupos de días para la página de contacto. */
+    /** Desglose por grupos de días para contacto y FAQ, o null sin datos. */
     getDetail: function () {
-      return detalleHorario(config.schedule);
+      return config ? detalleHorario(config.schedule) : null;
     },
 
-    /** true mientras se muestren los valores por defecto. */
-    isFallback: function () {
-      return esRespaldo;
-    },
-
-    /** Ejecuta el callback ahora y de nuevo cuando lleguen los datos reales. */
+    /** Ejecuta el callback ahora y de nuevo cada vez que cambien los datos. */
     onReady: function (callback) {
       callback(config);
       window.addEventListener('siteconfig:ready', function () {

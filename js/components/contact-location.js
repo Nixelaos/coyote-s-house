@@ -19,15 +19,19 @@ class ContactLocation extends HTMLElement {
 
   /**
    * Reconstruye el bloque de horarios a partir de la configuracion del taller.
+   * Sin datos reales el bloque entero se oculta: no hay horario de respaldo.
    * Se arma con nodos del DOM y no con innerHTML porque el contenido proviene
    * de la API.
    */
   updateSchedule() {
+    const item = this.querySelector('.contact-schedule-item');
     const contenedor = this.querySelector('.contact-schedule');
-    if (!contenedor || !window.CoyoteSiteConfig) return;
+    if (!item || !contenedor) return;
 
-    const detalle = window.CoyoteSiteConfig.getDetail();
+    const detalle = window.CoyoteSiteConfig ? window.CoyoteSiteConfig.getDetail() : null;
     contenedor.textContent = '';
+    item.hidden = !detalle;
+    if (!detalle) return;
 
     detalle.abiertos.forEach((grupo, indice) => {
       if (indice > 0) contenedor.appendChild(document.createElement('br'));
@@ -68,11 +72,11 @@ class ContactLocation extends HTMLElement {
                   </div>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item contact-schedule-item" hidden>
                   <div class="info-icon-box">🕒</div>
                   <div class="info-text">
                     <h4>Horario de Atención</h4>
-                    <p class="contact-schedule">Lunes a Viernes: <strong>09:00 a 17:00 hrs</strong><br>Sábados, Domingos y Festivos: Cerrado</p>
+                    <p class="contact-schedule"></p>
                   </div>
                 </div>
 

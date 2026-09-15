@@ -9,6 +9,12 @@
   padding: 0;
 }
 
+/* El atributo hidden tiene que ganarle a cualquier display de los componentes:
+   así se ocultan el horario y el anuncio cuando no hay datos reales. */
+[hidden] {
+  display: none !important;
+}
+
 /* Custom Web Component Elements */
 hero-section,
 features-section,

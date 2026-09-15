@@ -19,13 +19,15 @@ class SiteFooter extends HTMLElement {
     }
   }
 
+  /** Sin datos reales la línea del horario se oculta: no hay horario de respaldo. */
   updateSchedule() {
+    const item = this.querySelector('.footer-schedule-item');
     const label = this.querySelector('.footer-schedule');
-    if (!label) return;
+    if (!item || !label) return;
 
-    label.textContent = window.CoyoteSiteConfig
-      ? window.CoyoteSiteConfig.getSummary()
-      : 'Lun a Vie: 09:00 a 17:00 hrs';
+    const summary = window.CoyoteSiteConfig ? window.CoyoteSiteConfig.getSummary() : '';
+    label.textContent = summary;
+    item.hidden = !summary;
   }
 
   render() {
@@ -62,7 +64,7 @@ class SiteFooter extends HTMLElement {
               <ul>
                 <li>📍 Av. Macul 5845, Macul, Santiago</li>
                 <li>💬 WhatsApp: <a href="https://wa.me/56954750993" target="_blank" rel="noopener" style="color: var(--color-whatsapp);">+56 9 5475 0993</a></li>
-                <li>🕒 <span class="footer-schedule">Lun a Vie: 09:00 a 17:00 hrs</span></li>
+                <li class="footer-schedule-item" hidden>🕒 <span class="footer-schedule"></span></li>
                 <li>📸 <a href="https://www.instagram.com/tallercoyoteshouse/" target="_blank" rel="noopener">@tallercoyoteshouse</a></li>
               </ul>
             </div>
