@@ -6,6 +6,23 @@
 class HeroSection extends HTMLElement {
   connectedCallback() {
     this.render();
+    this.setupImageReveal();
+  }
+
+  setupImageReveal() {
+    const img = this.querySelector('img');
+    if (!img) return;
+
+    const reveal = () => img.classList.add('is-loaded');
+
+    if (img.complete && img.naturalWidth > 0) {
+      reveal();
+    } else if ('decode' in img) {
+      img.decode().then(reveal).catch(reveal);
+    } else {
+      img.addEventListener('load', reveal, { once: true });
+      img.addEventListener('error', reveal, { once: true });
+    }
   }
 
   render() {
@@ -40,7 +57,10 @@ class HeroSection extends HTMLElement {
 
             <div class="hero-media">
               <div class="hero-image-frame">
-                <img src="assets/workshop-hero.webp" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="904" height="910" decoding="async">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="assets/workshop-hero-celu.webp" type="image/webp" width="550" height="550">
+                  <img src="assets/workshop-hero.webp" alt="Taller Coyote's House - Motocicleta en elevador hidráulico y scanner de diagnóstico" loading="eager" width="904" height="910" decoding="async">
+                </picture>
               </div>
             </div>
           </div>

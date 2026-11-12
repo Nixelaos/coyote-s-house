@@ -7,6 +7,23 @@
 class AboutAlberto extends HTMLElement {
   connectedCallback() {
     this.render();
+    this.setupImageReveal();
+  }
+
+  setupImageReveal() {
+    const img = this.querySelector('img');
+    if (!img) return;
+
+    const reveal = () => img.classList.add('is-loaded');
+
+    if (img.complete && img.naturalWidth > 0) {
+      reveal();
+    } else if ('decode' in img) {
+      img.decode().then(reveal).catch(reveal);
+    } else {
+      img.addEventListener('load', reveal, { once: true });
+      img.addEventListener('error', reveal, { once: true });
+    }
   }
 
   render() {
@@ -18,7 +35,10 @@ class AboutAlberto extends HTMLElement {
           <div class="about-hero-grid">
             <div class="about-image-card">
               <div class="about-photo-wrapper">
-                <img src="assets/alberto-pizarro.webp" alt="Alberto Pizarro en el taller Coyote's House" loading="eager" width="600" height="700" decoding="async">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="assets/alberto-pizarro-celu.webp" type="image/webp" width="550" height="550">
+                  <img src="assets/alberto-pizarro.webp" alt="Alberto Pizarro en el taller Coyote's House" loading="eager" width="600" height="700" decoding="async">
+                </picture>
               </div>
               <div class="experience-sticker">
                 <span class="experience-tag">Mecánico</span>
