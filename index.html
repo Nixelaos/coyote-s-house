@@ -22,6 +22,14 @@
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
   <link rel="apple-touch-icon" href="assets/logo.jpg">
   
+  <!-- Critical Image Preload -->
+  <link rel="preload" as="image" href="assets/workshop-hero.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +80,7 @@
   <site-header active="inicio"></site-header>
 
   <!-- 3. Portada Principal de Inicio -->
-  <main>
+  <main class="is-transitioning">
     <!-- Hero / Portada Principal -->
     <hero-section></hero-section>
 

@@ -6,6 +6,12 @@
   <title>Reseñas de Google y Testimonios | Coyote's House Taller de Motos Macul</title>
   <meta name="description" content="Opiniones y valoraciones reales de clientes verificadas en Google Maps sobre Coyote's House, taller mecánico de motocicletas liderado por Alberto Pizarro en Macul.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,7 @@
   <site-header active="resenas"></site-header>
 
   <!-- Contenido de Reseñas de Google -->
-  <main>
+  <main class="is-transitioning">
     <customer-reviews></customer-reviews>
   </main>
 

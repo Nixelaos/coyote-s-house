@@ -6,6 +6,12 @@
   <title>Sobre Alberto Pizarro - Mecánico Especialista | Coyote's House Taller de Motos</title>
   <meta name="description" content="Conoce la trayectoria y experiencia de Alberto Pizarro, especialista en mecánica de motocicletas con trayectoria docente y líder del taller Coyote's House en Macul, Santiago.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,7 @@
   <site-header active="sobre-alberto"></site-header>
 
   <!-- Contenido Sobre Alberto -->
-  <main>
+  <main class="is-transitioning">
     <about-alberto></about-alberto>
     <customer-reviews></customer-reviews>
   </main>

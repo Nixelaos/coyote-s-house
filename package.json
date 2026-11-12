@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Sitio web de Coyote's House - Taller Mecánico de Motocicletas"
+  "description": "Sitio web de Coyote's House - Taller Mecánico de Motocicletas",
+  "scripts": {
+    "build:css": "node scripts/bundle-css.js"
+  }
 }

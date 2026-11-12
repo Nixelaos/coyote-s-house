@@ -240,10 +240,25 @@
     });
   }
 
+  // Revelación suave en la primera carga (Cold Load Fade-In)
+  function initPageEntrance() {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    if (main.classList.contains('is-transitioning')) {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          main.classList.remove('is-transitioning');
+        }, 40);
+      });
+    }
+  }
+
   // Inicialización
   document.addEventListener('DOMContentLoaded', () => {
     cacheCurrentPage();
     setupLinkInterceptor();
     startBackgroundPreload();
+    initPageEntrance();
   });
 })();

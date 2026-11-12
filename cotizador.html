@@ -6,6 +6,12 @@
   <title>Solicitar Agendamiento o Cotización | Coyote's House Taller Macul</title>
   <meta name="description" content="Solicita tu agendamiento para inspección técnica en taller o una cotización con Alberto Pizarro vía WhatsApp en Coyote's House, Macul.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,7 @@
   <site-header active="cotizador"></site-header>
 
   <!-- Contenido del Cotizador -->
-  <main>
+  <main class="is-transitioning">
     <whatsapp-cotizador></whatsapp-cotizador>
   </main>
 

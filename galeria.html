@@ -6,6 +6,12 @@
   <title>Galería de Casos y Trabajos en Taller | Coyote's House Motos Macul</title>
   <meta name="description" content="Explora la bitácora técnica de Coyote's House con casos reales de diagnóstico, desarme y ajuste de motores paso a paso por Alberto Pizarro en Macul.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,7 @@
   <site-header active="galeria"></site-header>
 
   <!-- Contenido de la Galería -->
-  <main>
+  <main class="is-transitioning">
     <workshop-gallery></workshop-gallery>
   </main>
 

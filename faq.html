@@ -6,6 +6,12 @@
   <title>Preguntas Frecuentes | Coyote's House - Taller Mecánico de Motocicletas</title>
   <meta name="description" content="Preguntas frecuentes sobre mantención de motos, tiempos de entrega en el día, pauta completa, marcas atendidas y agendamiento en Coyote's House Macul.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,7 @@
   <site-header active="faq"></site-header>
 
   <!-- Contenido Principal: Preguntas Frecuentes -->
-  <main>
+  <main class="is-transitioning">
     <faq-accordion></faq-accordion>
   </main>
 

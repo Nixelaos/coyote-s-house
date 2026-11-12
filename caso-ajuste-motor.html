@@ -6,6 +6,11 @@
   <title>Caso #01: Diagnóstico y Solución de Fuga de Aceite | Coyote's House Taller de Motos Macul</title>
   <meta name="description" content="Registro técnico detallado del desmontaje completo, rectificación de culata y ajuste integral de motor para solucionar fuga de aceite por Alberto Pizarro en Macul, Santiago.">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/logo.jpg" type="image/jpeg">
+
+  <!-- Anti-FOUC Dark Mode Baseline -->
+  <style>html, body { background-color: #18181B !important; color: #E7E7E9; }</style>
+  <noscript><style>main.is-transitioning { opacity: 1 !important; transform: none !important; }</style></noscript>
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -29,7 +34,7 @@
   <site-header active="galeria"></site-header>
 
   <!-- Contenido del Caso Técnico -->
-  <main>
+  <main class="is-transitioning">
     <case-study-motor></case-study-motor>
   </main>
 

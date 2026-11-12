@@ -1,0 +1,32 @@
+/* ==========================================================================
+   COYOTE'S HOUSE - TALLER MECÁNICO DE MOTOCICLETAS
+   Master Stylesheet & Modular Architecture Manifest
+   ========================================================================== */
+
+/* 1. Design Tokens, Typography & Base Foundation */
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./typography.css');
+
+/* 2. Global Reusable Components */
+@import url('./components/buttons.css');
+@import url('./components/announcement-banner.css');
+@import url('./components/topbar.css');
+@import url('./components/header.css');
+@import url('./components/placeholders.css');
+@import url('./components/floating-whatsapp.css');
+@import url('./components/footer.css');
+
+/* 3. Page Sections & Feature Modules */
+@import url('./sections/hero.css');
+@import url('./sections/features.css');
+@import url('./sections/services.css');
+@import url('./sections/about.css');
+@import url('./sections/cotizador.css');
+@import url('./sections/gallery.css');
+@import url('./sections/reviews.css');
+@import url('./sections/faq.css');
+@import url('./sections/contact.css');
+
+/* 4. Global Responsive Breakpoints & Overrides */
+@import url('./responsive.css');
