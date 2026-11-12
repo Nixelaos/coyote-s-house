@@ -84,9 +84,9 @@
   --color-banner-glow: rgba(34, 197, 94, 0.35);
 
   /* Typography Stack */
-  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
+  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', sans-serif;
   --font-body: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
+  --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', sans-serif;
 
   /* Shadows & Elevations */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);

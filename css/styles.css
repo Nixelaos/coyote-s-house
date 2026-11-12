@@ -90,9 +90,9 @@
   --color-banner-glow: rgba(34, 197, 94, 0.35);
 
   /* Typography Stack */
-  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
+  --font-heading: 'Automove', 'Automove Italic', 'Chakra Petch', sans-serif;
   --font-body: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', 'Saira', 'Oxanium', sans-serif;
+  --font-racing: 'Automove', 'Automove Italic', 'Chakra Petch', sans-serif;
 
   /* Shadows & Elevations */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -169,6 +169,8 @@ workshop-topbar {
   top: var(--banner-height, 0px);
   z-index: 1002;
   box-sizing: border-box;
+  min-height: var(--topbar-height, 38px);
+  background: rgba(22, 22, 26, 0.98);
 }
 
 site-header {
@@ -179,6 +181,8 @@ site-header {
   top: calc(var(--banner-height, 0px) + var(--topbar-height, 38px));
   z-index: 1000;
   box-sizing: border-box;
+  min-height: var(--header-height, 70px);
+  background: rgba(20, 20, 24, 0.94);
 }
 
 html {

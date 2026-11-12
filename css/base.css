@@ -43,6 +43,8 @@ workshop-topbar {
   top: var(--banner-height, 0px);
   z-index: 1002;
   box-sizing: border-box;
+  min-height: var(--topbar-height, 38px);
+  background: rgba(22, 22, 26, 0.98);
 }
 
 site-header {
@@ -53,6 +55,8 @@ site-header {
   top: calc(var(--banner-height, 0px) + var(--topbar-height, 38px));
   z-index: 1000;
   box-sizing: border-box;
+  min-height: var(--header-height, 70px);
+  background: rgba(20, 20, 24, 0.94);
 }
 
 html {

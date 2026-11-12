@@ -240,18 +240,42 @@
     });
   }
 
-  // Revelación suave en la primera carga (Cold Load Fade-In)
-  function initPageEntrance() {
+  // Revelación suave en la primera carga (Cold Load Fade-In coordinado con fuentes y componentes)
+  async function initPageEntrance() {
     const main = document.querySelector('main');
     if (!main) return;
 
-    if (main.classList.contains('is-transitioning')) {
+    if (!main.classList.contains('is-transitioning')) return;
+
+    // 1. Detectar los Web Components presentes en el DOM inicial
+    const customTags = Array.from(document.querySelectorAll('*'))
+      .map(el => el.tagName.toLowerCase())
+      .filter(tag => tag.includes('-'));
+    const uniqueTags = [...new Set(customTags)];
+
+    // 2. Esperar a que los componentes del DOM inicial estén definidos y renderizados
+    const componentsReadyPromise = Promise.all(
+      uniqueTags.map(tag => customElements.whenDefined(tag).catch(() => {}))
+    );
+
+    // 3. Esperar a que las tipografías (Kanit, Automove) terminen de cargarse
+    const fontsReadyPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
+    // 4. Timeout de seguridad (máximo 200ms) para garantizar inmediatez en redes lentas
+    const safetyTimeout = new Promise(resolve => setTimeout(resolve, 200));
+
+    // Esperar componentes + fuentes o agotar timeout
+    await Promise.race([
+      Promise.all([componentsReadyPromise, fontsReadyPromise]),
+      safetyTimeout
+    ]);
+
+    // Doble requestAnimationFrame para sincronizar con el ciclo de repintado del navegador
+    requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        setTimeout(() => {
-          main.classList.remove('is-transitioning');
-        }, 40);
+        main.classList.remove('is-transitioning');
       });
-    }
+    });
   }
 
   // Inicialización
